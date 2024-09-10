@@ -1,0 +1,351 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.logo {
+    display: block;
+    max-width: 100%;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    /* margin-right: -72px; */
+    position: relative;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    padding: 20px 12px;
+}
+
+/* .logo img {
+    height: 40px;
+} */
+
+/* Navbar links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 27px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: blue;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: white;
+    color: black;
+    padding: 0px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+} */
+
+/* .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+} */
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Auth buttons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    background-color: #7B5CFA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.auth-buttons .add-property {
+    background-color: #fff;
+    color: #7B5CFA;
+    border: 1px solid #7B5CFA;
+}
+
+.auth-buttons .add-property:hover {
+    background-color: #F2F2F2;
+}
+
+.auth-buttons .sign-up:hover {
+    background-color: #5A43E6;
+    
+}
+
+.auth-buttons .sign-in:hover {
+    background-color: #F2F2F2;
+    color: #7B5CFA;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Hamburger menu */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+.Sidebar_Display{
+    display: none;
+}
+
+
+/* .sidebar.open{
+    display: hide;
+} */
+
+/* Sidebar styles */
+/* .sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #7B5CFA;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}*/
+
+/* .close-btn {
+    font-size: 24px;
+    display: hide;
+    color: white;
+    cursor: pointer;
+    text-align: right;
+}  */
+
+/* Media Queries */
+@media (max-width: 1020px) {
+    .nav-links {
+        display: none;
+    }
+    .Sidebar_Display{
+        display: block;
+    }
+
+    .hamburger {
+        display: block;
+    }
+    
+
+    .auth-buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .auth-buttons .add-property {
+        display: none;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -350px;
+        width: 300px;
+        height: 100%;
+        background-color: #7B5CFA;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar ul li {
+        margin-bottom: 20px;
+    }
+    
+    .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+    }
+    .sidebar ul li .dropdown-content{
+        color: white;
+        background-color: rgb(43, 41, 41);
+    }
+    .dropbtn{
+        background-color: transparent;
+        color: white;
+    }
+    
+    .close-btn {
+        font-size: 24px;
+        color: white;
+        display: block;
+        cursor: pointer;
+        text-align: right;
+    }
+   
+}
+
+@media (max-width: 768px) {
+    .auth-buttons {
+        display: none;
+    }
+    .Sidebar_Display{
+        display: block;
+    }
+   
+    .sidebar ul li .dropdown-content{
+        color: white;
+        background-color: rgb(43, 41, 41);
+    }
+    .hamburger {
+        display: block;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -350px;
+        width: 300px;
+        height: 100%;
+        background-color: #7B5CFA;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar ul li {
+        margin-bottom: 20px;
+    }
+    
+    .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+    }
+    .dropbtn{
+        background-color: transparent;
+        color: white;
+    }
+    
+    .close-btn {
+        font-size: 24px;
+        color: white;
+        display: block;
+        cursor: pointer;
+        text-align: right;
+    }
+}
+@media (max-width: 400px) {
+    .navbar{
+        width: 100%;
+    }
+
+    
+}
+@media (max-width: 350px) {
+    .navbar{
+        width: 100%;
+    }
+
+    
+}
+
