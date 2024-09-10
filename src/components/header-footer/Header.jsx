@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlusCircle, faUserPlus, faSignInAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../../style/Header.css';
 import authService from '../../services/Auth_JwtApi/AuthService'; // Import your authService
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,29 +45,30 @@ const Navbar = () => {
                         <FontAwesomeIcon icon={faBars} />
                     </div>
                     <div className="logo">
-                        <h2 className="logo">RentalEase</h2>
+                        <h2 className="logo"><Link className='Link' to="/">RentalEase</Link></h2>
                     </div>
+                    
                     <ul className="nav-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Listing</a></li>
-                        <li><a href="#">Agent</a></li>
+                        <li><Link className='Link' to="/">Home</Link></li>
+                        <li><Link className='Link' to="/">Listing</Link></li>
+                        <li><Link className='Link' to="/">Agent</Link></li>
                         <li className="dropdown">
                             {loggedIn ? (
                                 <>
                                     <span onClick={handleAccountClick} className="dropbtn">My Account</span>
                                     {dropdownOpen && (
                                         <div className="dropdown-content">
-                                            <a href="#">Profile</a>
-                                            <a href="#">Your Listings</a>
-                                            <a href="#" onClick={onLogout}>Logout</a>
+                                            <Link className='Link' to="#">Profile</Link>
+                                            <Link className='Link' to="#">Your Listings</Link>
+                                            <Link className='Link' to="#" onClick={onLogout}>Logout</Link>
                                         </div>
                                     )}
                                 </>
                             ) : (
-                                <a href="/login" className="dropbtn">My Account</a>
+                                <Link to="/login" className="dropbtn">My Account</Link>
                             )}
                         </li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><Link className='Link' to="#">Contact Us</Link></li>
                     </ul>
                     <div className="auth-buttons">
                         <button className="add-property" onClick={handleAddPropertyClick}>
@@ -90,33 +92,31 @@ const Navbar = () => {
                             <FontAwesomeIcon icon={faTimes} />
                         </div>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Listing</a></li>
-                            <li><a href="#">Agent</a></li>
+                            <li><Link className='Link' to="#">Home</Link></li>
+                            <li><Link className='Link' to="#">Listing</Link></li>
+                            <li><Link className='Link' to="#">Agent</Link></li>
                             <li className="dropdown">
                                 {loggedIn ? (
                                     <>
                                         <span onClick={handleAccountClick} className="dropbtn">My Account</span>
                                         {dropdownOpen && (
                                             <div className="dropdown-content">
-                                                <a href="#">Profile</a>
-                                                <a href="#">Your Listings</a>
-                                                <a href="#" onClick={onLogout}>Logout</a>
+                                                <Link className='Link' to="#">Profile</Link>
+                                                <Link className='Link' to="#">Your Listings</Link>
+                                                <Link className='Link' to="#" onClick={onLogout}>Logout</Link>
                                             </div>
                                         )}
                                     </>
                                 ) : (
-                                    <a href="/login" className="dropbtn">My Account</a>
+                                    <Link to="/login" className="dropbtn">My Account</Link>
                                 )}
                             </li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#" onClick={handleAddPropertyClick}>
-                                Add New Property
-                            </a></li>
+                            <li><Link className='Link' to="#">Contact Us</Link></li>
+                            <li><Link className='Link' to="#" onClick={handleAddPropertyClick}>Add New Property</Link></li>
                             {!loggedIn && (
                                 <>
-                                    <li><a href="#">Sign Up</a></li>
-                                    <li><a href="#">Sign In</a></li>
+                                    <li><Link className='Link' to="#">Sign Up</Link></li>
+                                    <li><Link className='Link' to="#">Sign In</Link></li>
                                 </>
                             )}
                         </ul>

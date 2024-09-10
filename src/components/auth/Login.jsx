@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import '../../style/Login.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import authService from '../../services/Auth_JwtApi/AuthService'; // The service we created for JWT handling
-import { useNavigate } from 'react-router-dom'; // For redirecting after login
+import authService from '../../services/Auth_JwtApi/AuthService';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,11 +23,11 @@ const Login = () => {
     }
 
     try {
-      // Authenticate and store the token
       await authService.login(email, password);
-      history.push('/profile'); // Redirect to the profile page after successful login
+      toast.success('Login successful!');
+      history.push('/profile');
     } catch (err) {
-      setError('Invalid email or password.');
+      toast.error('Invalid email or password.');
     }
   };
 
@@ -93,7 +94,7 @@ const Login = () => {
               <input type="checkbox" id="remember" />
               <label htmlFor="remember">Remember me</label>
             </div>
-            <a href="/Reset-Password">Forgot Password?</a>
+            <a href="/Forgot-Password">Forgot Password?</a>
           </div>
           <button type="submit" className="login-button">
             Login
