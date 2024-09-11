@@ -74,16 +74,25 @@ const authService = {
       throw new Error(error.response ? error.response.data.message : error.message);
     }
   },
-//reset password method
+//Forgot password method
   forgotPassword: async (email) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/forgot-password`, { email });
+      const response = await axiosInstance.post(`${API_URL}/auth/forgot-password`, { email });
       return response.data;
     } catch (error) {
       console.error('Error sending password reset email:', error);
       throw error;
     }
   },
+
+  /// Hnadle/post New password and Token
+  resetPassword: ( token, newPassword) => {
+    return axiosInstance.post(`${API_URL}/reset-password`, {
+       
+        token,
+        newPassword
+    });
+}, 
 
 
 };

@@ -1,34 +1,51 @@
 import React, { useState } from 'react';
+import AuthService from '../../services/Auth_JwtApi/AuthService'; // Ensure this path is correct
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import '../../style/ResetPassword.css'; // Ensure to include your CSS file path
+import { toast, ToastContainer } from 'react-toastify';  // Import Toastify
+import '../../style/ResetPassword.css'; // Optional: Add a CSS file for styling
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-    const handleTogglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleToggleConfirmPasswordVisibility = () => {
-        setShowConfirmPassword(!showConfirmPassword);
-    };
 
     const handleResetPassword = (e) => {
         e.preventDefault();
+
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            toast.error("Passwords do not match!");  // Toastify alert
             return;
         }
-        // Add logic for resetting password
+
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        
+        if (!token) {
+            toast.error("Invalid or missing token!");  // Toastify alert
+            return;
+        }
+
+        AuthService.resetPassword({ token, password })
+            .then(response => {
+                toast.success("Password reset successful!");  // Toastify alert
+                setTimeout(() => {
+                    window.location.href = '/login';  // Redirect after a short delay
+                }, 2000);  // Redirect after 2 seconds
+            })
+            .catch(error => {
+                toast.error("Password reset failed: " + (error.response?.data?.message || "Unknown error"));  // Toastify alert
+            });
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
         <div className="reset-password-container">
+            <ToastContainer />  {/* Toastify container for displaying alerts */}
             <form className="reset-password-form" onSubmit={handleResetPassword}>
                 <h2>Reset your Password</h2>
 
@@ -37,12 +54,12 @@ const ResetPassword = () => {
                     <div className="password-input-wrapper">
                         <input
                             type={showPassword ? 'text' : 'password'}
-                            placeholder="Enter your new password"
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <span className="password-toggle-icon" onClick={handleTogglePasswordVisibility}>
+                        <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
                             <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                         </span>
                     </div>
@@ -52,14 +69,14 @@ const ResetPassword = () => {
                     <label>Confirm Password</label>
                     <div className="password-input-wrapper">
                         <input
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            placeholder="confirm password"
+                            type={confirmPassword ? 'text' : 'password'}
+                            placeholder="Enter your password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                         />
-                        <span className="password-toggle-icon" onClick={handleToggleConfirmPasswordVisibility}>
-                            <FontAwesomeIcon icon={showConfirmPassword ? faEye : faEyeSlash} />
+                        <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+                            <FontAwesomeIcon icon={confirmPassword ? faEye : faEyeSlash} />
                         </span>
                     </div>
                 </div>
