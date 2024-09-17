@@ -3,18 +3,18 @@ import AuthService from '../../services/Auth_JwtApi/AuthService'; // Ensure this
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';  // Import Toastify
+import { toast} from 'react-toastify';  // Import Toastify
 import '../../style/ResetPassword.css'; // Optional: Add a CSS file for styling
 
 const ResetPassword = () => {
-    const [password, setPassword] = useState('');
+    const [NewPassword, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleResetPassword = (e) => {
         e.preventDefault();
 
-        if (password !== confirmPassword) {
+        if (NewPassword !== confirmPassword) {
             toast.error("Passwords do not match!");  // Toastify alert
             return;
         }
@@ -27,7 +27,7 @@ const ResetPassword = () => {
             return;
         }
 
-        AuthService.resetPassword({ token, password })
+        AuthService.resetPassword({ token, NewPassword })
             .then(response => {
                 toast.success("Password reset successful!");  // Toastify alert
                 setTimeout(() => {
@@ -55,7 +55,7 @@ const ResetPassword = () => {
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Enter your password"
-                            value={password}
+                            value={NewPassword}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />

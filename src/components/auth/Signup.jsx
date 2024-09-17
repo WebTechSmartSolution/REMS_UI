@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSignUpFormValidation } from '../../hooks/authHooks/SignupformValidation_Api';
 import { usePassword } from '../../hooks/authHooks/usePassword';  // Importing the custom hook for password strength and visibility
 import '../../style/Signup.css';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const SignUp = () => {
   // Using custom hooks for form validation and password handling
@@ -12,18 +12,19 @@ const SignUp = () => {
 
   // Form state
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [countryCode, setCountryCode] = useState('+92');
-  const [isAgent, setIsAgent] = useState(false);
+const [email, setEmail] = useState('');
+const [mobile, setMobile] = useState('');
+const [countryCode, setCountryCode] = useState('+92');
+const [isAgent, setIsAgent] = useState(false);
 
   // Data object to pass for signup
   const signUpData = {
     name,
-    email,
-    password,
-    mobile: `${countryCode}${mobile}`,
-    isAgent,
+  email,
+  password,
+  mobileNumber: mobile,  // Adjusted field name
+  countryCode,
+  isAgent,
   };
 
   return (
@@ -139,8 +140,9 @@ const SignUp = () => {
           <p>Already have an account? <a href="/login">Login</a></p>
         </div>
       </form>
-      {/* Toastify notifications container */}
       <ToastContainer />
+      {/* Toastify notifications container */}
+
     </div>
   </div>
   );

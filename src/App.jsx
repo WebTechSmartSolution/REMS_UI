@@ -6,7 +6,6 @@ import ForgotPassword from './components/auth/Forgotpass';
 import Layout from './Layout/Layout';
 import Home from './pages/Home';
 import ResetPassword from './components/auth/Resetpass';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import Navbar from './components/header-footer/Header';
 // import SignUp from './components/auth/signup'
@@ -18,7 +17,7 @@ function App() {
     
     
     <Router>
-    <ToastContainer />
+    
       <Routes>
 
         {/*Routes that are  in Layout */}

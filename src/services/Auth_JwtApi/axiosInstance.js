@@ -1,10 +1,9 @@
-// axiosInstance.js
 import axios from 'axios';
-import authService from './AuthService';
+import authService from '../Auth_JwtApi/AuthService';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'https://example.com/api', // Replace with your actual backend URL
+  baseURL: 'http://localhost:5112/api/Auth', // Replace with your actual backend URL
   headers: {
     'Content-Type': 'application/json',
   },
@@ -36,7 +35,7 @@ axiosInstance.interceptors.response.use(
       try {
         await authService.refreshToken();
         const token = authService.getAccessToken();
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return axiosInstance(originalRequest);
       } catch (err) {
         authService.logout(); // Log out if token refresh fails

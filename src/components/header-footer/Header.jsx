@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlusCircle, faUserPlus, faSignInAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import '../../style/Header.css';
 import authService from '../../services/Auth_JwtApi/AuthService'; // Import your authService
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false); // Will be replaced with authService
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Check if user is logged in using authService
@@ -36,6 +38,14 @@ const Navbar = () => {
             window.location.href = '/login';
         }
     };
+    const handleSignUpClick = () => {
+        navigate('/signup');
+    };
+
+    // Redirect to login page
+    const handleSignInClick = () => {
+        navigate('/login');
+    };
 
     return (
         <>
@@ -47,7 +57,7 @@ const Navbar = () => {
                     <div className="logo">
                         <h2 className="logo"><Link className='Link' to="/">RentalEase</Link></h2>
                     </div>
-                    
+
                     <ul className="nav-links">
                         <li><Link className='Link' to="/">Home</Link></li>
                         <li><Link className='Link' to="/">Listing</Link></li>
@@ -58,9 +68,9 @@ const Navbar = () => {
                                     <span onClick={handleAccountClick} className="dropbtn">My Account</span>
                                     {dropdownOpen && (
                                         <div className="dropdown-content">
-                                            <Link className='Link' to="#">Profile</Link>
-                                            <Link className='Link' to="#">Your Listings</Link>
-                                            <Link className='Link' to="#" onClick={onLogout}>Logout</Link>
+                                            <Link className='Link' to="/Profile">Profile</Link>
+                                            <Link className='Link' to="/Profile/My-Listing">Your Listings</Link>
+                                            <Link className='Link' to="/login" onClick={onLogout}>Logout</Link>
                                         </div>
                                     )}
                                 </>
@@ -68,7 +78,7 @@ const Navbar = () => {
                                 <Link to="/login" className="dropbtn">My Account</Link>
                             )}
                         </li>
-                        <li><Link className='Link' to="#">Contact Us</Link></li>
+                        <li><Link className='Link' to="/contact">Contact Us</Link></li>
                     </ul>
                     <div className="auth-buttons">
                         <button className="add-property" onClick={handleAddPropertyClick}>
@@ -76,10 +86,10 @@ const Navbar = () => {
                         </button>
                         {!loggedIn && (
                             <>
-                                <button className="sign-up">
+                                <button className="sign-up" onClick={handleSignUpClick}>
                                     <FontAwesomeIcon icon={faUserPlus} /> Sign Up
                                 </button>
-                                <button className="sign-in">
+                                <button className="sign-in" onClick={handleSignInClick}>
                                     <FontAwesomeIcon icon={faSignInAlt} /> Sign In
                                 </button>
                             </>
@@ -115,8 +125,8 @@ const Navbar = () => {
                             <li><Link className='Link' to="#" onClick={handleAddPropertyClick}>Add New Property</Link></li>
                             {!loggedIn && (
                                 <>
-                                    <li><Link className='Link' to="#">Sign Up</Link></li>
-                                    <li><Link className='Link' to="#">Sign In</Link></li>
+                                    <li><Link className='Link' to="/signup">Sign Up</Link></li>
+                                    <li><Link className='Link' to="/login">Sign In</Link></li>
                                 </>
                             )}
                         </ul>

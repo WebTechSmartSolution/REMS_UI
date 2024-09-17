@@ -8,14 +8,20 @@ export const useSignUpFormValidation = () => {
 
   // Validation logic
   const validateForm = (formData) => {
+    // console.log('Form Data:', formData);  // Debugging line to check formData
+
     const newErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    if (!formData.password.trim()) newErrors.password = 'Password is required';
-    if (formData.password.length < 8) newErrors.password = 'Password must be at least 8 characters';
-    if (!formData.mobile.trim()) newErrors.mobile = 'Mobile number is required';
+    const name = (formData.name || '').toString(); // Ensure it's a string
+  const email = (formData.email || '').toString(); // Ensure it's a string
+  const password = (formData.password || '').toString(); // Ensure it's a string
+  const mobileNumber = (formData.mobileNumber || '').toString(); // Ensure it's a string
 
+    if (!name.trim()) newErrors.name = 'Name is required';
+    if (!email.trim()) newErrors.email = 'Email is required';
+    if (!password.trim()) newErrors.password = 'Password is required';
+    if (password.length < 8) newErrors.password = 'Password must be at least 8 characters';
+    if (!mobileNumber.trim()) newErrors.mobileNumber = 'Mobile number is required';
     return newErrors;
   };
 
@@ -39,8 +45,24 @@ export const useSignUpFormValidation = () => {
       await authService.signup(formData);
       toast.success('Signup successful! Please log in.');
     } catch (error) {
-      setErrors({ general: 'Failed to sign up. Please try again.' });
-      toast.error('Failed to sign up. Please try again.');
+      // Error handling based on error response or general failure
+      if (error.response) {
+        const statusCode = error.response.status;
+    
+        if (statusCode === 409) {
+          // Email conflict error
+          setErrors({ general: 'Email already exists.' });
+          toast.error('Email already exists.');
+        } else {
+          // General error for other statuses
+          setErrors({ general: 'Failed to sign up. Please try again.' });
+          toast.error('Failed to sign up. Please try again.');
+        }
+      } else {
+        // Network or unexpected error
+        setErrors({ general: 'An error occurred. Please try again.' });
+        toast.error('An error occurred. Please try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }
