@@ -1,123 +1,153 @@
 import React, { useState } from 'react';
 import { useSignUpFormValidation } from '../../hooks/authHooks/SignupformValidation_Api';
-import { usePassword } from '../../hooks/authHooks/usePassword';  // Importing the custom hook for password strength and visibility
+import { usePassword } from '../../hooks/authHooks/usePassword';
+import authService from '../../services/Auth_JwtApi/AuthService'; // Import authService for API calls
 import '../../style/Signup.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignUp = () => {
   // Using custom hooks for form validation and password handling
   const { password, passwordVisible, passwordStrength, togglePasswordVisibility, handlePasswordChange } = usePassword();
-  const { handleFormSubmit, isSubmitting, errors } = useSignUpFormValidation();
+  const { validateForm, isSubmitting, setIsSubmitting, errors, setErrors } = useSignUpFormValidation();
 
   // Form state
   const [name, setName] = useState('');
-const [email, setEmail] = useState('');
-const [mobile, setMobile] = useState('');
-const [countryCode, setCountryCode] = useState('+92');
-const [isAgent, setIsAgent] = useState(false);
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [countryCode, setCountryCode] = useState('+92');
+  const [isAgent, setIsAgent] = useState(false);
 
   // Data object to pass for signup
   const signUpData = {
     name,
-  email,
-  password,
-  mobileNumber: mobile,  // Adjusted field name
-  countryCode,
-  isAgent,
+    email,
+    password,
+    mobileNumber: mobile,  // Adjusted field name
+    countryCode,
+    isAgent,
+  };
+
+  // Submission logic directly in SignUp component
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+    setIsSubmitting(true);
+
+    // Validate form fields
+    const validationErrors = validateForm(signUpData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitting(false);
+      toast.error("Please fill out all required fields correctly.");
+      return;
+    }
+
+    // If validation passes, call the API via authService
+    // Call API via authService
+    const { status, message } = await authService.signup(signUpData);
+
+    // Toast success or failure based on response from authService
+    if (status === 200) {
+      toast.success(message);  // Signup successful!
+    } else {
+      toast.error(message);    // Display appropriate error message
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
     <div className="bdy">
-    <div className="signup-container">
-    <form
+      <div className="signup-container">
+        <form
           className="signup-form"
-          onSubmit={(e) => handleFormSubmit(e, signUpData)}
+          onSubmit={handleFormSubmit}
           noValidate
         >
-           <h2>Sign Up</h2>
+          <h2>Sign Up</h2>
 
-        {/* Success and error messages
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        {error && <p className="error-message">{error}</p>} */}
-
-        <label htmlFor="name">Name</label>
-        <input 
-          type="text" 
-          id="name" 
-          placeholder="Enter your name" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-          required 
-        />
-
-        <label htmlFor="email">Email Address</label>
-        <input 
-          type="email" 
-          id="email" 
-          placeholder="abc@example.com" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-
-        <label htmlFor="password">Password</label>
-        <div className="password-container">
-          <input
-            type={passwordVisible ? 'text' : 'password'}
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Create a strong password"
-            required
-            minLength="8"
-          />
-          <span id="toggle-password" className="toggle-password" onClick={togglePasswordVisibility}>
-            {passwordVisible ? '🙈' : '👁️'}
-          </span>
-        </div>
-        <div id="password-strength" className={`password-strength ${passwordStrength}`}></div>
-
-        <label htmlFor="country-code">Mobile Number</label>
-        <div className="mobile-container">
+          <label htmlFor="name">Name</label>
           <input
             type="text"
-            id="country-code"
-            placeholder="+92"
-            maxLength="4"
-            pattern="\+\d{1,3}"
-            value={countryCode}
-            onChange={(e) => setCountryCode(e.target.value)}
+            id="name"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
+          {/* {errors.name && <p className="error-message">{errors.name}</p>} */}
+
+          <label htmlFor="email">Email Address</label>
           <input
-            type="text"
-            id="mobile"
-            placeholder="Mobile Number"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            type="email"
+            id="email"
+            placeholder="abc@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
+          {/* {errors.email && <p className="error-message">{errors.email}</p>} */}
 
-        <label className="checkbox-container">
-          <input 
-            type="checkbox" 
-            id="agent" 
-            checked={isAgent}
-            onChange={(e) => setIsAgent(e.target.checked)}
-          />
-          I am an Agent!
-        </label>
+          <label htmlFor="password">Password</label>
+          <div className="password-container">
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Create a strong password"
+              required
+              minLength="8"
+            />
+            <span id="toggle-password" className="toggle-password" onClick={togglePasswordVisibility}>
+              {passwordVisible ? '🙈' : '👁️'}
+            </span>
+          </div>
+          <div id="password-strength" className={`password-strength ${passwordStrength}`}></div>
+          {/* {errors.password && <p className="error-message">{errors.password}</p>} */}
 
-        <button type="submit" className="register-btn" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Register'}
-        </button>
+          <label htmlFor="country-code">Mobile Number</label>
+          <div className="mobile-container">
+            <input
+              type="text"
+              id="country-code"
+              placeholder="+92"
+              maxLength="4"
+              pattern="\+\d{1,3}"
+              value={countryCode}
+              onChange={(e) => setCountryCode(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              id="mobile"
+              placeholder="Mobile Number"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              required
+            />
+          </div>
+          {/* {errors.mobileNumber && <p className="error-message">{errors.mobileNumber}</p>} */}
 
-        <p className="or">or</p>
+          <label className="checkbox-container">
+            <input
+              type="checkbox"
+              id="agent"
+              checked={isAgent}
+              onChange={(e) => setIsAgent(e.target.checked)}
+            />
+            I am an Agent!
+          </label>
 
-        {/* Social login buttons */}
-        <div className="social-login">
+          <button type="submit" className="register-btn" disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Register'}
+          </button>
+
+          <p className="or">or</p>
+
+          {/* Social login buttons */}
+          <div className="social-login">
           <button type="button" className="social-btn fb-btn">
             <svg className='fcb-svg' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 48 48">
               <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"></path>
@@ -136,15 +166,15 @@ const [isAgent, setIsAgent] = useState(false);
           </button>
         </div>
 
-        <div className="login-link">
-          <p>Already have an account? <a href="/login">Login</a></p>
-        </div>
-      </form>
-      <ToastContainer />
-      {/* Toastify notifications container */}
 
+          <div className="login-link">
+            <p>Already have an account? <a href="/login">Login</a></p>
+          </div>
+        </form>
+        <ToastContainer />
+        {/* Toastify notifications container */}
+      </div>
     </div>
-  </div>
   );
 };
 

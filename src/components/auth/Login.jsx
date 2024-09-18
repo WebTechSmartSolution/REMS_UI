@@ -3,7 +3,7 @@ import '../../style/Login.css';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import authService from '../../services/Auth_JwtApi/AuthService';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Login = () => {
@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
-  const history = useNavigate();
+  //const Redirect = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,11 +23,25 @@ const Login = () => {
     }
 
     try {
-      await authService.login(email, password);
-      toast.success('Login successful!');
-      history.push('/profile');
+      const { status, message } = await authService.login(email, password);
+// console.log(message, 'lol')
+// console.log(status)   for debuging
+// console.log(status)
+      if (status === 200) {
+        toast.success('Login Sucessful!'); 
+        //setLoggedIn(true);  // Login successful
+        setTimeout(() => {
+          window.location.href= '/';  // Redirect after a short delay
+      }, 5000);   // Navigate to profile or wherever
+      } else if (status === 400) {
+        toast.error(message);  
+      }else if (status === 401){
+        toast.error('Email and password not found');  // Show error message if login failed
+      }
     } catch (err) {
-      toast.error('Invalid email or password.');
+      // Generic error message in case something unexpected happened
+      console.log(err)
+      // toast.error(err.message);
     }
   };
 

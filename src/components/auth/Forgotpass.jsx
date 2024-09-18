@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import AuthService from '../../services/Auth_JwtApi/AuthService'; // Adjust the path based on your project structure
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -15,12 +17,13 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const response = await AuthService.forgotPassword(email);
       toast.success(response.message || 'Password reset link sent. Please check your email.');
     } catch (err) {
-      toast.error('Failed to send password reset email. Please try again later.');
+      toast.error(err.message);
     }
   };
 
@@ -50,9 +53,10 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-btn">
-            Submit
+          <button type="submit" className="submit-btn" disabled={isSubmitting}>
+            {isSubmitting ? 'Request Submited' : 'Submit'}
           </button>
+         
         </form>
 
         <div className="login-link">
@@ -61,6 +65,7 @@ const ForgotPassword = () => {
           </p>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

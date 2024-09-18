@@ -3,18 +3,18 @@ import AuthService from '../../services/Auth_JwtApi/AuthService'; // Ensure this
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { toast} from 'react-toastify';  // Import Toastify
+import { toast,ToastContainer} from 'react-toastify';  // Import Toastify
 import '../../style/ResetPassword.css'; // Optional: Add a CSS file for styling
 
 const ResetPassword = () => {
-    const [NewPassword, setPassword] = useState('');
+    const [newPassword, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleResetPassword = (e) => {
         e.preventDefault();
 
-        if (NewPassword !== confirmPassword) {
+        if (newPassword !== confirmPassword) {
             toast.error("Passwords do not match!");  // Toastify alert
             return;
         }
@@ -27,12 +27,12 @@ const ResetPassword = () => {
             return;
         }
 
-        AuthService.resetPassword({ token, NewPassword })
+        AuthService.resetPassword({ token, newPassword })
             .then(response => {
-                toast.success("Password reset successful!");  // Toastify alert
+                toast.success("Password reset successful! Please Login ");  // Toastify alert
                 setTimeout(() => {
                     window.location.href = '/login';  // Redirect after a short delay
-                }, 2000);  // Redirect after 2 seconds
+                }, 10000);  // Redirect after 2 seconds
             })
             .catch(error => {
                 toast.error("Password reset failed: " + (error.response?.data?.message || "Unknown error"));  // Toastify alert
@@ -55,7 +55,7 @@ const ResetPassword = () => {
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Enter your password"
-                            value={NewPassword}
+                            value={newPassword}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
