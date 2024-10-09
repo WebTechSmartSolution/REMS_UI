@@ -50,8 +50,8 @@ const Navbar = () => {
     return (
         <>
             <header>
-                <nav className="navbar">
-                    <div className="hamburger" onClick={toggleSidebar}>
+                <nav className="navbar1">
+                    <div className="hamburger1" onClick={toggleSidebar}>
                         <FontAwesomeIcon icon={faBars} />
                     </div>
                     <div className="logo">

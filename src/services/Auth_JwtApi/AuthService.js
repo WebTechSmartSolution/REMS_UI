@@ -16,7 +16,8 @@ const authService = {
      localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refreshToken);
      return {
       status: response.status,
-      message: response.data.message
+      message: response.data.message,
+      // console.log(response.message)
     };
     } catch (error) {
       console.log(error.message)

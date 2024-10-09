@@ -1,0 +1,25 @@
+.portfolio-layout {
+    display: flex;
+    height: 89vh;
+    /* left: 44px; */
+    width: 100vw;
+    padding-left: 95px;
+    top: 61px;
+    position: relative;
+    border: 2px solid red;
+}
+
+.navbar-sidebar {
+    width: 250px; /* Set a fixed width for the sidebar */
+    background-color: #f8f9fa; 
+    display: none !important;/* Optional: give it a background */
+    /* Add other styles as needed */
+}
+
+.content-area {
+     /* margin-top: 12px;  */
+    flex: 1; /* This allows the content area to fill remaining space */
+    padding: 20px; /* Add some padding */
+    overflow: hidden;
+    border: blue 2px solid; /* Enable scrolling if content overflows */
+}

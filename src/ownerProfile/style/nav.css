@@ -1,0 +1,533 @@
+/* Custom Navbar */
+.custom-navbar1 {
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between; /* Aligns the brand and links on opposite sides */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar-container1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hamburger-btn1 {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navbar-brand1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-left: 50px;
+  text-decoration: none;
+}
+
+/* Align links to the left */
+.navbar-links1 {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Ensures the links are pushed to the left */
+}
+
+/* Custom Buttons */
+.custom-btn1 {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.custom-btn1:hover {
+  background-color: #e9ecef;
+}
+
+/* Specific Styles for Buttons */
+.my-listings1 {
+  background-color: #f8f9fa;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.my-listings1:hover {
+  background-color: #e2e6ea;
+}
+
+.post-listing1 {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}
+
+.post-listing1:hover {
+  background-color: #218838;
+}
+
+/* Search and User Button */
+.search-btn1 {
+  background-color: #f8f9fa;
+  border-color: #00b23f;
+  color: #1cb91c;
+}
+
+.user-btn1 {
+  background-color: #f8f9fa;
+  border-color: #00b23f;
+  color: #1cb91c;
+}
+
+/* Profile Icon */
+.user-btn1 .faUser {
+  margin-left: 5px;
+}
+
+/* Sidebar styles */
+#sidebar1 {
+  width: 90px;
+  height: 100%;
+  background-color: white;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  transition: width 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar1.active1 {
+  width: 270px;
+}
+
+#sidebar1 ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+#sidebar1 ul li {
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  /* display: flex; */
+  align-items: center;
+}
+
+#sidebar1 ul li a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+#sidebar1 ul li a:hover {
+  background-color: #e7f4eb;
+  color: #00b23f;
+}
+
+#sidebar1 ul li i {
+  margin-right: 10px;
+  color: #00b23f; /* Changed icon color to green */
+}
+
+.sidebar-text1 {
+  display: none;
+  margin-left: 10px;
+}
+
+#sidebar1.active1 .sidebar-text1 {
+  display: inline-block;
+}
+
+#sidebar1 ul li.active1 {
+  background-color: #e7f4eb;
+  color: #00b23f;
+}
+
+/* Sidebar dropdown styles */
+#sidebar1 ul li .collapse1 {
+  padding-left: 15px; /* Indent the dropdown items */
+  /* background-color: #f9f9f9;  */
+}
+
+#sidebar1 ul li .collapse1 a {
+  display: flex;
+  align-items: center;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+#sidebar1 ul li .collapse1 a:hover {
+  background-color: #e7f4eb;
+  color: #00b23f;
+}
+
+/* Modal styles */
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+/* .modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+    width: 190px;
+    /* max-width: 292px; 
+    bottom: 111px;
+    left: 397px;
+    /* display: "flex"; align-items: "center"; padding: "10px";  */
+/* text-align: center; 
+    position: relative;
+} */
+.modal-content {
+  background-color: white;
+  padding: 8px;
+  border-radius: 8px;
+  flex-direction: row;
+  width: 227px;
+  bottom: 185px;
+  left: 397px;
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Optional for spacing between input and button */
+}
+
+.form-control {
+  width: 100%;
+  padding-right: 30px; /* Space for the icon */
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  /* padding-left: 0px; */
+  color: #25bd01;
+}
+
+.modal-content1 {
+  background: white;
+  padding: 21px;
+  border-radius: 8px;
+  width: 190px;
+  /* max-width: 292px; */
+  bottom: 147px;
+  left: 571px;
+  /* text-align: center; */
+  position: relative;
+}
+/* .modal-content button {
+  margin-top: 10px;
+} */
+
+/* Adjust modal position under the parent buttons */
+.search-modal-content {
+  top: 70px;
+  left: 0;
+  z-index: 1060;
+}
+
+.user-modal-content {
+  top: 70px;
+  right: 10px;
+  z-index: 1060;
+}
+
+/* Modal buttons */
+.modal-content button {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+/* Navbar - Search and User Buttons */
+.navbar .btn-outline-secondary:hover {
+  background-color: #e7f4eb;
+  color: #00b23f;
+}
+
+.btn-light {
+  border: 1px solid #00b23f;
+  color: #00b23f;
+}
+button.dropdown-toggle1 {
+  background: none;
+  color: black;
+  margin-left: -24px;
+}
+/* button.dropdown-toggle::after {
+  display: none; /* Hides the default caret 
+} */
+/* Sidebar container styling */
+.sidebar1 {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  background-color: #fff;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+/* Dropdown button styling */
+.dropdown-toggle1 {
+  background: none;
+  border: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-toggle1:hover {
+  color: #00b23f;
+}
+
+/* Submenu (ul) styling */
+.collapse1 {
+  list-style: none;
+  padding-left: 40px; /* Indentation for subitems */
+  margin-top: 10px;
+}
+
+.collapse1 li {
+  margin-bottom: 10px;
+}
+
+/* Link Styling */
+.collapse1 li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.collapse1 li a:hover {
+  color: #00b23f;
+  /* text-decoration: underline; */
+}
+
+/* Styling for the rest of the links */
+.sidebar1 a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.sidebar1 a:hover {
+  /* background-color: #e7f4eb; */
+  color: #00b23f;
+}
+
+/* Sidebar on Mobile */
+@media (max-width: 768px) {
+  .nav-link,
+  .btn-outline-secondary,
+  .btn-success {
+    display: none;
+  }
+
+  .hamburger-btn1 {
+    font-size: 1.5rem;
+  }
+
+  .navbar-brand1 {
+    display: none; /* Hide the navbar logo in mobile view */
+  }
+
+  #sidebar1 {
+    top: 60px;
+    left: 0;
+  }
+
+  .sidebar-text1 {
+    display: none;
+  }
+
+  #sidebar1.active1 .sidebar-text1 {
+    display: inline-block;
+  }
+
+  .modal-content {
+    width: 90%; /* Adjust modal width for mobile */
+    max-width: 400px; /* Set maximum width to avoid too wide modals */
+  }
+}
+
+/* Specific for Sidebar Hover */
+#sidebar1 ul li a:hover .sidebar-text1 {
+  color: #00b23f;
+}
+
+#sidebar1 ul li.active1 i {
+  color: #00b23f;
+}
+
+@media (max-width: 850px) {
+  .navbar-brand1 {
+    display: none;
+  }
+  .btn-outline-secondary {
+    display: block; /* Show search icon in mobile view */
+  }
+  .modal-content {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    width: 229px;
+    /* max-width: 292px; */
+    bottom: 180px;
+    left: 176px;
+    /* text-align: center; */
+    position: relative;
+  }
+}
+@media (max-width: 720px) {
+  .modal-content1 {
+    background: white;
+    /* padding: 21px; */
+    border-radius: 8px;
+    width: 190px;
+    /* max-width: 292px; */
+    bottom: 147px;
+    left: 224px;
+    /* text-align: center; */
+    position: relative;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    width: 240px;
+    /* max-width: 292px; */
+    bottom: 180px;
+    left: 110px;
+    /* text-align: center; */
+    position: relative;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content1 {
+    background: white;
+    padding: 21px;
+    border-radius: 8px;
+    width: 190px;
+    /* max-width: 292px; */
+    bottom: 147px;
+    left: 142px;
+    /* text-align: center; */
+    position: relative;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 21px;
+    border-radius: 8px;
+    width: 230px;
+    /* max-width: 292px; */
+    bottom: 180px;
+    left: 48px;
+    /* text-align: center; */
+    position: relative;
+  }
+}
+@media (max-width: 500px) {
+  .post-listing1 {
+    display: none;
+  }
+  .my-listings1 {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .modal-content1 {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 192px;
+    /* max-width: 292px; */
+    bottom: 147px;
+    left: 75px;
+    /* text-align: center; */
+    position: relative;
+  }
+  .post-listing1 {
+    display: none;
+  }
+  .my-listings1 {
+    display: none;
+  }
+  .modal-content {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    width: 225px;
+    /* max-width: 292px; */
+    bottom: 180px;
+    left: 48px;
+    /* text-align: center; */
+    position: relative;
+  }
+}
+
+@media (max-width: 350px) {
+  .modal-content1 {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 192px;
+    /* max-width: 292px; */
+    bottom: 147px;
+    left: 64px;
+    /* text-align: center; */
+    position: relative;
+  }
+  .post-listing1 {
+    display: none;
+  }
+  .my-listings1 {
+    display: none;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    width: 212px;
+    /* max-width: 292px; */
+    bottom: 184px;
+    left: 79px;
+    /* text-align: center; */
+    position: relative;
+  }
+}
