@@ -3,6 +3,7 @@
     padding: 60px 0;
     text-align: center;
     color: #fff; /* Text color */
+    border-bottom: 5px solid #020844;
 }
 
 .property-type-section h2 {

@@ -12,6 +12,7 @@
     align-items: center;
     color: #fff;
     text-align: center;
+    border-bottom: 5px solid #ff7200;
 }
 
 .hero-content {

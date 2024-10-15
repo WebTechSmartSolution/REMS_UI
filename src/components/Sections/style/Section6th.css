@@ -21,7 +21,7 @@
     width: calc(25% - 20px);
     box-shadow: 0 4px 8px rgb(255 255 255 / 50%);
     color: #16101c;
-    margin: 0 30px;
+    margin: 13px 30px;
     flex: 1 1 170px; /* Flex grow/shrink with a base width */
 }
 

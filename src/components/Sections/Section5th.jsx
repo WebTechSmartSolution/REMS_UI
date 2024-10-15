@@ -3,12 +3,12 @@ import "./style/Section5th.css"; // Adjust the path as needed
 
 const Section5th = () => {
   const cities = [
-    { name: "New York", properties: "100 properties", className: "bg1" },
-    { name: "Thailand", properties: "250 properties", className: "bg2" },
-    { name: "United Kingdom", properties: "180 properties", className: "bg3" },
-    { name: "Singapore", properties: "300 properties", className: "bg4" },
-    { name: "Argentina", properties: "130 properties", className: "bg5" },
-    { name: "United Arab Emirates", properties: "150 properties", className: "bg6" },
+    { name: "New York", properties: "100 properties", imageUrl: "src/assets/US6.jpeg" },
+    { name: "Thailand", properties: "250 properties", imageUrl: "src/assets/US1.jpeg" },
+    { name: "United Kingdom", properties: "180 properties", imageUrl: "src/assets/US2.jpeg" },
+    { name: "Singapore", properties: "300 properties", imageUrl: "src/assets/US3.jpeg" },
+    { name: "Argentina", properties: "130 properties", imageUrl: "src/assets/US4.jpeg" },
+    { name: "United Arab Emirates", properties: "150 properties", imageUrl: "src/assets/US5.jpeg" },
   ];
 
   return (
@@ -20,7 +20,9 @@ const Section5th = () => {
         <div className="cities-slider">
           {cities.map((city, index) => (
             <div className="city-card" key={index}>
-              <div className={`city-color ${city.className}`}></div>
+              <div className="city-image">
+                <img src={city.imageUrl} alt={city.name} />
+              </div>
               <div className="city-info">
                 <h3>{city.name}</h3>
                 <p>{city.properties}</p>
