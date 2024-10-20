@@ -89,7 +89,7 @@ function HeroSection() {
                 onChange={handleInputChange} 
               />
               <select 
-                className="property-type" 
+                className="property-type2" 
                 name="propertyType" 
                 value={formData.propertyType} 
                 onChange={handleInputChange}

@@ -10,18 +10,18 @@ const Section7th = () => {
     { name: "Partner E", image: "src/assets/US6.jpeg", sales: "300k Sales", rating: "5/5" },
   ];
 
-  const logos = [
-    { image: "src/assets/lo1.jpeg" }, 
-    { image: "src/assets/l2.jpeg" }, 
-    { image: "src/assets/l3.jpeg" }, 
-    { image: "src/assets/l4.jpeg" }, 
-    { image: "src/assets/l5.jpeg" },
-    { image: "src/assets/l6.jpeg" },
-    { image: "src/assets/l7.jpeg" }
-  ];
+  // const logos = [
+  //   { image: "src/assets/lo1.jpeg" }, 
+  //   { image: "src/assets/l2.jpeg" }, 
+  //   { image: "src/assets/l3.jpeg" }, 
+  //   { image: "src/assets/l4.jpeg" }, 
+  //   { image: "src/assets/l5.jpeg" },
+  //   { image: "src/assets/l6.jpeg" },
+  //   { image: "src/assets/l7.jpeg" }
+  // ];
 
   return (
-    <section className="partners-section">
+    <section id='Our-Partners' className="partners-section">
       <div className="container">
         <h2>Our Partners</h2>
         <div className="partners-cards">
@@ -39,13 +39,13 @@ const Section7th = () => {
         </div>
 
         {/* Scrolling ticker */}
-        <div className="ticker-wrapper">
+        {/* <div className="ticker-wrapper">
           <div className="ticker">
             {logos.map((logo, index) => (
               <img src={logo.image} alt={`logo${index}`} className="logo-image" key={index} />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

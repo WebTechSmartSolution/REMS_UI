@@ -10,6 +10,7 @@ import Section7th from '../components/Sections/Section7th'
 import '../components/Sections/style/Scroolbutton.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon component
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons"; // Import the specific icon
+import Section8th from '../components/Sections/Section8th';
 
 
 function Home() {
@@ -63,6 +64,7 @@ function Home() {
     <Section5th/>
     <Section6th/>
     <Section7th/>
+    <Section8th/>
     </>
   )
 }
