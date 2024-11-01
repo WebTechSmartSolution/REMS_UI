@@ -117,4 +117,6 @@ body{
     font-weight: 900;
     font-style: italic;
   }
-  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
