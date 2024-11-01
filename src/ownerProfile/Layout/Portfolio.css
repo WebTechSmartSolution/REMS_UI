@@ -6,7 +6,7 @@
     padding-left: 95px;
     top: 61px;
     position: relative;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .navbar-sidebar {
@@ -20,6 +20,20 @@
      /* margin-top: 12px;  */
     flex: 1; /* This allows the content area to fill remaining space */
     padding: 20px; /* Add some padding */
-    overflow: hidden;
-    border: blue 2px solid; /* Enable scrolling if content overflows */
+    overflow-y: hidden;
+    position: absolute;
+    z-index: -1;
+    /* border: blue 2px solid; Enable scrolling if content overflows */
 }
+
+@media (max-width: 500px) {
+    /* .navbar-sidebar {
+        display: none;
+    } */
+    /* .content-area {
+        /* margin-top: 12px;  */
+       left: 0px;
+       /* border: blue 2px solid; Enable scrolling if content overflows */
+   } */
+    
+  }

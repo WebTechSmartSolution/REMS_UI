@@ -175,6 +175,30 @@ const authService = {
 // }
 
 
+uploadImages: async (formData) => {
+  try {
+    const response = await axios.post('/upload-images', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data.imagePaths; // Assuming response sends back an array of image paths
+  } catch (error) {
+    console.error('Image upload failed:', error);
+    throw error;
+  }
+},
+
+PostListings: async (formData) => {
+  try {
+    const response = await axiosInstance.post('/upload-images', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data.imagePaths; // Assuming response sends back an array of image paths
+  } catch (error) {
+    console.error('Image upload failed:', error);
+    throw error;
+  }
+},
+
 };
 
 export default authService;

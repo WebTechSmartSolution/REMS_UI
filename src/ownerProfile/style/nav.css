@@ -468,6 +468,9 @@ button.dropdown-toggle1 {
   .my-listings1 {
     display: none;
   }
+  .sidebar1{
+    display: none;
+  }
 }
 @media (max-width: 400px) {
   .modal-content1 {
@@ -498,6 +501,7 @@ button.dropdown-toggle1 {
     /* text-align: center; */
     position: relative;
   }
+
 }
 
 @media (max-width: 350px) {
@@ -531,3 +535,4 @@ button.dropdown-toggle1 {
     position: relative;
   }
 }
+
