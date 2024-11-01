@@ -19,6 +19,7 @@ import Purchaseorders from './ownerProfile/pages/Purchase-orders';
 import UserProfile from './ownerProfile/pages/UserProfile';
 import Inbox from './ownerProfile/pages/Inbox';
 import Properties_details from './pages/Properties_Details';
+import ListingPage from './pages/ListingPage';
 
 // import Navbar from './components/header-footer/Header';
 // import SignUp from './components/auth/signup'
@@ -36,7 +37,7 @@ function App() {
         {/*Routes that are  in Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element = {<Home/>}/>
-        {/*  <Route path = 'properties' element = {<Properties/>}/> */}
+         <Route path = 'All_Listings' element = {<ListingPage/>}/>
         <Route path = 'Listing-Details' element = {<Properties_details/>}/>   
 
 <Route path="/login" element={<Login />} />

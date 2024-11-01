@@ -1,0 +1,39 @@
+/* Header Styles */
+.listing-header {
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 20px 0;
+}
+
+.listing-header .breadcrumb {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.listing-header .breadcrumb span {
+    margin-right: 5px;
+}
+
+.listing-header .listing-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #343a40;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .listing-header .listing-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .listing-header .listing-title {
+        font-size: 20px;
+    }
+
+    .listing-header .breadcrumb {
+        font-size: 12px;
+    }
+}

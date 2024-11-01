@@ -47,7 +47,7 @@ const Section4th = () => {
 
                 <div className="rating">⭐⭐⭐⭐⭐</div>
 
-                <button className="view-details-btn">View Details</button>
+                <button href='/Listing-Details' className="view-details-btn">View Details</button>
               </div>
             </div>
           ))}
