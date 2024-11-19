@@ -37,7 +37,7 @@ const Navbar = () => {
   const handleAddPropertyClick = () => {
     if (authService.isAuthenticated()) {
       // Redirect to add listing page if logged in
-      window.location.href = "/add-listing";
+      window.location.href = "/portfolio/add-listing";
     } else {
       // Redirect to login page if not logged in
       window.location.href = "/login";
@@ -101,13 +101,13 @@ const Navbar = () => {
                   </span>
                   {dropdownOpen && (
                     <div className="dropdown-content">
-                      <Link className="Link" to="/Profile">
+                      <Link className="Link" to="/portfolio">
                         Profile
                       </Link>
-                      <Link className="Link" to="/Profile/My-Listing">
+                      <Link className="Link" to="/portfolio/all-Listing">
                         Your Listings
                       </Link>
-                      <Link className="Link" to="/login" onClick={onLogout}>
+                      <Link className="Link" to="/" onClick={onLogout}>
                         Logout
                       </Link>
                     </div>
@@ -159,14 +159,18 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link className="Link" to="/">
+                <Link className="Link" to="/All_Listings">
                   Listing
                 </Link>
               </li>
               <li>
-                <Link className="Link" to="/">
-                  Agent
-                </Link>
+              <Link
+              to='/'
+                className="Link"
+                onClick={() => handleScrollToSection("Our-Partners")}
+              >
+                Agent
+              </Link>
               </li>
               <li className="dropdown">
                 {loggedIn ? (
@@ -176,13 +180,13 @@ const Navbar = () => {
                     </span>
                     {dropdownOpen && (
                       <div className="dropdown-content">
-                        <Link className="Link" to="/">
+                        <Link className="Link" to="/portfolio">
                           Profile
                         </Link>
-                        <Link className="Link" to="/">
+                        <Link className="Link" to="/portfolio/all-Listing">
                           Your Listings
                         </Link>
-                        <Link className="Link" to="/" onClick={onLogout}>
+                        <Link className="Link" to="/login" onClick={onLogout}>
                           Logout
                         </Link>
                       </div>
@@ -195,7 +199,11 @@ const Navbar = () => {
                 )}
               </li>
               <li>
-                <Link className="Link" to="/">
+              <Link
+                 to='/'
+                  className="Link"
+                  onClick={() => handleScrollToSection("contact-us")}
+                >
                   Contact Us
                 </Link>
               </li>

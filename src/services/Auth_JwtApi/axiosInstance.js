@@ -3,7 +3,7 @@ import authService from '../Auth_JwtApi/AuthService';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api/Auth', // Replace with your actual backend URL
+  baseURL: 'http://localhost:5000/api', // Replace with your actual backend URL
   headers: {
     'Content-Type': 'application/json',
   },

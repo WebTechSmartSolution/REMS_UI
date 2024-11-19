@@ -10,7 +10,7 @@ const authService = {
  login: async (email,Password) => {
     // console.log("signinuser call");
     try {
-      const response = await axiosInstance.post(`/login`, { email, Password });
+      const response = await axiosInstance.post(`/Auth/login`, { email, Password });
       console.log(response);
       localStorage.setItem(TOKEN_KEY, response.data.token);
      localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refreshToken);
@@ -55,7 +55,7 @@ const authService = {
     }
 
     try {
-      const response = await axiosInstance.post(`/refresh-token`, {
+      const response = await axiosInstance.post(`/Auth/refresh-token`, {
         token,
         refreshToken,
       });
@@ -84,7 +84,7 @@ const authService = {
   // Signup method with toast
   signup: async (data) => {
     try {
-      const response = await axiosInstance.post('/signup', data);
+      const response = await axiosInstance.post('/Auth/signup', data);
   
       // Handle success response
       return {
@@ -125,7 +125,7 @@ const authService = {
   // Forgot password method with toast
   forgotPassword: async (email) => {
     try {
-      const response = await axiosInstance.post(`/forgot-password`, { email });
+      const response = await axiosInstance.post(`/Auth/forgot-password`, { email });
       // toast.success('Password reset email sent successfully!');
       return response.data;
     } catch (error) {
@@ -139,7 +139,7 @@ const authService = {
   // Handle/post new password and token with toast
   resetPassword: async (data) => {
     try {
-      const response = await axiosInstance.post(`/reset-password`, {
+      const response = await axiosInstance.post(`/Auth/reset-password`, {
         token: data.token,            // Make sure `token` is a string
         newPassword: data.newPassword // Make sure `newPassword` is a string
       });
@@ -177,7 +177,7 @@ const authService = {
 
 uploadImages: async (formData) => {
   try {
-    const response = await axios.post('/upload-images', formData, {
+    const response = await axios.post('/Listings', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data.imagePaths; // Assuming response sends back an array of image paths
@@ -189,7 +189,7 @@ uploadImages: async (formData) => {
 
 PostListings: async (formData) => {
   try {
-    const response = await axiosInstance.post('/upload-images', formData, {
+    const response = await axiosInstance.post('/Listings', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data.imagePaths; // Assuming response sends back an array of image paths
