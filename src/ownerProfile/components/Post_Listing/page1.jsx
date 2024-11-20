@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import authService from "../../../services/Auth_JwtApi/AuthService";
 import "./Style/Section1.css"; // For styling
-import PropertyDocuments from "./PropertyDocuments";
 import PropertyGallery from "./PropertieGallary";
 
 const AddPost = () => {
@@ -53,21 +52,20 @@ const AddPost = () => {
       mapUrl: "",
     },
     gallery: [],
-    documents: [],
   });
 
   const [errors, setErrors] = useState({
     propertyInfo: {
       propertyName: "",
-      propertyType: "buy",
-      currencyType: "usd",
+      propertyType: "",
+      currencyType: "",
       salePrice: "",
       offerPrice: "",
     },
     propertyDetails: {
       propertyId: "",
       pricePerSqft: "",
-      structureType: "apartment",
+      structureType: "",
       noOfBedrooms: "",
       noOfBathrooms: "",
       sqft: "",
@@ -91,7 +89,7 @@ const AddPost = () => {
       description: "",
       bedrooms: "",
       bathrooms: "",
-      propertyType: "Apartment",
+      propertyType: "",
       garageSize: "",
       yearBuilt: "",
     },
@@ -103,8 +101,9 @@ const AddPost = () => {
       mapUrl: "",
     },
     gallery: [],
-    documents: [],
+   
   });
+  const userId = authService.getUserIdFromAuthToken();
 
   // Handle input changes
   const handleChange = (section, key, value) => {
@@ -176,7 +175,7 @@ const AddPost = () => {
         mapUrl: "",
       },
       gallery: [],
-      documents: [],
+      
     });
   };
 
@@ -274,7 +273,6 @@ const AddPost = () => {
               Property Details
             </li>
             <li onClick={() => scrollToSection("amenities")}>Amenities</li>
-            <li onClick={() => scrollToSection("documents")}>Documents</li>
             <li onClick={() => scrollToSection("gallery")}>Gallery</li>
             <li onClick={() => scrollToSection("floor_plans")}>Floor Plans</li>
             <li onClick={() => scrollToSection("location")}>Location</li>
@@ -304,14 +302,11 @@ const AddPost = () => {
                     className={`info-input ${
                       errors.propertyInfo.propertyName ? "error" : ""
                     }`}
-                    value={formData.propertyInfo.propertyName || ""}
-                    onChange={(e) =>
-                      handleChange(
-                        "propertyInfo",
-                        "propertyName",
-                        e.target.value
-                      )
-                    }
+                    value={formData.propertyInfo.propertyName}
+                    onChange={(e) => {
+                      console.log("PropertyName onChange event triggered");
+                      handleChange("propertyInfo", "propertyName", e.target.value);
+                    }}
                   />
                   {errors.propertyInfo.propertyName && (
                     <span className="error-message">
@@ -778,8 +773,12 @@ const AddPost = () => {
           </div>
         </div>
 
-        <PropertyDocuments setFieldValue={handleChange} />
-        <PropertyGallery setFieldValue={handleChange} />
+        
+        <PropertyGallery 
+        setFieldValue={handleChange} 
+        listingId={formData.propertyInfo.propertyId} 
+        userId={userId} 
+      />
 
         <div className="description-floor-plan-section" id="floor_plans">
           <div className="left-column">
@@ -896,7 +895,7 @@ const AddPost = () => {
                     )
                   }
                 >
-                  <option value="">Select Type</option>
+                  <option value="0">Select Type</option>
                   <option value="Apartment">Apartment</option>
                   <option value="House">House</option>
                   <option value="Villa">Villa</option>

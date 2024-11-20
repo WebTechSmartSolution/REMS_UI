@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import authService from './../../../services/Auth_JwtApi/AuthService';
 import './Style/PropertyGallery.css';
 
-const PropertyGallery = ({ setFieldValue }) => {
+const PropertyGallery = ({ setFieldValue, listingId, userId }) => {  // userId is now a prop
   const [images, setImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -19,7 +19,7 @@ const PropertyGallery = ({ setFieldValue }) => {
     }
 
     setImages((prev) => [...prev, ...validImages]);
-    setFieldValue('images', [...images, ...validImages]); // Update centralized state
+    setFieldValue('gallery', 'images', [...images, ...validImages]); // Using 'setFieldValue' for gallery
     const previews = validImages.map((file) => URL.createObjectURL(file));
     setImagePreviews((prev) => [...prev, ...previews]);
   };
@@ -33,12 +33,13 @@ const PropertyGallery = ({ setFieldValue }) => {
     try {
       const formData = new FormData();
       images.forEach((image) => formData.append('images', image));
-      const response = await authService.uploadImages(formData);
+      // Send both userId and listingId along with images for upload
+      const response = await authService.uploadImages(formData, userId, listingId);
       console.log('Images uploaded:', response);
       alert('Images uploaded successfully');
       setImages([]);
       setImagePreviews([]);
-      setFieldValue('images', []); // Clear centralized state images on successful upload
+      setFieldValue('gallery', 'images', []); // Clear gallery on successful upload
     } catch (error) {
       console.error('Failed to upload images:', error);
       alert('Failed to upload images.');
@@ -50,12 +51,12 @@ const PropertyGallery = ({ setFieldValue }) => {
   const removeImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
     setImages(updatedImages);
-    setFieldValue('images', updatedImages); // Update centralized state
+    setFieldValue('gallery', 'images', updatedImages); // Update gallery field value
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
-    <div className="property-gallery-section" id="gallery" >
+    <div className="property-gallery-section" id="gallery">
       <div className="gallery-description">
         <h3>Property Gallery</h3>
         <p>Upload photos of the property to give potential tenants a better view of the property’s features and layout.</p>

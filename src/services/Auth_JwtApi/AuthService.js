@@ -1,17 +1,37 @@
 import { toast } from 'react-toastify';
+
+import { jwtDecode } from 'jwt-decode';  // Use the named import
+
 import axiosInstance from './axiosInstance';
 
 const TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
 
 const authService = {
-  // Login and store tokens in localStorage
+  
+  getUserIdFromAuthToken: () => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    
+    if (!token) {
+      return null;  // Return null if there's no token
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);  // Decode the token
+      const userId = decodedToken.nameid; 
+      
+      return userId;  // Assuming 'userId' is the key in the token payload
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return null;  // Return null in case of any error
+    }
+  },
   
  login: async (email,Password) => {
     // console.log("signinuser call");
     try {
       const response = await axiosInstance.post(`/Auth/login`, { email, Password });
-      console.log(response);
+     
       localStorage.setItem(TOKEN_KEY, response.data.token);
      localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refreshToken);
      return {
@@ -68,7 +88,7 @@ const authService = {
 
       return response;
     } catch (err) {
-      console.error('Error refreshing token', err);
+      
       toast.error('Failed to refresh token. Logging out.');
       authService.logout(); // Logout if refresh fails
     }
@@ -77,7 +97,7 @@ const authService = {
   // Check if the user is authenticated
   isAuthenticated: () => {
     const token = localStorage.getItem(TOKEN_KEY);
-    console.log(TOKEN_KEY)
+    
     return !!token; // Return true if there's a token
   },
 
@@ -177,7 +197,7 @@ const authService = {
 
 uploadImages: async (formData) => {
   try {
-    const response = await axios.post('/Listings', formData, {
+    const response = await axiosInstance.post('/Listings', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data.imagePaths; // Assuming response sends back an array of image paths

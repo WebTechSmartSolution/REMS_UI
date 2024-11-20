@@ -218,19 +218,24 @@
 
   /* Main Amenities Section Styling */
 .amenities-section {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  margin-bottom: 40px;
+  display: flex; 
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 /* Flexbox to layout heading/description on left, inputs on right */
 .amenities-container {
   display: flex;
-  justify-content: space-between;
-  /* align-items: flex-start; */
+    justify-content: space-between;
+    /* padding: 30px; */
+    background-color: #f9f9f9;
+    border-radius: 10px
 }
 
 /* Left Side: Description (heading and paragraph) */
@@ -253,7 +258,7 @@
 
 /* Right Side: Inputs Area */
 .amenities-inputs {
-  flex: 1.5;
+  flex: 1.45;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -473,7 +478,7 @@
 }
 
 .right-column {
-  flex: 1.5;
+  flex: 1.43;
   background: #fff;
   /* max-width:60% ; */
   padding: 20px;
@@ -556,7 +561,7 @@
 }
 
 .right-column {
-  flex: 1.5;
+  flex: 1.43;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
