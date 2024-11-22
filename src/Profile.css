@@ -1,0 +1,159 @@
+/* ProfileSettings.css */
+
+  
+  .profile-settings-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .profile-settings {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .profile-pic-container {
+    position: relative;
+    margin: 0 auto 20px;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .profile-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+  }
+  
+  .upload-label {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #4caf50;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .upload-label input {
+    display: none;
+  }
+  
+  .upload-icon {
+    font-size: 18px;
+  }
+  
+  .profile-form h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .form-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .form-input {
+    width: 88%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .form-input:focus {
+    border-color: #4caf50;
+    outline: none;
+  }
+  
+  .form-input-disabled {
+    background-color: #f9f9f9;
+    color: #888;
+    cursor: not-allowed;
+  }
+  
+  .form-button {
+    width: 38%;
+    padding: 10px;
+    background: #4caf50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .form-button:hover {
+    background: #45a049;
+  }
+  /* ProfileSettings.css */
+.profile-pic-container {
+    position: relative;
+    margin: 0 auto 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8ef8d5; /* Default background */
+  }
+  
+  .profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .placeholder-initials {
+    font-size: 48px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  
+  .password-input-container {
+    position: relative;
+    
+  }
+  
+ 
+  
+  .toggle-password-visibility {
+    position: absolute;
+    right: 10px;
+    top: 38%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+  }
+  
