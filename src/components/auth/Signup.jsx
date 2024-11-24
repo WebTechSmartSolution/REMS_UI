@@ -30,12 +30,14 @@ const SignUp = () => {
 
   // Submission logic directly in SignUp component
   const handleFormSubmit = async (e) => {
+  
     e.preventDefault();
     setErrors({});
     setIsSubmitting(true);
 
     // Validate form fields
     const validationErrors = validateForm(signUpData);
+    console.log(signUpData)
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
@@ -98,7 +100,7 @@ const SignUp = () => {
               onChange={handlePasswordChange}
               placeholder="Create a strong password"
               required
-              minLength="8"
+              minLength="6"
             />
             <span id="toggle-password" className="toggle-password" onClick={togglePasswordVisibility}>
               {passwordVisible ? '🙈' : '👁️'}

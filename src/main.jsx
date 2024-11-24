@@ -5,6 +5,7 @@ import App from './App.jsx';
 import { UserProvider } from './ownerProfile/contextAPi/UserContext.jsx'; // Adjust the import path as necessary
 import './index.css';
 import { ToastContainer } from 'react-toastify'
+import { SearchProvider } from './Context/Searchcontext.jsx';
 
 
 
@@ -13,8 +14,10 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider> {/* Wrap App with UserProvider */}
-      <ToastContainer /> 
+      <SearchProvider>
         <App />
+        <ToastContainer /> 
+        </SearchProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>,

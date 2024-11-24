@@ -28,16 +28,15 @@ const authService = {
   },
   
  login: async (email,Password) => {
-    // console.log("signinuser call");
     try {
       const response = await axiosInstance.post(`/Auth/login`, { email, Password });
      
       localStorage.setItem(TOKEN_KEY, response.data.token);
+      localStorage.setItem("User", response.data.email);
      localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refreshToken);
      return {
       status: response.status,
       message: response.data.message,
-      // console.log(response.message)
     };
     } catch (error) {
       console.log(error.message)
@@ -49,11 +48,11 @@ const authService = {
   logout: () => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
-    // localStorage.removeItem('token');
+    localStorage.removeItem("User");
     toast.success('Logged out successfully.');
     setTimeout(() => {
       window.location.href = '/login';// Redirect after a short delay
-  }, 9000); },
+  }, 5000); },
        
     
     
@@ -110,6 +109,7 @@ const authService = {
       return {
         status: response.status,
         message: 'Signup successful! Please log in.'
+       
       };
     } catch (error) {
       if (error.response) {

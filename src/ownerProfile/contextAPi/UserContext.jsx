@@ -6,9 +6,10 @@ export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    const email = localStorage.getItem('userEmail');
+    const email = localStorage.getItem('User');
     if (email) {
-      setUsername(email.substring(0, 8));
+      const name = email.split('@')[0]; 
+     setUsername(name);
     }
   }, []);
 

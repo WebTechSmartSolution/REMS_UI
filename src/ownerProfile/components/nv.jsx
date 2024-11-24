@@ -8,6 +8,7 @@ import {
   faStore, faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import '../style/nav.css';
+import authService from "../../services/Auth_JwtApi/AuthService";
 
 const NavbarSidebar = () => {
   const [sidebarActive, setSidebarActive] = useState(false);
@@ -28,8 +29,8 @@ const NavbarSidebar = () => {
   };
 
   const handleLogout = () => {
-    alert('Logging out...');
-    window.location.href = '/login';
+    authService.logout();
+    
   };
 
   return (
