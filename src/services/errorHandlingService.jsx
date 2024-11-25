@@ -39,8 +39,4 @@ export const notify = (type, message) => {
       toast(message, options); // General notification
       break;
   }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 6dca6f638d3ed1e0b90a88c62b68b0108a87ffda

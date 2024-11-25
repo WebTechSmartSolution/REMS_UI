@@ -13,6 +13,7 @@ const authService = {
     const token = localStorage.getItem(TOKEN_KEY);
     
     if (!token) {
+     authService.logout();
       return null;  // Return null if there's no token
     }
 
@@ -210,7 +211,9 @@ uploadImages: async (formData) => {
 PostListings: async (formData) => {
   try {
     const response = await axiosInstance.post('/Listings', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+        'Content-Type': 'multipart/form-data' },
     });
     return response.data.imagePaths; // Assuming response sends back an array of image paths
   } catch (error) {

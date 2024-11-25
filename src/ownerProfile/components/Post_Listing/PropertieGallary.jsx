@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import authService from './../../../services/Auth_JwtApi/AuthService';
 import './Style/PropertyGallery.css';
 
-const PropertyGallery = ({ setFieldValue, listingId, userId }) => {  // userId is now a prop
-  const [images, setImages] = useState([]);
+const PropertyGallery = ({ setFieldValue }) => {
   const [imagePreviews, setImagePreviews] = useState([]);
-  const [uploading, setUploading] = useState(false);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -13,46 +10,26 @@ const PropertyGallery = ({ setFieldValue, listingId, userId }) => {  // userId i
       (file) => file.size <= 8000000 && (file.type === 'image/jpeg' || file.type === 'image/png')
     );
 
-    if (validImages.length + images.length > 10) {
+    if (validImages.length + imagePreviews.length > 10) {
       alert('You can only upload a maximum of 10 images.');
       return;
     }
 
-    setImages((prev) => [...prev, ...validImages]);
-    setFieldValue('gallery', 'images', [...images, ...validImages]); // Using 'setFieldValue' for gallery
     const previews = validImages.map((file) => URL.createObjectURL(file));
     setImagePreviews((prev) => [...prev, ...previews]);
-  };
 
-  const handleUpload = async () => {
-    if (images.length === 0) {
-      alert('Please select images to upload.');
-      return;
-    }
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      images.forEach((image) => formData.append('images', image));
-      // Send both userId and listingId along with images for upload
-      const response = await authService.uploadImages(formData, userId, listingId);
-      console.log('Images uploaded:', response);
-      alert('Images uploaded successfully');
-      setImages([]);
-      setImagePreviews([]);
-      setFieldValue('gallery', 'images', []); // Clear gallery on successful upload
-    } catch (error) {
-      console.error('Failed to upload images:', error);
-      alert('Failed to upload images.');
-    } finally {
-      setUploading(false);
-    }
+    setFieldValue((prevFormData) => ({
+      ...prevFormData,
+      gallery: [...prevFormData.gallery, ...validImages],
+    }));
   };
 
   const removeImage = (index) => {
-    const updatedImages = images.filter((_, i) => i !== index);
-    setImages(updatedImages);
-    setFieldValue('gallery', 'images', updatedImages); // Update gallery field value
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+    setFieldValue((prevFormData) => ({
+      ...prevFormData,
+      gallery: prevFormData.gallery.filter((_, i) => i !== index),
+    }));
   };
 
   return (
@@ -73,13 +50,6 @@ const PropertyGallery = ({ setFieldValue, listingId, userId }) => {  // userId i
             accept="image/jpeg, image/png"
             multiple
           />
-          <button
-            className="upload-button1"
-            onClick={handleUpload}
-            disabled={uploading}
-          >
-            {uploading ? 'Uploading...' : 'Upload Photos'}
-          </button>
         </div>
 
         <ul className="upload-instructions">

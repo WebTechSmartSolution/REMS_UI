@@ -2,7 +2,7 @@
 
 
 
-import { notifyPromise } from "../services/errorHandlerService";
+import { notifyPromise } from "../services/errorHandlingService";
 
 const Signup = () => {
   const { userDetail, handleChange, handleSubmit } = useSignupForm();

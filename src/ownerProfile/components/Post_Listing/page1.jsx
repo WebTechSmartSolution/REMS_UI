@@ -103,7 +103,7 @@ const AddPost = () => {
     gallery: [],
    
   });
-  const userId = authService.getUserIdFromAuthToken();
+  
 
   // Handle input changes
   const handleChange = (section, key, value) => {
@@ -215,32 +215,43 @@ const AddPost = () => {
         zipCode: !formData.location.zipCode.trim(),
       },
     };
-
+  
     setErrors(newErrors);
-
+  
     // Check if there are any errors across all sections
     const hasErrors = Object.values(newErrors).some((section) =>
       Object.values(section).some(Boolean)
     );
-
+  
     if (!hasErrors) {
       try {
-        const response = await authService.PostListings(formData);
-        console.log("Data submitted successfully:", response.data);
-        alert("Data submitted successfully.");
-        handleReset();
+        const form = new FormData();
+  
+        // Append images
+        formData.gallery.forEach((file) => form.append('Images', file));
+  
+        // Append other fields as JSON strings
+        form.append('propertyInfo', JSON.stringify(formData.propertyInfo));
+        form.append('propertyDetails', JSON.stringify(formData.propertyDetails));
+        form.append('description', JSON.stringify(formData.description));
+        form.append('location', JSON.stringify(formData.location));
+        form.append('amenities', JSON.stringify(formData.amenities));
+  
+        const response = await authService.addListing(form);
+        console.log('Data submitted successfully:', response.data);
+        alert('Data submitted successfully.');
+        handleReset(); // Reset form after successful submission
       } catch (error) {
-        console.error("Error submitting form data:", error);
-        alert("There was an error submitting the data. Please try again.");
+        console.error('Error submitting form data:', error);
+        alert('There was an error submitting the data. Please try again.');
       }
     } else {
-      console.log("Form Data:", formData);
-
-      console.log("Please fill all required fields.");
-      alert("Please fill all required fields.");
+      console.log('Form Data:', formData);
+      console.log('Please fill all required fields.');
+      alert('Please fill all required fields.');
     }
   };
-
+  
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -774,11 +785,7 @@ const AddPost = () => {
         </div>
 
         
-        <PropertyGallery 
-        setFieldValue={handleChange} 
-        listingId={formData.propertyInfo.propertyId} 
-        userId={userId} 
-      />
+        <PropertyGallery setFieldValue={setFormData} />
 
         <div className="description-floor-plan-section" id="floor_plans">
           <div className="left-column">
