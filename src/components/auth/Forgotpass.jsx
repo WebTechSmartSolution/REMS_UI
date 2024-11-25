@@ -54,7 +54,7 @@ const ForgotPassword = () => {
             />
           </div>
           <button type="submit" className="submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Request Submited' : 'Submit'}
+            {isSubmitting ? 'Requesting....' : 'Submit'}
           </button>
          
         </form>

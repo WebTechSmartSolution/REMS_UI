@@ -119,7 +119,7 @@ const Navbar = () => {
                 </Link>
               )}
             </li>
-            <li>
+            
               <li>
                 <Link
                  to='/'
@@ -129,7 +129,7 @@ const Navbar = () => {
                   Contact Us
                 </Link>
               </li>
-            </li>
+           
           </ul>
           <div className="auth-buttons">
             <button className="add-property" onClick={handleAddPropertyClick}>

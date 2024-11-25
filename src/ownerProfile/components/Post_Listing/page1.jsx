@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import authService from "../../../services/Auth_JwtApi/AuthService";
 import "./Style/Section1.css"; // For styling
 import PropertyGallery from "./PropertieGallary";
+import {notify} from "../../../services/errorHandlingService";
 
 const AddPost = () => {
   const [formData, setFormData] = useState({
@@ -239,16 +240,14 @@ const AddPost = () => {
   
         const response = await authService.addListing(form);
         console.log('Data submitted successfully:', response.data);
-        alert('Data submitted successfully.');
+        notify( "success", "Data submitted successfully.");
         handleReset(); // Reset form after successful submission
       } catch (error) {
-        console.error('Error submitting form data:', error);
-        alert('There was an error submitting the data. Please try again.');
+        notify( "error", "There was an error submitting the data."+ error.message);
       }
     } else {
       console.log('Form Data:', formData);
-      console.log('Please fill all required fields.');
-      alert('Please fill all required fields.');
+      notify("error", "Please fill all required fields.");
     }
   };
   

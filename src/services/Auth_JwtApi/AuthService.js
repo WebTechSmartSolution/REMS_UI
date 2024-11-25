@@ -186,14 +186,14 @@ const authService = {
   },
 
 // call for sending filters valuses from home page for search
-// searchProperties: async (searchData) => {
-//   try {
-//     const response = await axios.post('https://api.example.com/search', searchData);
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+searchProperties: async (searchData) => {
+  try {
+    const response = await axiosInstance.post('https://api.example.com/search', searchData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+},
 
 
 uploadImages: async (formData) => {

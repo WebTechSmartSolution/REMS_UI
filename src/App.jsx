@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/auth/Login";
-import SignUp from "./components/auth/signup";
+import SignUp from "./components/auth/Signup";
 import ForgotPassword from "./components/auth/Forgotpass";
 import Layout from "./Layout/Layout";
 import Home from "./pages/Home";
@@ -45,8 +45,8 @@ function App() {
         {/* routes for portfolio section of user */}
 
         {/* Protected Portfolio Routes */}
-        <Route path="/portfolio" element={<PrivateRoute />}>
-          <Route element={<PortfolioLayout />}>
+        <Route path="/portfolio" element={<PortfolioLayout />}>
+          {/* <Route element={<PortfolioLayout />}> */}
             <Route index element={<Dashboard />} />
             <Route path="all-listing" element={<AllListing />} />
             <Route path="order-history" element={<OrderHistory />} />
@@ -60,7 +60,7 @@ function App() {
               <Route path="change-password" element={<UserProfile />} />
             </Route>
           </Route>
-        </Route>
+        {/* </Route> */}
       </Routes>
     </>
   );

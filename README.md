@@ -8,6 +8,10 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-issues in this code right now ....
+##issues in this code right now ....
+`````
 APi setup are reanining 
 upload image issue(Add listing) but data making api call.
+in listing details we need to call api for better responce and data display
+Design issue on Reset-Password page.
+`````

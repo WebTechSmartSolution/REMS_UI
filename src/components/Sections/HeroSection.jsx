@@ -3,6 +3,7 @@ import  { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faHome, faSearch , faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import authservice from '../../services/Auth_JwtApi/AuthService';
+import { notify } from '../../services/errorHandlingService';
 import './style/HeroSection.css'
 
 function HeroSection() {
@@ -31,7 +32,7 @@ function HeroSection() {
       // Check if all fields are filled (you can make this check more strict as required)
       const { keyword, propertyType, address, minPrice, maxPrice } = formData;
       if (!keyword || !propertyType || !address || !minPrice || !maxPrice) {
-        alert("Please fill out all fields");
+        notify("error","Please fill out all fields");
         return;
       }
   
@@ -45,9 +46,11 @@ function HeroSection() {
       authservice.searchProperties(searchData)
         .then(response => {
           console.log("API Response: ", response);
+          
         })
         .catch(error => {
-          console.error("Error during API call: ", error);
+          
+          notify("error","Error during API call: " + error.message);
         });
     };
   

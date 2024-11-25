@@ -76,6 +76,7 @@ const Login = () => {
               type="email"
               placeholder="example@gmail.com"
               value={email}
+               autoComplete="false"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -86,6 +87,7 @@ const Login = () => {
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password"
               value={password}
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />

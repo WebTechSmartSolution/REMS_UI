@@ -4,12 +4,13 @@ import ListingCard from '../components/cards/Card';
 import { FiSearch, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import '../style/ListingPage.css';
 import Section1 from '../components/Sections/Listing/Section1';
+import { notify } from '../services/errorHandlingService';
 
 const ITEMS_PER_PAGE = 12;
 
 const defaultListings = [
   {
-    propertyType: "Buy",
+    Propertytype: "Buy",
     id: 1,
     title: "Beautiful Condo Room",
     location: "Chicago, IL",
@@ -24,7 +25,7 @@ const defaultListings = [
     isNew: true,
   },
   {
-    propertyType: "Buy",
+    Propertytype: "Buy",
     id: 15,
     title: "Beautiful Condo Room",
     location: "Chicago, IL",
@@ -39,7 +40,7 @@ const defaultListings = [
     isNew: true,
   },
   {
-    propertyType: "Rent", // Add propertyType here as well
+    Propertytype: "Rent", // Add Propertytype here as well
     id: 16,
     title: "Grand Mahaka",
     location: "New York, NY",
@@ -54,7 +55,7 @@ const defaultListings = [
     isNew: false,
   },
   {
-    propertyType: "Buy",
+    Propertytype: "Buy",
     id: 2,
     title: "Grand Mahaka",
     location: "New York, NY",
@@ -69,7 +70,7 @@ const defaultListings = [
     isNew: false,
   },
   {
-    propertyType: "Buy",
+    Propertytype: "Buy",
     id: 3,
   title: "Grand Mahaka",
   location: "New York, NY",
@@ -84,7 +85,7 @@ const defaultListings = [
   isNew: false,
 },
 {
-  propertyType: "Buy",
+  Propertytype: "Buy",
   id: 4,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -98,7 +99,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Buy",
+{Propertytype: "Buy",
   id: 5,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -112,7 +113,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Buy",
+{Propertytype: "Buy",
   id: 6,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -126,7 +127,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Buy",
+{Propertytype: "Buy",
   id: 7,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -140,7 +141,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Buy",
+{Propertytype: "Buy",
   id: 8,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -154,7 +155,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 }, 
-{propertyType: "Buy",
+{Propertytype: "Buy",
    id: 9,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -168,7 +169,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Rent",
+{Propertytype: "Rent",
   id: 10,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -182,7 +183,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Rent",
+{Propertytype: "Rent",
   id: 11,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -196,7 +197,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Rent",
+{Propertytype: "Rent",
   id: 12,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -204,14 +205,14 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-propertyType: 'buy',
+Propertytype: 'buy',
 imageUrl: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Rent",
+{Propertytype: "Rent",
   id: 13,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -225,7 +226,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{propertyType: "Rent",
+{Propertytype: "Rent",
   id: 14,
 title: "Grand Mahaka",
 location: "New York, NY",
@@ -255,7 +256,8 @@ const ListingPage = () => {
         setListings(data.length ? data : defaultListings);
         setFilteredData(data.length ? data : defaultListings);
       } catch (error) {
-        console.error('Error fetching listings:', error);
+        notify("error", "Error fetching listings: " + error.message);
+       
         setListings(defaultListings);
         setFilteredData(defaultListings);
       }
@@ -265,15 +267,15 @@ const ListingPage = () => {
   }, []);
 
   const handleSearch = (filters) => {
-    const { location, priceRange, propertyType } = filters;
+    const { location, priceRange, Propertytype } = filters;
   
     const filtered = listings.filter((listing) => {
       const locationMatch = !location || listing.location.toLowerCase().includes(location.toLowerCase());
       const priceMatch = !priceRange || listing.price <= Number(priceRange);
-      const propertyTypeMatch = !propertyType || listing.propertyType.toLowerCase() === propertyType.toLowerCase();
+      const PropertytypeMatch = !Propertytype || listing.Propertytype.toLowerCase() === Propertytype.toLowerCase();
   
       // Use AND condition to include listings that match all selected filters
-      return locationMatch && priceMatch && propertyTypeMatch;
+      return locationMatch && priceMatch && PropertytypeMatch;
     });
   
     setFilteredData(filtered);

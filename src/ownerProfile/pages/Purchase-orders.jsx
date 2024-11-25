@@ -1,11 +1,19 @@
 import React from 'react'
+import ProductPage from '../components/Product_Order/Purchaseorders';
 
 function Purchaseorders() {
   return (
-    <div>
-      <h1>Purchase order</h1>
-    </div>
+   
+     <>
+
+     <ProductPage/>
+     </>
+    
   )
 }
 
 export default Purchaseorders;
+
+
+
+

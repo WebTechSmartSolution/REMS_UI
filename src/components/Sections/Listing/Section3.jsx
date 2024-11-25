@@ -9,7 +9,7 @@ const Filters = ({ onSearch }) => {
   // Handle the search
   const handleSearch = () => {
     onSearch({ location, priceRange, propertyType });
-    console.log(onSearch)
+    
   };
 
   return (

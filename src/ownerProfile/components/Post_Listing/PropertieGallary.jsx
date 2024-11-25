@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Style/PropertyGallery.css';
+import { notify } from '../../../services/errorHandlingService';
+
 
 const PropertyGallery = ({ setFieldValue }) => {
   const [imagePreviews, setImagePreviews] = useState([]);
@@ -11,7 +13,7 @@ const PropertyGallery = ({ setFieldValue }) => {
     );
 
     if (validImages.length + imagePreviews.length > 10) {
-      alert('You can only upload a maximum of 10 images.');
+        notify("warning", "You can only upload a maximum of 10 images.");
       return;
     }
 

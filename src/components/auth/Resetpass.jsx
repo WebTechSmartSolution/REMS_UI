@@ -13,6 +13,8 @@ const ResetPassword = () => {
 
     const handleResetPassword = (e) => {
         e.preventDefault();
+        
+          
 
         if (newPassword !== confirmPassword) {
             toast.error("Passwords do not match!");  // Toastify alert
@@ -26,16 +28,16 @@ const ResetPassword = () => {
             toast.error("Invalid or missing token!");  // Toastify alert
             return;
         }
-
+       
         AuthService.resetPassword({ token, newPassword })
             .then(response => {
-                toast.success("Password reset successful! Please Login ");  // Toastify alert
+                toast.success("Password reset successful! Please Login ");  
                 setTimeout(() => {
-                    window.location.href = '/login';  // Redirect after a short delay
-                }, 10000);  // Redirect after 2 seconds
+                    window.location.href = '/login';  
+                }, 10000);  
             })
             .catch(error => {
-                toast.error("Password reset failed: " + (error.response?.data?.message || "Unknown error"));  // Toastify alert
+                toast.error("Password reset failed: " + (error.response?.data?.message || "Unknown error"));  
             });
     };
 
@@ -45,7 +47,8 @@ const ResetPassword = () => {
 
     return (
         <div className="reset-password-container">
-            <ToastContainer />  {/* Toastify container for displaying alerts */}
+            <ToastContainer />  
+            
             <form className="reset-password-form" onSubmit={handleResetPassword}>
                 <h2>Reset your Password</h2>
 

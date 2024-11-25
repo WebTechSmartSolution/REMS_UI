@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify'; // Import toast for notifications
+ // Import notify from '../../services/errorHandlingService';
 
 export const useSignUpFormValidation = () => {
   const [errors, setErrors] = useState({});

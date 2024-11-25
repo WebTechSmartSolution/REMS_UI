@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../style/Reviews.css"; // Assuming CSS is in a separate file
+import { notify } from "../../../services/errorHandlingService";
 
 const Reviews = () => {
   // State to store reviews and form inputs
@@ -34,7 +35,7 @@ const Reviews = () => {
         setReviews(data);
       }
     } catch (error) {
-      console.error("Error fetching reviews:", error);
+      notify("error", "Error fetching reviews: " + error.message);
     }
   };
 
@@ -71,7 +72,7 @@ const Reviews = () => {
       // Clear form after submission
       setFormData({ name: "", email: "", rating: 0, comment: "" });
     } catch (error) {
-      console.error("Error posting review:", error);
+      notify("error", "Error posting review: " + error.message);
     }
   };
 
