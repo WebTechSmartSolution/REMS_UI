@@ -66,7 +66,7 @@ const NavbarSidebar = () => {
 
 
       {/* Sidebar */}
-      <div id="sidebar1" className={sidebarActive ? 'active1' : ''}>
+      <div id="sidebar1" className={sidebarActive ? 'active1' : ''} onMouseEnter={() => setSidebarActive(true)} onMouseLeave={()=>setSidebarActive(false)}>
         <ul className="p-3">
           <li className="active1">
             <Link to="/portfolio/dashboard"><FontAwesomeIcon icon={faHome} /><span className="sidebar-text1"> Dashboard</span></Link>

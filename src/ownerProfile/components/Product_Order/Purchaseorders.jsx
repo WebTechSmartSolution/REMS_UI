@@ -61,7 +61,7 @@ const ProductPage = () => {
             setErrorMessage("Your cart is empty. Add items before proceeding.");
         } else {
             // Navigate to the payment page if total is greater than 0
-            navigate('/pay', { state: { cart, total } });
+            navigate('/portfolio/payment-checkout', { state: { cart, total } });
         }
     };
 
@@ -141,7 +141,7 @@ const ProductPage = () => {
                                     <button onClick={() => updateQuantity(item, item.quantity - 1)}>-</button>
                                     <input type="text" value={item.quantity} onChange={(e) => updateQuantity(item, parseInt(e.target.value) || 0)} />
                                     <button onClick={() => updateQuantity(item, item.quantity + 1)}>+</button>
-                                    <button onClick={() => removeFromCart(item)} className="remove-button">🗑️</button> {/* Delete Icon */}
+                                    <button onClick={() => removeFromCart(item)} className="remove-button">🗑️</button> 
                                 </div>
                             </li>
                         ))}

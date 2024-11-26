@@ -21,6 +21,7 @@ import Inbox from "./ownerProfile/pages/Inbox";
 import Properties_details from "./pages/Properties_Details";
 import ListingPage from "./pages/ListingPage";
 import PrivateRoute from "./services/Auth_JwtApi/PrivateRoute";
+import PaymentPage from "./ownerProfile/pages/Pyament";
 
 // import Navbar from './components/header-footer/Header';
 // import SignUp from './components/auth/signup'
@@ -52,6 +53,8 @@ function App() {
             <Route path="order-history" element={<OrderHistory />} />
             <Route path="post-listing" element={<PostListing />} />
             <Route path="purchase-products" element={<Purchaseorders />} />
+            <Route path="payment-checkout" element={<PaymentPage />} />
+            
             <Route path="inbox" element={<Inbox />} />
 
             {/* Profile nested routes */}
