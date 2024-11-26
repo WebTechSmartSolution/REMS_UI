@@ -237,16 +237,16 @@ const AddPost = () => {
         form.append('description', JSON.stringify(formData.description));
         form.append('location', JSON.stringify(formData.location));
         form.append('amenities', JSON.stringify(formData.amenities));
-  
-        const response = await authService.addListing(form);
-        console.log('Data submitted successfully:', response.data);
-        notify( "success", "Data submitted successfully.");
+        for (let [key, value] of form.entries()) {
+          console.log(`${key}:`, value);
+        }
+        const response = await authService.PostListings(form);
+        notify( "success", "Data submitted successfully."+ response.message);
         handleReset(); // Reset form after successful submission
       } catch (error) {
         notify( "error", "There was an error submitting the data."+ error.message);
       }
     } else {
-      console.log('Form Data:', formData);
       notify("error", "Please fill all required fields.");
     }
   };

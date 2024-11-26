@@ -2,7 +2,7 @@
     display: flex;
     /* height: 89vh; */
     /* left: 44px; */
-    width: 100vw;
+    width: 100%;
     padding-left: 95px;
     top: 61px;
     position: relative;
@@ -19,11 +19,12 @@
 .content-area {
      /* margin-top: 12px;  */
     flex: 1; /* This allows the content area to fill remaining space */
-    padding: 20px; /* Add some padding */
+    width: 95%;
+    /* padding: 20px;  */
     /* overflow-y: hidden; */
     position: absolute;
     z-index: -1;
-    /* border: blue 2px solid; Enable scrolling if content overflows */
+    /* border: blue 2px solid;  */
 }
 
 @media (max-width: 500px) {

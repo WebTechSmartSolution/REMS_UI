@@ -41,7 +41,7 @@ const NavbarSidebar = () => {
   
 
   return (
-    <div>
+    <div className="main3">
       
       {/* Navbar */}
 <nav className="custom-navbar1 fixed-top">
@@ -76,21 +76,21 @@ const NavbarSidebar = () => {
       <div id="sidebar1" className={sidebarActive ? 'active1' : ''} >
         <ul className="p-3">
           <li className="active1">
-            <Link to="/portfolio/dashboard"><FontAwesomeIcon icon={faHome} /><span className="sidebar-text1">Dashboard</span></Link>
+            <Link to="/portfolio/dashboard" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faHome} /><span className="sidebar-text1">Dashboard</span></Link>
           </li>
           <li>
-            <Link to="/portfolio/post-listing"><FontAwesomeIcon icon={faPlus} /><span className="sidebar-text1">Post Listing</span></Link>
+            <Link to="/portfolio/post-listing" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faPlus} /><span className="sidebar-text1">Post Listing</span></Link>
           </li>
 
          <li>
-          <Link to="/portfolio/all-listing"><FontAwesomeIcon icon={faTasks} /><span className="sidebar-text1">All Listings</span></Link>
+          <Link to="/portfolio/all-listing" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faTasks} /><span className="sidebar-text1">All Listings</span></Link>
           </li>
           <li>
-            <Link to="/portfolio/inbox"><FontAwesomeIcon icon={faEnvelope} /><span className="sidebar-text1">Inbox</span></Link>
+            <Link to="/portfolio/inbox" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faEnvelope} /><span className="sidebar-text1">Inbox</span></Link>
           </li>
 
           <li>
-            <Link to="/portfolio/profile-setting"><FontAwesomeIcon icon={faUserCog} /><span className="sidebar-text1">User Settings</span></Link>
+            <Link to="/portfolio/profile-setting"  onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faUserCog} /><span className="sidebar-text1">User Settings</span></Link>
           </li>
 
           <li>
@@ -99,8 +99,8 @@ const NavbarSidebar = () => {
             </button>
             {openDropdown === 'propShop' && (
               <ul className="collapse1 show">
-                <li><Link to="/portfolio/purchase-products">Buy Product</Link></li>
-                <li><Link to="/portfolio/order-history">Order History</Link></li>
+                <li><Link to="/portfolio/purchase-products"  >Buy Product</Link></li>
+                <li><Link to="/portfolio/order-history" >Order History</Link></li>
               </ul>
             )}
           </li>

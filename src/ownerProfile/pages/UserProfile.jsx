@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import authService from "../../services/Auth_JwtApi/AuthService";
+import { notify } from "../../services/errorHandlingService";
 
 import "../style/Profile.css"; 
 
@@ -15,19 +17,20 @@ const UserProfile = () => {
     });
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            const userData = {
-                username: "JohnDoe",
-                email: "johndoe@example.com",
-                phoneNumber: "1234567890",
-            };
+        const getUserData = async () => {
+          try {
+            const userData = await authService.fetchUserData();
             setFormData((prev) => ({
-                ...prev,
-                ...userData,
+              ...prev,
+              ...userData,
             }));
+          } catch (error) {
+            notify("error", "Error fetching user data: " + error.message);
+          }
         };
-        fetchUserData();
-    }, []);
+    
+        getUserData();
+      }, []);
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -53,10 +56,10 @@ const UserProfile = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
+            notify("error", "Passwords do not match!");
             return;
         }
-        console.log("Updated Profile Data:", formData);
+        notify("success", "Profile updated successfully!");
     };
 
     return (

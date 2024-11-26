@@ -8,6 +8,9 @@
   z-index: 1000;
   width: 100%;
 }
+.main3{
+  z-index: 1000;
+}
 
 .navbar-container1 {
   display: flex;

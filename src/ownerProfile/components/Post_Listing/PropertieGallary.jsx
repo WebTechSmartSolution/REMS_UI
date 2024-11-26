@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Style/PropertyGallery.css';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { notify } from '../../../services/errorHandlingService';
 
 
@@ -63,7 +65,7 @@ const PropertyGallery = ({ setFieldValue }) => {
           {imagePreviews.map((preview, index) => (
             <div className="image-preview" key={index}>
               <img src={preview} alt="Property Preview" className="preview-img" />
-              <button className="remove-button" onClick={() => removeImage(index)}>Remove</button>
+              <button className="remove-button3" onClick={() => removeImage(index)}> <FontAwesomeIcon icon={faTimes} /></button>
             </div>
           ))}
         </div>

@@ -5,7 +5,6 @@ function Purchaseorders() {
   return (
    
      <>
-
      <ProductPage/>
      </>
     
