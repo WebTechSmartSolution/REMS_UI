@@ -197,7 +197,7 @@ agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
 isNew: false,
 },
-{Propertytype: "Rent",
+{
   id: 12,
 title: "Grand Mahaka",
 location: "New York, NY",
