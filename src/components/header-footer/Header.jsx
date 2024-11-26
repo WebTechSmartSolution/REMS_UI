@@ -148,7 +148,7 @@ const Navbar = () => {
           </div>
         </nav>
         <div className="Sidebar_Display">
-          <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+          <div className={`sidebar ${sidebarOpen ? "open" : ""}`} >
             <div className="close-btn" onClick={toggleSidebar}>
               <FontAwesomeIcon icon={faTimes} />
             </div>

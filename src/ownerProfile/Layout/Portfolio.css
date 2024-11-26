@@ -20,7 +20,7 @@
      /* margin-top: 12px;  */
     flex: 1; /* This allows the content area to fill remaining space */
     padding: 20px; /* Add some padding */
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     position: absolute;
     z-index: -1;
     /* border: blue 2px solid; Enable scrolling if content overflows */

@@ -42,7 +42,7 @@ const PropertyGallery = ({ setFieldValue }) => {
       </div>
 
       <div className="gallery-upload-container">
-        <label htmlFor="imageUpload" className="upload-label">Select Photos</label>
+        <label htmlFor="imageUpload1" className="upload-label1">Select Photos</label>
         <div className="gallery-upload">
           <input
             type="file"

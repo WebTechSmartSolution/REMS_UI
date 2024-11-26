@@ -1,0 +1,194 @@
+/* General Layout */
+body {
+    background-color: #f3f4f6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    width: 100%; /* Ensure container takes up full width */
+    box-sizing: border-box; /* Prevent elements from overflowing */
+}
+
+@media (min-width: 1024px) {
+    .container {
+        flex-direction: row;
+        justify-content: center;
+        padding: 40px;
+    }
+}
+
+.payment-method,
+.order-summary1 {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; /* Prevent overflow */
+}
+
+.payment-method {
+    max-width: 742px;
+    margin-bottom: 20px;
+}
+
+.order-summary1 {
+    max-width: 323px;
+}
+
+/* Payment Card */
+.payment-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 7px #017724;
+    width: 100%; /* Make the card take 100% width */
+    max-width: 698px; /* Set a max width for larger screens */
+    box-sizing: border-box; /* Prevent overflow */
+}
+
+/* Typography */
+.heading1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.subheading {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Form */
+.label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.input {
+    width: 95%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #017724;
+    box-shadow: 0 0 0 2px #017724;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.half {
+    flex: 1;
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+    .form-row {
+        flex-direction: row;
+    }
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.logos {
+    display: flex;
+    gap: 8px;
+}
+
+.logo {
+    height: auto;
+    max-width: 40px;
+}
+
+/* Order Summary */
+.divider {
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.total {
+    font-weight: bold;
+}
+
+.total-amount {
+    color: #129739;
+}
+
+/* Button */
+.pay-button {
+    width: 100%;
+    background-color: #129739;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pay-button:hover {
+    background-color: #017724;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .payment-method,
+    .order-summary1 {
+        padding: 16px;
+    }
+
+    .payment-card {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+
+    .heading1 {
+        font-size: 1.125rem;
+    }
+
+    .input {
+        font-size: 0.875rem;
+    }
+
+    .logos {
+        flex-wrap: wrap;
+    }
+}

@@ -634,11 +634,13 @@
 .reset-button {
   background-color: #d9534f;
   color: #fff;
+  margin-bottom: 30px;
 }
 
 .submit-button {
   background-color: #007bff;
   color: #fff;
+  margin-bottom: 30px;
 }
 
 .reset-button:hover {
