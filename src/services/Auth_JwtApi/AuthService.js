@@ -9,6 +9,8 @@ const REFRESH_TOKEN_KEY = 'refreshToken';
 
 const authService = {
   
+// ============================================Api calls for User related calls ===============================================
+
   getUserIdFromAuthToken: () => {
     const token = localStorage.getItem(TOKEN_KEY);
     
@@ -23,11 +25,23 @@ const authService = {
       
       return userId;  // Assuming 'userId' is the key in the token payload
     } catch (error) {
-      console.error("Error decoding token:", error);
+      // console.error("Error decoding token:", error);
       return null;  // Return null in case of any error
     }
   },
+  fetchUserData: async () => {
+    try {
+      const response = await axiosInstance.get("/api/user"); 
+      return response.data; 
+    } catch (error) {
+      // console.error("Error fetching user data:", error);
+      throw new Error("Failed to fetch user data. Please try again later.");
+    }
+  },
   
+//  ........................................Auth related Api calls.....................................................
+
+
  login: async (email,Password) => {
     try {
       const response = await axiosInstance.post(`/Auth/login`, { email, Password });
@@ -40,7 +54,7 @@ const authService = {
       message: response.data.message,
     };
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
       return error.response;
     }
   },
@@ -69,7 +83,7 @@ const authService = {
     const accessToken = localStorage.getItem(TOKEN_KEY);
     
     if (!refreshToken || !accessToken) {
-      toast.error('Session expired. Please log in again.');
+      
       authService.logout();
       return;
     }
@@ -175,8 +189,9 @@ const authService = {
       console.error("Reset Password error:", error.response ? error.response.data : error.message);
 
       if (error.response && error.response.data && error.response.data.errors) {
-        console.error("Validation errors:", error.response.data.errors);
+        // console.error("Validation errors:", error.response.data.errors);
         // toast.error('Validation errors: ' + JSON.stringify(error.response.data.errors));
+        return error.response.data.errors;
       } else {
          error(error.response ? error.response.data.message : 'An error occurred');
       }
@@ -184,6 +199,15 @@ const authService = {
       throw new Error(error.response ? error.response.data.message : error.message);
     }
   },
+
+
+
+
+// =============================================Api calls for Search data ================================
+
+
+
+
 
 // call for sending filters valuses from home page for search
 searchProperties: async (searchData) => {
@@ -196,6 +220,14 @@ searchProperties: async (searchData) => {
 },
 
 
+
+
+
+// =============================================Api calls for Listing Property Post or get listings ================================
+
+
+
+
 uploadImages: async (formData) => {
   try {
     const response = await axiosInstance.post('/Listings', formData, {
@@ -203,7 +235,7 @@ uploadImages: async (formData) => {
     });
     return response.data.imagePaths; // Assuming response sends back an array of image paths
   } catch (error) {
-    console.error('Image upload failed:', error);
+    // console.error('Image upload failed:', error);
     throw error;
   }
 },
@@ -217,10 +249,48 @@ PostListings: async (formData) => {
     });
     return response.data.imagePaths; // Assuming response sends back an array of image paths
   } catch (error) {
-    console.error('Image upload failed:', error);
+    // console.error('Image upload failed:', error);
     throw error;
   }
 },
+
+
+getListings: async () => {
+  try {
+    const response = await axiosInstance.get("/api/listings");
+
+    if (response && Array.isArray(response.data)) {
+      return response.data;
+    } else {
+      
+     
+      return [];
+    }
+  } catch (error) {
+    
+    const errorMessage = error.response
+      ? error.response.data?.message || "Error fetching listings"
+      : "An unexpected error occurred";
+      
+    throw error; 
+  }
+},
+
+
+
+deleteListing: async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/Listings/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting listing:', error);
+    throw error;
+  }
+},
+
+
+
+
 
 };
 
