@@ -1,9 +1,11 @@
 import React from 'react'
 
+import ListingDashboard from '../components/All-Listing/All-Listings'
+
 function AllListing() {
   return (
     <div>
-      <h2>post all listings</h2>
+      <ListingDashboard/>
     </div>
   )
 }
