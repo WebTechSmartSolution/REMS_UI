@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ProductPage.css'; // Importing the CSS file
 import { useNavigate } from 'react-router-dom';
+import { notify } from '../../../services/errorHandlingService';
+
 
 const products = [
     { id: 1, name: 'Listing', description: 'Get an ad slot for 30 days to post your listing', price: 3000, icon: 'fas fa-ad text-green-500' },
@@ -14,7 +16,6 @@ const products = [
 
 const ProductPage = () => {
     const [cart, setCart] = useState([]);
-    const [errorMessage, setErrorMessage] = useState(""); // Error message state
     const navigate = useNavigate();
 
     // Retrieve cart data from localStorage on page load
@@ -56,9 +57,9 @@ const ProductPage = () => {
 
     const proceedToPayment = () => {
         if (total === 0) {
-            setErrorMessage("Please select a product to proceed to payment."); // Display error message
+            notify("warning", "Please select a product to proceed to payment."); // Display error message
         } else if (cart.length === 0) {
-            setErrorMessage("Your cart is empty. Add items before proceeding.");
+            notify("warning", "Your cart is empty. Add items before proceeding.");
         } else {
             // Navigate to the payment page if total is greater than 0
             navigate('/portfolio/payment-checkout', { state: { cart, total } });
@@ -152,7 +153,6 @@ const ProductPage = () => {
                     </div>
                     
                     <button onClick={proceedToPayment} className="proceed-button">Proceed To Payment</button>
-                    {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Display error message */}
                 </div>
             </div>
         </div>
