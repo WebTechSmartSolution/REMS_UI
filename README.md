@@ -1,7 +1,19 @@
+# Issues In this project need to Handled 
+`````
+--need to solve the API call and data representation...
+--chat functionality is still remaining to implement...
+
+`````
+
+
+
+
 # REMS_UI
 This repo contain all the required UI updated and final change of UI code
+# This steps are for payment gateway adding using BrainTree
 
-# install these npm packages
+
+## install these npm packages
 ```
 npm i braintree-web-drop-in-react-updated
 npm i braintree
