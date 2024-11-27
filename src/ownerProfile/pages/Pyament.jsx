@@ -19,7 +19,7 @@ const PaymentPage = () => {
                             <img
                                 src="../src/assets/visacard.svg"
                                 alt="VISA logo"
-                                className="logo"
+                                className="logo1"
                             />
                             {/* <img
                                 src="../src/assets/mastercard.svg"

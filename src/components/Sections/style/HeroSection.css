@@ -1,5 +1,5 @@
 
-.hero-section {
+.hero_section {
     background-color: #1f3c88;
     /* background-image: url('../assets//images.jpeg'); 
     background-repeat: no-repeat; 
@@ -15,7 +15,7 @@
     border-bottom: 5px solid #ff7200;
 }
 
-.hero-content {
+.hero_content {
     max-width: 80%;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.5); /* Slight black overlay for better readability */
@@ -23,33 +23,33 @@
     border-radius: 10px;
 }
 
-.hero-content h1 {
+.hero_content h1 {
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 20px;
     color: #fff;
 }
 
-.hero-content p {
+.hero_content p {
     font-size: 18px;
     margin-bottom: 40px;
     color: #e0e0e0;
 }
 
-.toggle-buttons {
+.toggle_buttons {
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
 }
 
-.toggle-btns {
+.toggle_btns {
     display: flex;
     border: 2px solid #4d7cfe;
     border-radius: 8px;
     overflow: hidden;
 }
 
-.toggle-btn {
+.toggle_btn {
     background-color: #ffffff;
     border: none;
     color: #4d7cfe;
@@ -60,16 +60,16 @@
     flex: 1;
 }
 
-.toggle-btn:hover {
+.toggle_btn:hover {
     background-color: #f1f1f1;
 }
 
-.toggle-btn.active {
+.toggle_btn.active {
     background-color: #4d7cfe;
     color: #fff;
 }
 
-.search-box-container {
+.search_box_container {
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     padding: 20px;
@@ -79,7 +79,7 @@
     justify-content: center;
 }
 
-.search-box {
+.search_box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +87,7 @@
     flex-wrap: wrap;
 }
 
-.search-input, .property-type2 {
+.search_input, .property-type2 {
     padding: 12px 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -95,7 +95,7 @@
     width: 153px;
 }
 
-.search-btn {
+.search_btn {
     background-color: #4d7cfe;
     color: white;
     padding: 12px 20px;
@@ -107,13 +107,13 @@
     align-items: center;
 }
 
-.search-btn:hover {
+.search_btn:hover {
     background-color: #3a5b9b;
 }
 
 
 @media (min-width: 800px) and (max-width:1020px) {
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 670px;
        
@@ -121,7 +121,7 @@
     
 }
 @media (max-width: 800px) {
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 700px;
        
@@ -130,50 +130,85 @@
 }
 
 @media (max-width: 768px)  {
-    .search-box {
+    .search_box {
         flex-direction: column;
         width: 100%;
     }
 
-    .search-input, .property-type {
+    .search_input, .property-type {
         width: 100%;
     }
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 915px;
        
     }
+    .search_input, .property-type2 {
+        padding: 12px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
 }
 
 @media (min-width:600px) and (max-width: 700px) {
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 990px;
        
     }
+    .search_input, .property-type2 {
+        padding: 12px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
     
 }
 @media (min-width:500px) and (max-width: 600px) {
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 1075px;
        
     }
+    .search_input, .property-type2 {
+        padding: 12px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
     
 }
 @media (min-width:350px) and (max-width: 500px) {
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 1320px;
        
     }
+    .search_input, .property-type2 {
+        padding: 12px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
     
 }
 @media (min-width:280px) and (max-width: 350px) {
-    .hero-section {
+    .hero_section {
         /* Match your image's background color */
         height: 1350px;
        
+    }
+    .search_input, .property-type2 {
+        padding: 12px 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
     }
     
 }

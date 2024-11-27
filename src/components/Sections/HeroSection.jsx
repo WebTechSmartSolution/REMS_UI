@@ -57,22 +57,22 @@ function HeroSection() {
     return (
         <>
         <section>
-      <div className="hero-section">
-        <div className="hero-content">
+      <div className="hero_section">
+        <div className="hero_content">
           <h1>Find Your Best Dream House for Rental, Buy & Sell...</h1>
           <p>Property finds by meeting your location. With more than 2000+ listings for you to choose from</p>
   
           {/* Buttons for Rent/Buy with Icons */}
-          <div className="toggle-buttons">
-            <div className="toggle-btns">
+          <div className="toggle_buttons">
+            <div className="toggle_btns">
               <button 
-                className={`toggle-btn ${activeOption === 'rent' ? 'active' : ''}`} 
+                className={`toggle_btn ${activeOption === 'rent' ? 'active' : ''}`} 
                 onClick={() => toggleOption('rent')}
               >
                 <FontAwesomeIcon icon={faHome} /> Rent Property
               </button>
               <button 
-                className={`toggle-btn ${activeOption === 'buy' ? 'active' : ''}`} 
+                className={`toggle_btn ${activeOption === 'buy' ? 'active' : ''}`} 
                 onClick={() => toggleOption('buy')}
               >
                 <FontAwesomeIcon icon={faShoppingCart} /> Buy Property
@@ -81,13 +81,13 @@ function HeroSection() {
           </div>
   
           {/* Search Box Container with Border */}
-          <div className="search-box-container">
-            <div className="search-box">
+          <div className="search_box_container">
+            <div className="search_box">
               <input 
                 type="text" 
                 placeholder="Enter Keyword" 
                 name="keyword"
-                className="search-input" 
+                className="search_input" 
                 value={formData.keyword}
                 onChange={handleInputChange} 
               />
@@ -106,7 +106,7 @@ function HeroSection() {
                 type="text" 
                 placeholder="Enter Address" 
                 name="address"
-                className="search-input" 
+                className="search_input" 
                 value={formData.address}
                 onChange={handleInputChange} 
               />
@@ -114,7 +114,7 @@ function HeroSection() {
                 type="number" 
                 placeholder="Min Price" 
                 name="minPrice"
-                className="search-input" 
+                className="search_input" 
                 value={formData.minPrice}
                 onChange={handleInputChange} 
               />
@@ -122,11 +122,11 @@ function HeroSection() {
                 type="number" 
                 placeholder="Max Price" 
                 name="maxPrice"
-                className="search-input" 
+                className="search_input" 
                 value={formData.maxPrice}
                 onChange={handleInputChange} 
               />
-              <button className="search-btn" onClick={handleSearch}>
+              <button className="search_btn" onClick={handleSearch}>
                 <FontAwesomeIcon icon={faSearch} /> 
               </button>
             </div>

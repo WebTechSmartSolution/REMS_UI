@@ -13,7 +13,7 @@ const Section4th = () => {
 
   return (
     <section className="featured-properties-section">
-      <div className="container">
+      <div className="container1">
         <h2>Featured Properties for Buy/Sell and Rent</h2>
         <span className='nav-line'></span>
         <p>Hand-picked selections of quality places</p>

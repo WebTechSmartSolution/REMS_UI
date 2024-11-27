@@ -13,7 +13,7 @@ const Section5th = () => {
 
   return (
     <section className="cities-listing-section">
-      <div className="container">
+      <div className="container1">
         <h2>Cities With Listing</h2>
         <div className="nav-line"></div> 
         <p>Discover places we love the most</p>
