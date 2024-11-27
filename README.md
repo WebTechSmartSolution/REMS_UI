@@ -18,7 +18,7 @@ This repo contain all the required UI updated and final change of UI code
 npm i braintree-web-drop-in-react-updated
 npm i braintree
 ```
-# Add this in frontend
+## Add this in frontend
 
 ```
 import DropIn from "braintree-web-drop-in-react-updated";
@@ -91,7 +91,7 @@ import DropIn from "braintree-web-drop-in-react-updated";
 ```
 
 
-# Add this in backend
+## Add this in backend
 
 ```
 const order = require("../models/OrderModel");
