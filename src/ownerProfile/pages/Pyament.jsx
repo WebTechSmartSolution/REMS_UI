@@ -2,6 +2,8 @@ import React from "react";
 import { useLocation } from 'react-router-dom';
 import "../style/PaymentPage.css";
 
+
+
 const PaymentPage = () => {
     const location = useLocation();
     const { cart, total } = location.state || { cart: [], total: 0 };
@@ -17,7 +19,7 @@ const PaymentPage = () => {
                             <img
                                 src="../src/assets/visacard.svg"
                                 alt="VISA logo"
-                                className="logo1"
+                                className="logo"
                             />
                             {/* <img
                                 src="../src/assets/mastercard.svg"
