@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ListingDashboard from '../components/All-Listing/All-Listings'
+import ListingDashboard from '../components/All-Listings'
 
 function AllListing() {
   return (
