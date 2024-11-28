@@ -35,16 +35,7 @@ const AddPost = () => {
       dryer: false,
       wifi: true,
     },
-    description: {
-      title: "",
-      totalArea: "",
-      description: "",
-      bedrooms: "",
-      bathrooms: "",
-      propertyType: "",
-      garageSize: "",
-      yearBuilt: "",
-    },
+   
     location: {
       address: "",
       city: "",
@@ -84,16 +75,7 @@ const AddPost = () => {
       dryer: false,
       wifi: true,
     },
-    description: {
-      title: "",
-      totalArea: "",
-      description: "",
-      bedrooms: "",
-      bathrooms: "",
-      propertyType: "",
-      garageSize: "",
-      yearBuilt: "",
-    },
+   
     location: {
       address: "",
       city: "",
@@ -158,16 +140,7 @@ const AddPost = () => {
         dryer: false,
         wifi: true,
       },
-      description: {
-        title: "",
-        totalArea: "",
-        description: "",
-        bedrooms: "",
-        bathrooms: "",
-        propertyType: "Apartment",
-        garageSize: "",
-        yearBuilt: "",
-      },
+     
       location: {
         address: "",
         city: "",
@@ -200,15 +173,7 @@ const AddPost = () => {
         garageSize: !formData.propertyDetails.garageSize.trim(),
         yearConstructed: !formData.propertyDetails.yearConstructed.trim(),
       },
-      description: {
-        title: !formData.description.title.trim(),
-        totalArea: !formData.description.totalArea.trim(),
-        description: !formData.description.description.trim(),
-        bedrooms: !formData.description.bedrooms.trim(),
-        bathrooms: !formData.description.bathrooms.trim(),
-        garageSize: !formData.description.garageSize.trim(),
-        yearBuilt: !formData.description.yearBuilt.trim(),
-      },
+      
       location: {
         address: !formData.location.address.trim(),
         city: !formData.location.city.trim(),
@@ -234,7 +199,6 @@ const AddPost = () => {
         // Append other fields as JSON strings
         form.append('propertyInfo', JSON.stringify(formData.propertyInfo));
         form.append('propertyDetails', JSON.stringify(formData.propertyDetails));
-        form.append('description', JSON.stringify(formData.description));
         form.append('location', JSON.stringify(formData.location));
         form.append('amenities', JSON.stringify(formData.amenities));
         for (let [key, value] of form.entries()) {
@@ -284,7 +248,7 @@ const AddPost = () => {
             </li>
             <li onClick={() => scrollToSection("amenities")}>Amenities</li>
             <li onClick={() => scrollToSection("gallery")}>Gallery</li>
-            <li onClick={() => scrollToSection("floor_plans")}>Floor Plans</li>
+            
             <li onClick={() => scrollToSection("location")}>Location</li>
           </ul>
         </div>
@@ -786,171 +750,7 @@ const AddPost = () => {
         
         <PropertyGallery setFieldValue={setFormData} />
 
-        <div className="description-floor-plan-section" id="floor_plans">
-          <div className="left-column">
-            <h3>Property Description & Floor Plan</h3>
-            <p className="section-info">
-              Provide a detailed description of the property, including key
-              features and layout information.
-            </p>
-          </div>
-
-          <div className="right-column">
-            {/* Row for Property Title and Total Area */}
-            <div className="form-group-row">
-              <div className="form-group">
-                <label>Property Title</label>
-                <input
-                  type="text"
-                  placeholder="Enter property title"
-                  className="input-field"
-                  value={formData.description?.title || ""}
-                  onChange={(e) =>
-                    handleChange("description", "title", e.target.value)
-                  }
-                />
-                {errors.description?.title && (
-                  <span className="error-message">
-                    Property title is required.
-                  </span>
-                )}
-              </div>
-              <div className="form-group">
-                <label>Total Area (sqft)</label>
-                <input
-                  type="number"
-                  placeholder="Enter total area"
-                  className="input-field"
-                  value={formData.description?.totalArea || ""}
-                  onChange={(e) =>
-                    handleChange("description", "totalArea", e.target.value)
-                  }
-                />
-                {errors.propertyDetails?.totalArea && (
-                  <span className="error-message">Total area is required.</span>
-                )}
-              </div>
-            </div>
-
-            {/* Property Description Text Area */}
-            <div className="form-group">
-              <label>Description</label>
-              <textarea
-                placeholder="Enter detailed description"
-                className="description-textarea"
-                value={formData.description?.description || ""}
-                onChange={(e) =>
-                  handleChange("description", "description", e.target.value)
-                }
-              />
-              {errors.description?.description && (
-                <span className="error-message">Description is required.</span>
-              )}
-            </div>
-
-            {/* Row for Bedrooms and Bathrooms */}
-            <div className="form-group-row">
-              <div className="form-group">
-                <label>Bedrooms</label>
-                <input
-                  type="number"
-                  placeholder="Enter number of bedrooms"
-                  className="input-field"
-                  value={formData.description?.bedrooms || ""}
-                  onChange={(e) =>
-                    handleChange("description", "bedrooms", e.target.value)
-                  }
-                />
-                {errors.description?.bedrooms && (
-                  <span className="error-message">
-                    Please enter number of bedrooms.
-                  </span>
-                )}
-              </div>
-              <div className="form-group">
-                <label>Bathrooms</label>
-                <input
-                  type="number"
-                  placeholder="Enter number of bathrooms"
-                  className="input-field"
-                  value={formData.description?.bathrooms || ""}
-                  onChange={(e) =>
-                    handleChange("description", "bathrooms", e.target.value)
-                  }
-                />
-                {errors.description?.bathrooms && (
-                  <span className="error-message">
-                    Please enter number of bathrooms.
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Row for Property Type and Garage Size */}
-            <div className="form-group-row">
-              <div className="form-group">
-                <label>Property Type</label>
-                <select
-                  className="input-field"
-                  value={formData.propertyDetails?.propertyType || ""}
-                  onChange={(e) =>
-                    handleChange(
-                      "propertyDetails",
-                      "propertyType",
-                      e.target.value
-                    )
-                  }
-                >
-                  <option value="0">Select Type</option>
-                  <option value="Apartment">Apartment</option>
-                  <option value="House">House</option>
-                  <option value="Villa">Villa</option>
-                </select>
-                {errors.description?.propertyType && (
-                  <span className="error-message">
-                    Please select a property type.
-                  </span>
-                )}
-              </div>
-              <div className="form-group">
-                <label>Garage Size</label>
-                <input
-                  type="number"
-                  placeholder="Enter garage size"
-                  className="input-field"
-                  value={formData.description?.garageSize || ""}
-                  onChange={(e) =>
-                    handleChange("description", "garageSize", e.target.value)
-                  }
-                />
-                {errors.description?.garageSize && (
-                  <span className="error-message">
-                    Garage size is required.
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Year Built Input */}
-            <div className="form-group">
-              <label>Year Built</label>
-              <input
-                type="number"
-                placeholder="Enter year built"
-                className="input-field"
-                value={formData.description?.yearBuilt || ""}
-                onChange={(e) =>
-                  handleChange("description", "yearBuilt", e.target.value)
-                }
-              />
-              {errors.description?.yearBuilt && (
-                <span className="error-message">
-                  Please enter the year built.
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
+       
 
         <div className="properties-location-section" id="location">
           <div className="left-column">
