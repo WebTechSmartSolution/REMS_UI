@@ -8,14 +8,14 @@ import { notify } from "../../../services/errorHandlingService";
 const AddPost = () => {
   const [formData, setFormData] = useState({
     propertyInfo: {
-      propertyName: "",
-      propertyType: "",
-      currencyType: "",
+      PropertyName: "",
+      PropertyType: "",
+      CurrencyType: "",
       salePrice: "",
       offerPrice: "",
     },
     propertyDetails: {
-      propertyId: "",
+      PropertyId: "",
       pricePerSqft: "",
       structureType: "",
       noOfBedrooms: "",
@@ -37,30 +37,30 @@ const AddPost = () => {
     },
     ContactInfo: {
      Email: "",
-     PhoneNumber: "",
+     Phone: "",
     
     },
 
     location: {
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
+      Address: "",
+      City: "",
+      State: "",
+      ZipCode: "",
       mapUrl: "",
     },
     gallery: [],
   });
-
+console.log(formData)
   const [errors, setErrors] = useState({
     propertyInfo: {
-      propertyName: "",
-      propertyType: "",
-      currencyType: "",
+      PropertyName: "",
+      PropertyType: "",
+      CurrencyType: "",
       salePrice: "",
       offerPrice: "",
     },
     propertyDetails: {
-      propertyId: "",
+      PropertyId: "",
       pricePerSqft: "",
       structureType: "",
       noOfBedrooms: "",
@@ -82,15 +82,15 @@ const AddPost = () => {
     },
     ContactInfo: {
       Email: "",
-      PhoneNumber: "",
+      Phone: "",
       
      },
  
     location: {
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
+      Address: "",
+      City: "",
+      State: "",
+      ZipCode: "",
       mapUrl: "",
     },
     gallery: [],
@@ -123,14 +123,14 @@ const AddPost = () => {
   const handleReset = () => {
     setFormData({
       propertyInfo: {
-        propertyName: "",
-        propertyType: "buy",
-        currencyType: "usd",
+        PropertyName: "",
+        PropertyType: "buy",
+        CurrencyType: "usd",
         salePrice: "",
         offerPrice: "",
       },
       propertyDetails: {
-        propertyId: "",
+        PropertyId: "",
         pricePerSqft: "",
         structureType: "apartment",
         noOfBedrooms: "",
@@ -152,16 +152,16 @@ const AddPost = () => {
       },
       ContactInfo: {
         Email: "",
-        PhoneNumber: "",
+        Phone: "",
        
        },
    
 
       location: {
-        address: "",
-        city: "",
-        state: "",
-        zipCode: "",
+        Address: "",
+        City: "",
+        State: "",
+        ZipCode: "",
         mapUrl: "",
       },
       gallery: [],
@@ -173,14 +173,14 @@ const AddPost = () => {
   const handleSubmit = async () => {
     const newErrors = {
       propertyInfo: {
-        propertyType: !formData.propertyInfo.propertyType.trim(),
-        currencyType: !formData.propertyInfo.currencyType.trim(),
+        PropertyType: !formData.propertyInfo.PropertyType.trim(),
+        CurrencyType: !formData.propertyInfo.CurrencyType.trim(),
         offerPrice: !formData.propertyInfo.offerPrice.trim(),
-        propertyName: !formData.propertyInfo.propertyName.trim(),
+        PropertyName: !formData.propertyInfo.PropertyName.trim(),
         salePrice: !formData.propertyInfo.salePrice.trim(),
       },
       propertyDetails: {
-        propertyId: !formData.propertyDetails.propertyId.trim(),
+        PropertyId: !formData.propertyDetails.PropertyId.trim(),
         pricePerSqft: !formData.propertyDetails.pricePerSqft.trim(),
         noOfBedrooms: !formData.propertyDetails.noOfBedrooms.trim(),
         noOfBathrooms: !formData.propertyDetails.noOfBathrooms.trim(),
@@ -191,15 +191,15 @@ const AddPost = () => {
       },
       ContactInfo: {
         Email: !formData.ContactInfo.Email.trim(),
-        PhoneNumber: !formData.ContactInfo.PhoneNumber.trim(),
+        Phone: !formData.ContactInfo.Phone.trim(),
        
        },
 
       location: {
-        address: !formData.location.address.trim(),
-        city: !formData.location.city.trim(),
-        state: !formData.location.state.trim(),
-        zipCode: !formData.location.zipCode.trim(),
+        Address: !formData.location.Address.trim(),
+        City: !formData.location.City.trim(),
+        State: !formData.location.State.trim(),
+        ZipCode: !formData.location.ZipCode.trim(),
       },
     };
 
@@ -215,7 +215,6 @@ const AddPost = () => {
         const form = new FormData();
 
         // Append images
-        formData.gallery.forEach((file) => form.append('Images', file));
 
         // Append other fields as JSON strings
         form.append('propertyInfo', JSON.stringify(formData.propertyInfo));
@@ -223,6 +222,8 @@ const AddPost = () => {
         form.append('location', JSON.stringify(formData.location));
         form.append('ContactInfo', JSON.stringify(formData.ContactInfo));
         form.append('amenities', JSON.stringify(formData.amenities));
+        formData.gallery.forEach((file) => form.append('Images', file));
+
         for (let [key, value] of form.entries()) {
           console.log(`${key}:`, value);
         }
@@ -295,15 +296,15 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Name"
-                    className={`info-input ${errors.propertyInfo.propertyName ? "error" : ""
+                    className={`info-input ${errors.propertyInfo.PropertyName ? "error" : ""
                       }`}
-                    value={formData.propertyInfo.propertyName}
+                    value={formData.propertyInfo.PropertyName}
                     onChange={(e) => {
                       console.log("PropertyName onChange event triggered");
-                      handleChange("propertyInfo", "propertyName", e.target.value);
+                      handleChange("propertyInfo", "PropertyName", e.target.value);
                     }}
                   />
-                  {errors.propertyInfo.propertyName && (
+                  {errors.propertyInfo.PropertyName && (
                     <span className="error-message">
                       Property Name is required.
                     </span>
@@ -314,13 +315,13 @@ const AddPost = () => {
                 <div className="info-form-group">
                   <label>Property Type</label>
                   <select
-                    className={`info-select ${errors.propertyInfo.propertyType ? "error" : ""
+                    className={`info-select ${errors.propertyInfo.PropertyType ? "error" : ""
                       }`}
-                    value={formData.propertyInfo.propertyType || ""}
+                    value={formData.propertyInfo.PropertyType || ""}
                     onChange={(e) =>
                       handleChange(
                         "propertyInfo",
-                        "propertyType",
+                        "PropertyType",
                         e.target.value
                       )
                     }
@@ -334,13 +335,13 @@ const AddPost = () => {
                 <div className="info-form-group">
                   <label>Currency Type</label>
                   <select
-                    className={`info-select ${errors.propertyInfo.currencyType ? "error" : ""
+                    className={`info-select ${errors.propertyInfo.CurrencyType ? "error" : ""
                       }`}
-                    value={formData.propertyInfo.currencyType || ""}
+                    value={formData.propertyInfo.CurrencyType || ""}
                     onChange={(e) =>
                       handleChange(
                         "propertyInfo",
-                        "currencyType",
+                        "CurrencyType",
                         e.target.value
                       )
                     }
@@ -413,18 +414,18 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${errors.propertyDetails.propertyId ? "error" : ""
+                    className={`details-input ${errors.propertyDetails.PropertyId ? "error" : ""
                       }`}
-                    value={formData.propertyDetails.propertyId || ""}
+                    value={formData.propertyDetails.PropertyId || ""}
                     onChange={(e) =>
                       handleChange(
                         "propertyDetails",
-                        "propertyId",
+                        "PropertyId",
                         e.target.value
                       )
                     }
                   />
-                  {errors.propertyDetails.propertyId && (
+                  {errors.propertyDetails.PropertyId && (
                     <span className="error-message">
                       Property ID is required.
                     </span>
@@ -795,18 +796,18 @@ const AddPost = () => {
                 <input
                   type="text"
                   placeholder="Enter Phone Number"
-                  className={`info-input ${errors.ContactInfo.PhoneNumber ? "error" : ""
+                  className={`info-input ${errors.ContactInfo.Phone ? "error" : ""
                     }`}
-                  value={formData.ContactInfo.PhoneNumber || ""}
+                  value={formData.ContactInfo.Phone || ""}
                   onChange={(e) =>
                     handleChange(
                       "ContactInfo",
-                      "PhoneNumber",
+                      "Phone",
                       e.target.value
                     )
                   }
                 />
-                {errors.ContactInfo.PhoneNumber && (
+                {errors.ContactInfo.Phone && (
                   <span className="error-message">
                     Phone Number is required.
                   </span>
@@ -835,14 +836,14 @@ const AddPost = () => {
               <label>Address</label>
               <input
                 type="text"
-                placeholder="Enter property address"
+                placeholder="Enter property Address"
                 className="input-field"
-                value={formData.location?.address || ""}
+                value={formData.location?.Address || ""}
                 onChange={(e) =>
-                  handleChange("location", "address", e.target.value)
+                  handleChange("location", "Address", e.target.value)
                 }
               />
-              {errors.location?.address && (
+              {errors.location?.Address && (
                 <span className="error-message">Address is required.</span>
               )}
             </div>
@@ -853,14 +854,14 @@ const AddPost = () => {
                 <label>City</label>
                 <input
                   type="text"
-                  placeholder="Enter city"
+                  placeholder="Enter City"
                   className="input-field"
-                  value={formData.location?.city || ""}
+                  value={formData.location?.City || ""}
                   onChange={(e) =>
-                    handleChange("location", "city", e.target.value)
+                    handleChange("location", "City", e.target.value)
                   }
                 />
-                {errors.location?.city && (
+                {errors.location?.City && (
                   <span className="error-message">City is required.</span>
                 )}
               </div>
@@ -868,14 +869,14 @@ const AddPost = () => {
                 <label>State</label>
                 <input
                   type="text"
-                  placeholder="Enter state"
+                  placeholder="Enter State"
                   className="input-field"
-                  value={formData.location?.state || ""}
+                  value={formData.location?.State || ""}
                   onChange={(e) =>
-                    handleChange("location", "state", e.target.value)
+                    handleChange("location", "State", e.target.value)
                   }
                 />
-                {errors.location?.state && (
+                {errors.location?.State && (
                   <span className="error-message">State is required.</span>
                 )}
               </div>
@@ -889,12 +890,12 @@ const AddPost = () => {
                   type="text"
                   placeholder="Enter zip code"
                   className="input-field"
-                  value={formData.location?.zipCode || ""}
+                  value={formData.location?.ZipCode || ""}
                   onChange={(e) =>
-                    handleChange("location", "zipCode", e.target.value)
+                    handleChange("location", "ZipCode", e.target.value)
                   }
                 />
-                {errors.location?.zipCode && (
+                {errors.location?.ZipCode && (
                   <span className="error-message">Zip Code is required.</span>
                 )}
               </div>
