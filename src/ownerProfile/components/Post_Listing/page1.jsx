@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import authService from "../../../services/Auth_JwtApi/AuthService";
 import "./Style/Section1.css"; // For styling
 import PropertyGallery from "./PropertieGallary";
-import {notify} from "../../../services/errorHandlingService";
+import { notify } from "../../../services/errorHandlingService";
 
 const AddPost = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +35,12 @@ const AddPost = () => {
       dryer: false,
       wifi: true,
     },
-   
+    ContactInfo: {
+     Email: "",
+     PhoneNumber: "",
+    
+    },
+
     location: {
       address: "",
       city: "",
@@ -75,7 +80,12 @@ const AddPost = () => {
       dryer: false,
       wifi: true,
     },
-   
+    ContactInfo: {
+      Email: "",
+      PhoneNumber: "",
+      
+     },
+ 
     location: {
       address: "",
       city: "",
@@ -84,9 +94,9 @@ const AddPost = () => {
       mapUrl: "",
     },
     gallery: [],
-   
+
   });
-  
+
 
   // Handle input changes
   const handleChange = (section, key, value) => {
@@ -140,7 +150,13 @@ const AddPost = () => {
         dryer: false,
         wifi: true,
       },
-     
+      ContactInfo: {
+        Email: "",
+        PhoneNumber: "",
+       
+       },
+   
+
       location: {
         address: "",
         city: "",
@@ -149,7 +165,7 @@ const AddPost = () => {
         mapUrl: "",
       },
       gallery: [],
-      
+
     });
   };
 
@@ -173,7 +189,12 @@ const AddPost = () => {
         garageSize: !formData.propertyDetails.garageSize.trim(),
         yearConstructed: !formData.propertyDetails.yearConstructed.trim(),
       },
-      
+      ContactInfo: {
+        Email: !formData.ContactInfo.Email.trim(),
+        PhoneNumber: !formData.ContactInfo.PhoneNumber.trim(),
+       
+       },
+
       location: {
         address: !formData.location.address.trim(),
         city: !formData.location.city.trim(),
@@ -181,40 +202,41 @@ const AddPost = () => {
         zipCode: !formData.location.zipCode.trim(),
       },
     };
-  
+
     setErrors(newErrors);
-  
+
     // Check if there are any errors across all sections
     const hasErrors = Object.values(newErrors).some((section) =>
       Object.values(section).some(Boolean)
     );
-  
+
     if (!hasErrors) {
       try {
         const form = new FormData();
-  
+
         // Append images
         formData.gallery.forEach((file) => form.append('Images', file));
-  
+
         // Append other fields as JSON strings
         form.append('propertyInfo', JSON.stringify(formData.propertyInfo));
         form.append('propertyDetails', JSON.stringify(formData.propertyDetails));
         form.append('location', JSON.stringify(formData.location));
+        form.append('ContactInfo', JSON.stringify(formData.ContactInfo));
         form.append('amenities', JSON.stringify(formData.amenities));
         for (let [key, value] of form.entries()) {
           console.log(`${key}:`, value);
         }
         const response = await authService.PostListings(form);
-        notify( "success", "Data submitted successfully."+ response.message);
+        notify("success", "Data submitted successfully." + response.message);
         handleReset(); // Reset form after successful submission
       } catch (error) {
-        notify( "error", "There was an error submitting the data."+ error.message);
+        notify("error", "There was an error submitting the data." + error.message);
       }
     } else {
       notify("error", "Please fill all required fields.");
     }
   };
-  
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -248,7 +270,7 @@ const AddPost = () => {
             </li>
             <li onClick={() => scrollToSection("amenities")}>Amenities</li>
             <li onClick={() => scrollToSection("gallery")}>Gallery</li>
-            
+            <li onClick={() => scrollToSection("ContactInfo")}>Contact Info</li>
             <li onClick={() => scrollToSection("location")}>Location</li>
           </ul>
         </div>
@@ -273,9 +295,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Name"
-                    className={`info-input ${
-                      errors.propertyInfo.propertyName ? "error" : ""
-                    }`}
+                    className={`info-input ${errors.propertyInfo.propertyName ? "error" : ""
+                      }`}
                     value={formData.propertyInfo.propertyName}
                     onChange={(e) => {
                       console.log("PropertyName onChange event triggered");
@@ -293,9 +314,8 @@ const AddPost = () => {
                 <div className="info-form-group">
                   <label>Property Type</label>
                   <select
-                    className={`info-select ${
-                      errors.propertyInfo.propertyType ? "error" : ""
-                    }`}
+                    className={`info-select ${errors.propertyInfo.propertyType ? "error" : ""
+                      }`}
                     value={formData.propertyInfo.propertyType || ""}
                     onChange={(e) =>
                       handleChange(
@@ -314,9 +334,8 @@ const AddPost = () => {
                 <div className="info-form-group">
                   <label>Currency Type</label>
                   <select
-                    className={`info-select ${
-                      errors.propertyInfo.currencyType ? "error" : ""
-                    }`}
+                    className={`info-select ${errors.propertyInfo.currencyType ? "error" : ""
+                      }`}
                     value={formData.propertyInfo.currencyType || ""}
                     onChange={(e) =>
                       handleChange(
@@ -337,9 +356,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Sale Price"
-                    className={`info-input ${
-                      errors.propertyInfo.salePrice ? "error" : ""
-                    }`}
+                    className={`info-input ${errors.propertyInfo.salePrice ? "error" : ""
+                      }`}
                     value={formData.propertyInfo.salePrice || ""}
                     onChange={(e) =>
                       handleChange("propertyInfo", "salePrice", e.target.value)
@@ -358,9 +376,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Offer Price"
-                    className={`info-input ${
-                      errors.propertyInfo.offerPrice ? "error" : ""
-                    }`}
+                    className={`info-input ${errors.propertyInfo.offerPrice ? "error" : ""
+                      }`}
                     value={formData.propertyInfo.offerPrice || ""}
                     onChange={(e) =>
                       handleChange("propertyInfo", "offerPrice", e.target.value)
@@ -396,9 +413,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${
-                      errors.propertyDetails.propertyId ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.propertyId ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.propertyId || ""}
                     onChange={(e) =>
                       handleChange(
@@ -421,9 +437,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Price"
-                    className={`details-input ${
-                      errors.propertyDetails.pricePerSqft ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.pricePerSqft ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.pricePerSqft || ""}
                     onChange={(e) =>
                       handleChange(
@@ -444,9 +459,8 @@ const AddPost = () => {
                 <div className="details-form-group">
                   <label>Structure Type</label>
                   <select
-                    className={`details-select ${
-                      errors.propertyDetails.structureType ? "error" : ""
-                    }`}
+                    className={`details-select ${errors.propertyDetails.structureType ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.structureType || ""}
                     onChange={(e) =>
                       handleChange(
@@ -467,9 +481,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${
-                      errors.propertyDetails.noOfBedrooms ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.noOfBedrooms ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.noOfBedrooms || ""}
                     onChange={(e) =>
                       handleChange(
@@ -492,9 +505,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${
-                      errors.propertyDetails.noOfBathrooms ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.noOfBathrooms ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.noOfBathrooms || ""}
                     onChange={(e) =>
                       handleChange(
@@ -517,9 +529,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${
-                      errors.propertyDetails.sqft ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.sqft ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.sqft || ""}
                     onChange={(e) =>
                       handleChange("propertyDetails", "sqft", e.target.value)
@@ -536,9 +547,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${
-                      errors.propertyDetails.noOfFloors ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.noOfFloors ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.noOfFloors || ""}
                     onChange={(e) =>
                       handleChange(
@@ -561,9 +571,8 @@ const AddPost = () => {
                   <input
                     type="text"
                     placeholder="Enter Value"
-                    className={`details-input ${
-                      errors.propertyDetails.garageSize ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.garageSize ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.garageSize || ""}
                     onChange={(e) =>
                       handleChange(
@@ -585,9 +594,8 @@ const AddPost = () => {
                   <label>Year Constructed</label>
                   <input
                     type="date"
-                    className={`details-input ${
-                      errors.propertyDetails.yearConstructed ? "error" : ""
-                    }`}
+                    className={`details-input ${errors.propertyDetails.yearConstructed ? "error" : ""
+                      }`}
                     value={formData.propertyDetails.yearConstructed || ""}
                     onChange={(e) =>
                       handleChange(
@@ -747,10 +755,70 @@ const AddPost = () => {
           </div>
         </div>
 
-        
+
         <PropertyGallery setFieldValue={setFormData} />
 
-       
+        <div className="property-info-section" id="ContactInfo">
+          <div className="info-description">
+            <h3>Contact Inofrmation</h3>
+            <p>
+              Provide contact details for potential buyers or renters to Contact. This information will be shared with potential buyers or renters.
+            </p>
+          </div>
+
+          <div className="info-inputs-container">
+            <div className="info-inputs">
+              {/* Property Name */}
+              <div className="info-form-group">
+                <label>Email</label>
+                <input
+                  type="Email"
+                  placeholder="Enter Name"
+                  className={`info-input ${errors.ContactInfo.Email ? "error" : ""
+                    }`}
+                  value={formData.ContactInfo.Email}
+                  onChange={(e) => {
+                    console.log("PropertyName onChange event triggered");
+                    handleChange("ContactInfo", "Email", e.target.value);
+                  }}
+                />
+                {errors.ContactInfo.Email && (
+                  <span className="error-message">
+                    Owner Contact details is required.
+                  </span>
+                )}
+              </div>
+
+              {/* Phone Number */}
+              <div className="info-form-group">
+                <label>Phone Number</label>
+                <input
+                  type="text"
+                  placeholder="Enter Phone Number"
+                  className={`info-input ${errors.ContactInfo.PhoneNumber ? "error" : ""
+                    }`}
+                  value={formData.ContactInfo.PhoneNumber || ""}
+                  onChange={(e) =>
+                    handleChange(
+                      "ContactInfo",
+                      "PhoneNumber",
+                      e.target.value
+                    )
+                  }
+                />
+                {errors.ContactInfo.PhoneNumber && (
+                  <span className="error-message">
+                    Phone Number is required.
+                  </span>
+                )}
+              </div>
+
+              
+
+
+            </div>
+          </div>
+        </div>
 
         <div className="properties-location-section" id="location">
           <div className="left-column">
