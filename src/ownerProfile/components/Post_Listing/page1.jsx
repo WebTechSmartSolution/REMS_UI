@@ -170,6 +170,73 @@ console.log(formData)
   };
 
   // Handle form submission with validation
+  // const handleSubmit = async () => {
+  //   const newErrors = {
+  //     propertyInfo: {
+  //       PropertyType: !formData.propertyInfo.PropertyType.trim(),
+  //       CurrencyType: !formData.propertyInfo.CurrencyType.trim(),
+  //       offerPrice: !formData.propertyInfo.offerPrice.trim(),
+  //       PropertyName: !formData.propertyInfo.PropertyName.trim(),
+  //       salePrice: !formData.propertyInfo.salePrice.trim(),
+  //     },
+  //     propertyDetails: {
+  //       PropertyId: !formData.propertyDetails.PropertyId.trim(),
+  //       pricePerSqft: !formData.propertyDetails.pricePerSqft.trim(),
+  //       noOfBedrooms: !formData.propertyDetails.noOfBedrooms.trim(),
+  //       noOfBathrooms: !formData.propertyDetails.noOfBathrooms.trim(),
+  //       sqft: !formData.propertyDetails.sqft.trim(),
+  //       noOfFloors: !formData.propertyDetails.noOfFloors.trim(),
+  //       garageSize: !formData.propertyDetails.garageSize.trim(),
+  //       yearConstructed: !formData.propertyDetails.yearConstructed.trim(),
+  //     },
+  //     ContactInfo: {
+  //       Email: !formData.ContactInfo.Email.trim(),
+  //       Phone: !formData.ContactInfo.Phone.trim(),
+       
+  //      },
+
+  //     location: {
+  //       Address: !formData.location.Address.trim(),
+  //       City: !formData.location.City.trim(),
+  //       State: !formData.location.State.trim(),
+  //       ZipCode: !formData.location.ZipCode.trim(),
+  //     },
+  //   };
+
+  //   setErrors(newErrors);
+
+  //   // Check if there are any errors across all sections
+  //   const hasErrors = Object.values(newErrors).some((section) =>
+  //     Object.values(section).some(Boolean)
+  //   );
+
+  //   if (!hasErrors) {
+  //     try {
+  //       const form = new FormData();
+
+  //       // Append images
+
+  //       // Append other fields as JSON strings
+  //       form.append('propertyInfo', JSON.stringify(formData.propertyInfo));
+  //       form.append('propertyDetails', JSON.stringify(formData.propertyDetails));
+  //       form.append('location', JSON.stringify(formData.location));
+  //       form.append('ContactInfo', JSON.stringify(formData.ContactInfo));
+  //       form.append('amenities', JSON.stringify(formData.amenities));
+  //       formData.gallery.forEach((file) => form.append('Images', file));
+
+  //       for (let [key, value] of form.entries()) {
+  //         console.log(`${key}:`, value);
+  //       }
+  //       const response = await authService.PostListings(form);
+  //       notify("success", "Data submitted successfully." + response.message);
+  //       handleReset(); // Reset form after successful submission
+  //     } catch (error) {
+  //       notify("error", "There was an error submitting the data." + error.message);
+  //     }
+  //   } else {
+  //     notify("error", "Please fill all required fields.");
+  //   }
+  // };
   const handleSubmit = async () => {
     const newErrors = {
       propertyInfo: {
@@ -192,9 +259,7 @@ console.log(formData)
       ContactInfo: {
         Email: !formData.ContactInfo.Email.trim(),
         Phone: !formData.ContactInfo.Phone.trim(),
-       
-       },
-
+      },
       location: {
         Address: !formData.location.Address.trim(),
         City: !formData.location.City.trim(),
@@ -202,34 +267,41 @@ console.log(formData)
         ZipCode: !formData.location.ZipCode.trim(),
       },
     };
-
+  
     setErrors(newErrors);
-
-    // Check if there are any errors across all sections
+  
     const hasErrors = Object.values(newErrors).some((section) =>
       Object.values(section).some(Boolean)
     );
-
+  
     if (!hasErrors) {
       try {
         const form = new FormData();
-
-        // Append images
-
-        // Append other fields as JSON strings
-        form.append('propertyInfo', JSON.stringify(formData.propertyInfo));
-        form.append('propertyDetails', JSON.stringify(formData.propertyDetails));
-        form.append('location', JSON.stringify(formData.location));
-        form.append('ContactInfo', JSON.stringify(formData.ContactInfo));
-        form.append('amenities', JSON.stringify(formData.amenities));
-        formData.gallery.forEach((file) => form.append('Images', file));
-
-        for (let [key, value] of form.entries()) {
-          console.log(`${key}:`, value);
-        }
+        // Flatten the data
+        const payload = {
+          ...formData.propertyInfo,
+          ...formData.propertyDetails,
+          ...formData.ContactInfo,
+          ...formData.location,
+          ...formData.amenities,
+          // Images: formData.gallery.map((file) => file.name),
+          // images: formData.gallery, // Assuming `formData.gallery` contains base64 strings or File objects
+        };
+      //  payload= formData.gallery.forEach((file) => payload.append('Images', file))
+      Object.entries(payload).forEach(([key, value]) => {
+        form.append(key, value);
+      });
+  
+      // Append image files
+      formData.gallery.forEach((file) => {
+        form.append("Images", file); // Key name must match backend's expected field
+      });
+        console.log("Payload:", payload);
+  
+        // Send as JSON
         const response = await authService.PostListings(form);
         notify("success", "Data submitted successfully." + response.message);
-        handleReset(); // Reset form after successful submission
+        handleReset();
       } catch (error) {
         notify("error", "There was an error submitting the data." + error.message);
       }
@@ -237,7 +309,7 @@ console.log(formData)
       notify("error", "Please fill all required fields.");
     }
   };
-
+  
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -594,7 +666,8 @@ console.log(formData)
                 <div className="details-form-group">
                   <label>Year Constructed</label>
                   <input
-                    type="date"
+                    type="text"
+                    placeholder="Enter Value"
                     className={`details-input ${errors.propertyDetails.yearConstructed ? "error" : ""
                       }`}
                     value={formData.propertyDetails.yearConstructed || ""}
