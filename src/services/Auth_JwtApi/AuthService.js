@@ -242,7 +242,7 @@ uploadImages: async (formData) => {
 
 PostListings: async (formData) => {
   try {
-    const response = await axiosInstance.post('/Listings', formData, {
+    const response = await axiosInstance.post('/Listings/AddListings', formData, {
       headers: { 
         'Authorization': `Bearer ${TOKEN_KEY}`,
         'Content-Type': 'multipart/form-data' },
@@ -257,7 +257,7 @@ PostListings: async (formData) => {
 
 getListings: async () => {
   try {
-    const response = await axiosInstance.get("/api/listings");
+    const response = await axiosInstance.get("/listings");
 
     if (response && Array.isArray(response.data)) {
       return response.data;
