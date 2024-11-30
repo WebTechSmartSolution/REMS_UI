@@ -247,6 +247,7 @@ PostListings: async (formData) => {
         'Authorization': `Bearer ${TOKEN_KEY}`,
         'Content-Type': 'multipart/form-data' },
     });
+    console.log(headers)
     return response.data.imagePaths; // Assuming response sends back an array of image paths
   } catch (error) {
     // console.error('Image upload failed:', error);

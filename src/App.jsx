@@ -46,8 +46,8 @@ function App() {
         {/* routes for portfolio section of user */}
 
         {/* Protected Portfolio Routes */}
-        <Route path="/portfolio" element={<PortfolioLayout />}>
-          {/* <Route element={<PortfolioLayout />}> */}
+        <Route path="/portfolio" element={<PrivateRoute />}>
+          <Route element={<PortfolioLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="all-listing" element={<AllListing />} />
             <Route path="order-history" element={<OrderHistory />} />
@@ -63,7 +63,7 @@ function App() {
               <Route path="change-password" element={<UserProfile />} />
             </Route>
           </Route>
-        {/* </Route> */}
+        </Route>
       </Routes>
     </>
   );
