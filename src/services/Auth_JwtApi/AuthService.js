@@ -247,8 +247,13 @@ PostListings: async (formData) => {
         'Authorization': `Bearer ${TOKEN_KEY}`,
         'Content-Type': 'multipart/form-data' },
     });
-    console.log(headers)
-    return response.data.imagePaths; // Assuming response sends back an array of image paths
+    if (response && response.data && response.data.images) {
+      // console.log('Image Paths:', response.data.images.map(image => image.path)); // Log image paths from the response
+      return response.data.images.map(image => image.path); // Return image paths as an array
+    } else {
+      // console.error('No images in response.');
+      return [];
+    }
   } catch (error) {
     // console.error('Image upload failed:', error);
     throw error;

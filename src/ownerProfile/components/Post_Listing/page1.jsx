@@ -300,9 +300,11 @@ console.log(formData)
   
         // Send as JSON
         const response = await authService.PostListings(form);
+        console.log("Response:", response);
         notify("success", "Data submitted successfully." + response.message);
         handleReset();
       } catch (error) {
+        console.log(error);
         notify("error", "There was an error submitting the data." + error.message);
       }
     } else {
