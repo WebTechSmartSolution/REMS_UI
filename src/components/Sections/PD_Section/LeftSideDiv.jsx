@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import "../style/PD_Section.css"; // Make sure to create this CSS file
+import { notify } from "../../../services/errorHandlingService";
+// import authService from "../../../services/Auth_JwtApi/AuthService";
 
 const RequestInfo = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +10,8 @@ const RequestInfo = () => {
     email: "",
     message: ""
   });
+// making chat room for the user to get more information to the Owner
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -17,7 +22,9 @@ const RequestInfo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    setTimeout(() => {
+      notify("success", "Your message has been sent successfully.");  
+    }, 5000);
     console.log("Form data submitted:", formData);
   };
 

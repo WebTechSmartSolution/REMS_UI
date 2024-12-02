@@ -16,7 +16,13 @@
     margin-bottom: 30px; /* Adjusted to reduce space */
     color: #d1c4e9; /* Light purple for paragraph */
 }
+.main{
+  
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
 
+}
 .nav-line {
     width: 60px; /* Length of the navigation line */
     height: 4px; /* Thickness of the line */

@@ -13,7 +13,13 @@
     color: #5a2d8b;
     margin-bottom: 40px;
   }
+  .main{
   
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+
+}
   .partners-cards {
     display: flex;
     flex-wrap: wrap;

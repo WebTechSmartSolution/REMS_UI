@@ -496,6 +496,20 @@ background: linear-gradient(90deg, rgba(112,38,140,1) 0%, rgba(1,1,120,1) 61%, r
   .request-info .submit-btn:hover {
     background-color: #ff5733;
   }
+  .request-info .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Style the chat button */
+  .request-info .submit-btn.chat-btn {
+    background-color: #2d89eb;
+  }
+  
+  .request-info .submit-btn.chat-btn:hover {
+    background-color: #1d63bf;
+  }
   
 
 

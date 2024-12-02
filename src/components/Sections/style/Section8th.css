@@ -10,7 +10,13 @@
     color: #333;
     margin-bottom: 30px;
   }
+  .main{
   
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+
+}
   .contact-form-container {
     display: flex;
     justify-content: space-between;

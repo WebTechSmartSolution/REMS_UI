@@ -35,7 +35,7 @@ const Section3rd = () => {
 
     return (
         <section className="property-type-section">
-            <div className="container1">
+            <div className="main">
                 <h2>Explore by Property Type</h2>
                 <div className="nav-line"></div> {/* Navigation line */}
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis et sem sed.</p>

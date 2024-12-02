@@ -13,7 +13,7 @@ const SimilarListings = () => {
 
   return (
     <section className="featured-properties-section">
-      <div className="container">
+      <div className="main">
         <h2>Featured Properties for Buy/Sell and Rent</h2>
         <span className='nav-line1'></span>
         <p>Hand-picked selections of quality places</p>

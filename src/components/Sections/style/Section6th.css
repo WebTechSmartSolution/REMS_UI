@@ -13,7 +13,13 @@
     max-width: 1200px; /* Maximum width to keep cards aligned */
     margin: 0 auto; /* Center the container */
 }
+.main{
+  
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
 
+}
 .statistic-card {
     background-color: #ffffff0a;
     border-radius: 10px;

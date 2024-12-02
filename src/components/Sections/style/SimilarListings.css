@@ -16,6 +16,13 @@
   color: #666;
   margin-bottom: 40px;
 }
+.main{
+  
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+
+}
 
 .property-cards {
   display: flex;

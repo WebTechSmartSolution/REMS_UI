@@ -22,7 +22,7 @@ const Section7th = () => {
 
   return (
     <section id='Our-Partners' className="partners-section">
-      <div className="container1">
+      <div className="main">
         <h2>Our Partners</h2>
         <div className="partners-cards">
           {partners.map((partner, index) => (

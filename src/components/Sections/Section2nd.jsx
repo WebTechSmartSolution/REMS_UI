@@ -6,7 +6,7 @@ import './style/Section2nd.css'
 function Section2nd() {
   return (
     <div> <section className="how-it-works-section">
-    <div className="container1">
+    <div className="main">
       <h2>How It Works</h2>
       {/* Navigation or separator line */}
       <div className="nav-line">

@@ -1,7 +1,26 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../../../services/Auth_JwtApi/AuthService";  
 import "../style/OwnerDetails.css"; // Assuming you have a separate CSS file for this
 
 const OwnerDetails = () => {
+
+  const navigate = useNavigate();
+  const viewerId = authService.getUserIdFromAuthToken(); 
+  // const viewerId = "viewer123";
+  console.log("Viewer ID:", viewerId);
+  const startChat = async () => {
+    try {
+        const form = {
+            viewerId,
+            ownerId: listing.ownerId,
+        };
+        const roomId = await authService.StartChat_with_Listing_Owner(form);
+        navigate(`/chat/${roomId}`);
+    } catch (error) {
+        console.error("Failed to start chat:", error);
+    }
+};
   // Hardcoded example data for the owner
   const owner = {
     name: "John Doe",
@@ -30,7 +49,13 @@ const OwnerDetails = () => {
             <a href={`mailto:${owner.email}`}>{owner.email}</a>
           </p>
         </div>
-        <button className="contact-owner">Contact Owner</button>
+        <button
+            type="button"
+            className="contact-owner"
+            onClick={startChat}
+          >
+            Start Chat
+          </button>
       </div>
     </div>
   );

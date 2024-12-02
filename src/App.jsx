@@ -33,8 +33,8 @@ function App() {
         {/*Routes that are  in Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="all_Listings" element={<ListingPage />} />
-          <Route path="View_Listing_Details" element={<Properties_details />} />
+          <Route path="/all_Listings" element={<ListingPage />} />
+          <Route path="/view_listing_details" element={<Properties_details />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
