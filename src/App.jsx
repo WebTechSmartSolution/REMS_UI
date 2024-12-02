@@ -33,8 +33,8 @@ function App() {
         {/*Routes that are  in Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="All_Listings" element={<ListingPage />} />
-          <Route path="Listing-Details" element={<Properties_details />} />
+          <Route path="all_Listings" element={<ListingPage />} />
+          <Route path="View_Listing_Details" element={<Properties_details />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
@@ -46,24 +46,24 @@ function App() {
         {/* routes for portfolio section of user */}
 
         {/* Protected Portfolio Routes */}
-        <Route path="/portfolio" element={<PrivateRoute />}>
-          <Route element={<PortfolioLayout />}>
+        <Route path="/portfolio" element={<PortfolioLayout />}>
+          {/* <Route element={<PortfolioLayout />}> */}
             <Route index element={<Dashboard />} />
-            <Route path="all-listing" element={<AllListing />} />
-            <Route path="order-history" element={<OrderHistory />} />
-            <Route path="post-listing" element={<PostListing />} />
-            <Route path="purchase-products" element={<Purchaseorders />} />
-            <Route path="payment-checkout" element={<PaymentPage />} />
+            <Route path="my_all_listings" element={<AllListing />} />
+            <Route path="order_history" element={<OrderHistory />} />
+            <Route path="post_listing" element={<PostListing />} />
+            <Route path="purchase_products" element={<Purchaseorders />} />
+            <Route path="payment_checkout" element={<PaymentPage />} />
             
             <Route path="inbox" element={<Inbox />} />
 
             {/* Profile nested routes */}
-            <Route path="profile-setting" element={<UserProfile />}>
-              <Route path="update-profile" element={<UserProfile />} />
-              <Route path="change-password" element={<UserProfile />} />
+            <Route path="profile_setting" element={<UserProfile />}>
+              <Route path="update_profile" element={<UserProfile />} />
+              <Route path="change_password" element={<UserProfile />} />
             </Route>
           </Route>
-        </Route>
+        {/* </Route> */}
       </Routes>
     </>
   );

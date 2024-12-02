@@ -51,10 +51,10 @@ const NavbarSidebar = () => {
     </button>
     <Link className="navbar-brand1" to="/portfolio">Profolio</Link>
     <div className="navbar-links1">
-      <Link className="custom-btn1 my-listings1" to="/portfolio/all-listing">
+      <Link className="custom-btn1 my-listings1" to="/portfolio/my_all_listings">
         <FontAwesomeIcon icon={faList} /> My Listings
       </Link>
-      <Link className="custom-btn1 post-listing1" to="/portfolio/post-listing">
+      <Link className="custom-btn1 post-listing1" to="/portfolio/post_listing">
         <FontAwesomeIcon icon={faPlus} /> Post Listing
       </Link>
 
@@ -79,18 +79,18 @@ const NavbarSidebar = () => {
             <Link to="/portfolio/dashboard" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faHome} /><span className="sidebar-text1">Dashboard</span></Link>
           </li>
           <li>
-            <Link to="/portfolio/post-listing" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faPlus} /><span className="sidebar-text1">Post Listing</span></Link>
+            <Link to="/portfolio/post_listing" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faPlus} /><span className="sidebar-text1">Post Listing</span></Link>
           </li>
 
          <li>
-          <Link to="/portfolio/all-listing" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faTasks} /><span className="sidebar-text1">All Listings</span></Link>
+          <Link to="/portfolio/my_all_listings" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faTasks} /><span className="sidebar-text1">All Listings</span></Link>
           </li>
           <li>
             <Link to="/portfolio/inbox" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faEnvelope} /><span className="sidebar-text1">Inbox</span></Link>
           </li>
 
           <li>
-            <Link to="/portfolio/profile-setting"  onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faUserCog} /><span className="sidebar-text1">User Settings</span></Link>
+            <Link to="/portfolio/profile_setting"  onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faUserCog} /><span className="sidebar-text1">User Settings</span></Link>
           </li>
 
           <li>
@@ -99,8 +99,8 @@ const NavbarSidebar = () => {
             </button>
             {openDropdown === 'propShop' && (
               <ul className="collapse1 show">
-                <li><Link to="/portfolio/purchase-products"  >Buy Product</Link></li>
-                <li><Link to="/portfolio/order-history" >Order History</Link></li>
+                <li><Link to="/portfolio/purchase_products"  >Buy Product</Link></li>
+                <li><Link to="/portfolio/order_history" >Order History</Link></li>
               </ul>
             )}
           </li>

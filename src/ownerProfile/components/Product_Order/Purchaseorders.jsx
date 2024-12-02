@@ -62,7 +62,7 @@ const ProductPage = () => {
             notify("warning", "Your cart is empty. Add items before proceeding.");
         } else {
             // Navigate to the payment page if total is greater than 0
-            navigate('/portfolio/payment-checkout', { state: { cart, total } });
+            navigate('/portfolio/payment_checkout', { state: { cart, total } });
         }
     };
 
