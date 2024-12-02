@@ -34,7 +34,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/all_Listings" element={<ListingPage />} />
-          <Route path="/view_listing_details" element={<Properties_details />} />
+          <Route path="/view_listing_details/:id" element={<Properties_details />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

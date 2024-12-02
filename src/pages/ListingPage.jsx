@@ -5,6 +5,7 @@ import { FiSearch, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import '../style/ListingPage.css';
 import Section1 from '../components/Sections/Listing/Section1';
 import { notify } from '../services/errorHandlingService';
+import authService from '../services/Auth_JwtApi/AuthService';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -251,13 +252,12 @@ const ListingPage = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/listings'); // Replace with actual API endpoint
-        const data = await response.json();
+        const data = await authService.getListings(); 
         setListings(data.length ? data : defaultListings);
         setFilteredData(data.length ? data : defaultListings);
       } catch (error) {
-        notify("error", "Error fetching listings: " + error.message);
-       
+        console.log('Error fetching listings:', error);
+        notify("error", `Error fetching listings: ${error.message}`);
         setListings(defaultListings);
         setFilteredData(defaultListings);
       }
@@ -265,6 +265,7 @@ const ListingPage = () => {
 
     fetchListings();
   }, []);
+
 
   const handleSearch = (filters) => {
     const { location, priceRange, Propertytype } = filters;

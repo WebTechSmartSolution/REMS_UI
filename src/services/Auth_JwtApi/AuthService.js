@@ -249,7 +249,7 @@ PostListings: async (formData) => {
     });
     if (response && response.data && response.data.images) {
       // console.log('Image Paths:', response.data.images.map(image => image.path)); // Log image paths from the response
-      return response.data.images.map(image => image.path); // Return image paths as an array
+      return response.data.images.map(image => image.path); 
     } else {
       // console.error('No images in response.');
       return [];
@@ -263,7 +263,7 @@ PostListings: async (formData) => {
 
 getListings: async () => {
   try {
-    const response = await axiosInstance.get("/listings");
+    const response = await axiosInstance.get("/Listings");
 
     if (response && Array.isArray(response.data)) {
       return response.data;
@@ -282,7 +282,15 @@ getListings: async () => {
   }
 },
 
-
+fetchListingDetails: async (listingId) => {
+  try {
+    const response = await axiosInstance.get(`/Listings/${listingId}`);
+    return response.data; 
+  } catch (error) {
+    console.error('Failed to fetch listing details:', error);
+    throw error; 
+  }
+},
 
 deleteListing: async (id) => {
   try {
