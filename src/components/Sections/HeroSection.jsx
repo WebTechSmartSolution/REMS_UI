@@ -1,5 +1,6 @@
 import React from 'react'
-import  { useState } from 'react';
+import  { useState, useEffect } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faHome, faSearch , faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import authservice from '../../services/Auth_JwtApi/AuthService';
@@ -7,6 +8,11 @@ import { notify } from '../../services/errorHandlingService';
 import './style/HeroSection.css'
 
 function HeroSection() {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+ 
     const [activeOption, setActiveOption] = useState('rent');
     const [formData, setFormData] = useState({
       keyword: '',
@@ -15,6 +21,32 @@ function HeroSection() {
       minPrice: '',
       maxPrice: ''
     });
+    const words = ["Rent...","Buy...","Sale..."];
+    const speed = 180; // Typing speed in milliseconds
+
+    useEffect(() => {
+      const handleTyping = () => {
+        const currentWord = words[wordIndex];
+        if (!isDeleting) {
+          setText(currentWord.substring(0, charIndex + 1));
+          setCharIndex((prev) => prev + 1);
+          if (charIndex + 1 === currentWord.length) {
+            setIsDeleting(true);
+          }
+        } else {
+          setText(currentWord.substring(0, charIndex));
+          setCharIndex((prev) => prev - 1);
+          if (charIndex === 0) {
+            setIsDeleting(false);
+            setWordIndex((prev) => (prev + 1) % words.length);
+          }
+        }
+      };
+  
+      const typingInterval = setInterval(handleTyping, speed);
+  
+      return () => clearInterval(typingInterval);
+    }, [charIndex, isDeleting, wordIndex, words]);
   
     const toggleOption = (option) => {
       setActiveOption(option);
@@ -59,8 +91,16 @@ function HeroSection() {
         <section>
       <div className="hero_section">
         <div className="hero_content">
-          <h1>Find Your Best Dream House for Rental, Buy & Sell...</h1>
-          <p>Property finds by meeting your location. With more than 2000+ listings for you to choose from</p>
+        {/* <h1>
+      Find Your Best Dream House For{" "}
+      <span style={{ color: color }}>{currentWord}</span>
+    </h1> */}
+          <div className="here_right_text">
+            {/* //  <h1>Smart <span>Parking</span> Smart <span>Solution</span></h1>  */}
+            <h1>Find Your Dream House Anywhere For <span> {text}</span></h1>
+            <p>Property finds by meeting your location. With more than 2000+ listings for you to choose from</p>
+          </div>
+          
   
           {/* Buttons for Rent/Buy with Icons */}
           <div className="toggle_buttons">

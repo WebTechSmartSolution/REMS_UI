@@ -63,7 +63,7 @@ table img {
 
 
 
-button {
+button1 {
     margin: 5px;
     padding: 5px 10px;
     border: none;
@@ -73,7 +73,7 @@ button {
     border-radius: 4px;
 }
 
-button:hover {
+button1:hover {
     background: #0056b3;
 }
 

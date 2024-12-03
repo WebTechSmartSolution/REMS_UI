@@ -212,4 +212,42 @@
     }
     
 }
+ 
+.here_right_text h1 {
+  
 
+    color: var(--primary);
+    /* text-shadow: 1px 1px rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    white-space: wrap; */
+   
+    
+  }
+  
+ .here_right_text  span {
+    color: var(--secondary) !important;
+    
+    /* border-right: 4px solid var(--secondary); */
+    display: inline-block;
+    animation: blink-caret 0.75s step-end infinite;
+  
+  }
+  
+  @keyframes blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: var(--secondary);
+    }
+  }
+  
+  
+   .here_right_text p {
+    line-height: var(--line-height);
+    font-size: var(--font-size-small);
+    color: var(--text-white);
+    font-weight: 300;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.9);
+  
+  }
