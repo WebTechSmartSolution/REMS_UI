@@ -3,14 +3,17 @@ import { notify } from "../../../services/errorHandlingService";
 import authService from "../../../services/Auth_JwtApi/AuthService";
 import { useNavigate } from "react-router-dom";
 import "./All-Listing.css";
+import LoadingSpinner from "../../../components/cards/loadingspiner";
 
 const ListingDashboard = () => {
   const [listings, setListings] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); // To handle redirects for edit
 
   useEffect(() => {
     const fetchListings = async () => {
+      setLoading(true);
       try {
         // Logging response for debugging
         const fetchedListings = await authService.getListings();
@@ -22,7 +25,7 @@ const ListingDashboard = () => {
           setListings([
             {
               id: 1,
-              image: "/default.jpg",
+              image: "/src/assets/rental2.jpeg",
               title: "Sample Property 1",
               reservationId: "1234",
               totalBooking: 10,
@@ -32,7 +35,7 @@ const ListingDashboard = () => {
             },
             {
               id: 2,
-              image: "/default.jpg",
+              image: "/src/assets/rental1.jpeg",
               title: "Sample Property 2",
               reservationId: "5678",
               totalBooking: 5,
@@ -45,11 +48,19 @@ const ListingDashboard = () => {
       } catch (error) {
         // Logging error for debugging
         notify("error", "Error fetching listings: " + (error.message || error));
+        
       }
+     finally {
+      setLoading(false); // End loading
+    }
     };
 
     fetchListings();
   }, []);
+
+if (loading) {
+  return <LoadingSpinner/>;
+} 
 
   const filteredListings = listings; // All listings are shown as the default filter
 
@@ -61,9 +72,9 @@ const ListingDashboard = () => {
     navigate(`/listing/edit/${id}`);
   };
 
-  const handleDelete = async (id) => {
+  const handleStatusChange = async (id) => {
     try {
-      await authService.deleteListing(id);
+      await authService.ChangeListingStatus(id);
       setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
     } catch (error) {
       notify("error", "Error during listing deletion: " + (error.message || error));
@@ -79,7 +90,7 @@ const ListingDashboard = () => {
             <div className="stat-label">Total listings</div>
           </div>
         </div>
-        <button className="new-space-btn" onClick={() => navigate("/listing/new")}>
+        <button className="new-space-btn" onClick={() => navigate("/portfolio/post_listing")}>
           List New Space
         </button>
       </div>
@@ -136,8 +147,8 @@ const ListingDashboard = () => {
                     <button className="action-btn edit-btn" onClick={() => handleEdit(listing.id)}>
                       <i className="fas fa-edit"></i> Edit
                     </button>
-                    <button className="action-btn delete-btn" onClick={() => handleDelete(listing.id)}>
-                      <i className="fas fa-trash"></i> Delete
+                    <button className="action-btn delete-btn" onClick={() => handleStatusChange(listing.id)}>
+                      <i className="fas fa-trash"></i> Mark Sold
                     </button>
                   </td>
                 </tr>

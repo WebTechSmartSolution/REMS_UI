@@ -3,12 +3,12 @@ import "./style/Section3.css";
 
 const Filters = ({ onSearch }) => {
   const [location, setLocation] = useState("");
-  const [priceRange, setPriceRange] = useState("");
+  const [price, setPriceRange] = useState("");
   const [propertyType, setPropertyType] = useState("rent");
 
   // Handle the search
   const handleSearch = () => {
-    onSearch({ location, priceRange, propertyType });
+    onSearch({ location, price, propertyType });
     
   };
 
@@ -26,7 +26,7 @@ const Filters = ({ onSearch }) => {
         <input
           type="number"
           placeholder="Price Range"
-          value={priceRange}
+          value={price}
           onChange={(e) => setPriceRange(e.target.value)}
           className="filter-input"
         />

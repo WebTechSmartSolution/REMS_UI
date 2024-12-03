@@ -278,7 +278,7 @@ getListings: async () => {
       ? error.response.data?.message || "Error fetching listings"
       : "An unexpected error occurred";
       
-    throw error; 
+    return error; 
   }
 },
 
@@ -287,17 +287,17 @@ fetchListingDetails: async (listingId) => {
     const response = await axiosInstance.get(`/Listings/${listingId}`);
     return response.data; 
   } catch (error) {
-    console.error('Failed to fetch listing details:', error);
+    // console.error('Failed to fetch listing details:', error);
     throw error; 
   }
 },
 
-deleteListing: async (id) => {
+ChangeListingStatus: async (id) => {
   try {
-    const response = await axiosInstance.delete(`/Listings/${id}`);
+    const response = await axiosInstance.put(`/Listings/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Error deleting listing:', error);
+    // console.error('Error deleting listing:', error);
     throw error;
   }
 },

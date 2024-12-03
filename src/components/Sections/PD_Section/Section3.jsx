@@ -3,8 +3,20 @@ import "../style/PD_Section.css";
 
 const Section3 = ({ listing }) => {
   const [mainImage, setMainImage] = useState(listing?.images?.[0] || ""); // Default to the first image
+  const amenitiesList = [
+    "Air Conditioning",
+    "Swimming Pools",
+    "Gym",
+    "Landscaped Gardens",
+    "Open Spaces",
+    "Spa",
+    "Billiards Table",
+    "Surveillance Cameras"
+  ];
 
   // Function to update the main image
+
+  // const thumbnails = [thumb1, thumb2, thumb3, thumb4];
   const handleImageClick = (thumbnail) => {
     setMainImage(thumbnail);
   };
@@ -136,17 +148,16 @@ const Section3 = ({ listing }) => {
 
         {/* Amenities */}
         <div className="amenities">
-          <h3>Amenities</h3>
-          <div className="amenities-grid">
-            {listing?.amenities?.length > 0
-              ? listing.amenities.map((amenity, index) => (
-                  <div key={index} className="amenity-item">
-                    {amenity}
-                  </div>
-                ))
-              : "No amenities listed"}
+      <h3>Amenities</h3>
+      <div className="amenities-grid">
+        {amenitiesList.map((amenity, index) => (
+          <div key={index} className="amenity-item">
+            {amenity}
           </div>
-        </div>
+        ))}
+      </div>
+    </div>
+
       </section>
     </>
   );
