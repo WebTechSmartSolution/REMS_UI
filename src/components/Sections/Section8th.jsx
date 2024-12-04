@@ -1,49 +1,33 @@
 import React, { useState } from 'react';
 import './style/Section8th.css'; // Import your CSS
+import { notify } from '../../services/errorHandlingService';
 
 const Section8th = () => {
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
-  const [submitStatus, setSubmitStatus] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const isFormValid = () => {
+    return formData.name && formData.email && formData.message;
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setSubmitStatus('');
+  const handleFormSubmission = () => {
+    if (isFormValid()) {
+      setIsLoading(true); // Set loading to true when form submission starts
 
-    try {
-      const response = await fetch('https://your-api-endpoint.com/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      setTimeout(() => {
+        notify('success', 'Form has been submitted!');
 
-      if (response.ok) {
-        setSubmitStatus('success'); // Form has been successfully submitted
-        setFormData({ name: '', email: '', message: '' }); // Clear form
-      } else {
-        setSubmitStatus('error'); // Error occurred during submission
-      }
-    } catch (error) {
-      setSubmitStatus('error'); // Network or API error
-    } finally {
-      setLoading(false);
+        setFormData({ name: '', email: '', message: '' });
+        setIsLoading(false);
+      }, 2000);
+    } else {
+      notify('error', 'Please fill in all the fields!');
     }
   };
-
   return (
     <section className="contact-section" id='contact-us'>
       <h2>Contact Us</h2>
@@ -57,13 +41,13 @@ const Section8th = () => {
           <p><strong>Address:</strong> 1234 Street Name, City, Country</p>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             name="name"
             placeholder="Your Name"
             value={formData.name}
-            onChange={handleInputChange}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
           />
           <input
@@ -71,7 +55,7 @@ const Section8th = () => {
             name="email"
             placeholder="Your Email"
             value={formData.email}
-            onChange={handleInputChange}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
           />
           <textarea
@@ -79,20 +63,19 @@ const Section8th = () => {
             placeholder="Your Message"
             rows="5"
             value={formData.message}
-            onChange={handleInputChange}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             required
           ></textarea>
 
-          <button type="submit" disabled={loading}>
-            {loading ? 'Submitting...' : 'Submit'}
+          <button
+            type="button"
+            onClick={handleFormSubmission}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Submitting...' : 'Submit'}
           </button>
 
-          {submitStatus === 'success' && (
-            <p className="success-message">Your form has been submitted successfully!</p>
-          )}
-          {submitStatus === 'error' && (
-            <p className="error-message">Error submitting the form. Please try again.</p>
-          )}
+
         </form>
       </div>
     </section>

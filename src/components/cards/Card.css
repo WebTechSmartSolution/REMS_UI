@@ -15,6 +15,24 @@
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+.label2 {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.label2.featured22 {
+  background-color: #f7931e;
+  color: #fff;
+}
+
+.label2.new22 {
+  background-color: #e63946;
+  color: #fff;
+}
 
 .card-labels2 {
   position: absolute;
@@ -100,6 +118,31 @@
 
 .book-now-btn2:hover {
   background-color: #3949a8;
+}
+.new22 {
+  background-color: #e63946;
+  color: #fff;
+  
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.card-labels2 {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.label.property-type22 {
+  background-color: #009688;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
 }
 
 /* Responsive Design */

@@ -6,6 +6,7 @@ import '../style/ListingPage.css';
 import Section1 from '../components/Sections/Listing/Section1';
 import { notify } from '../services/errorHandlingService';
 import authService from '../services/Auth_JwtApi/AuthService';
+import LoadingSpinner from '../components/cards/loadingspiner';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -19,7 +20,7 @@ const defaultListings = [
     beds: 4,
     baths: 4,
     size: 3500,
-    imageUrl: "/src/assets/US1.jpeg",
+    images: "/src/assets/US1.jpeg",
     agentName: "Marc Silva",
     agentImage: "/src/assets/US3.jpeg",
     isFeatured: true,
@@ -34,7 +35,7 @@ const defaultListings = [
     beds: 4,
     baths: 4,
     size: 3500,
-    imageUrl: "/src/assets/US1.jpeg",
+    images: "/src/assets/US1.jpeg",
     agentName: "Marc Silva",
     agentImage: "/src/assets/US3.jpeg",
     isFeatured: true,
@@ -49,7 +50,7 @@ const defaultListings = [
     beds: 2,
     baths: 1,
     size: 5000,
-    imageUrl: "/src/assets/US1.jpeg",
+    images: "/src/assets/US1.jpeg",
     agentName: "Karen Maria",
     agentImage: "/src/assets/US4.jpeg",
     isFeatured: true,
@@ -64,7 +65,7 @@ const defaultListings = [
     beds: 2,
     baths: 1,
     size: 5000,
-    imageUrl: "/src/assets/US1.jpeg",
+    images: "/src/assets/US1.jpeg",
     agentName: "Karen Maria",
     agentImage: "/src/assets/US4.jpeg",
     isFeatured: true,
@@ -79,7 +80,7 @@ const defaultListings = [
   beds: 2,
   baths: 1,
   size: 5000,
-  imageUrl: "/src/assets/US1.jpeg",
+  images: "/src/assets/US1.jpeg",
   agentName: "Karen Maria",
   agentImage: "/src/assets/US4.jpeg",
   isFeatured: true,
@@ -94,7 +95,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -108,7 +109,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -122,7 +123,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -136,7 +137,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -150,7 +151,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -164,7 +165,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -178,7 +179,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -192,7 +193,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -207,7 +208,7 @@ beds: 2,
 baths: 1,
 size: 5000,
 Propertytype: 'buy',
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -221,7 +222,7 @@ price: 1400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -231,11 +232,11 @@ isNew: false,
   id: 14,
 title: "Grand Mahaka",
 location: "New York, NY",
-price: 1400,
+price: 5400,
 beds: 2,
 baths: 1,
 size: 5000,
-imageUrl: "/src/assets/US1.jpeg",
+images: "/src/assets/US1.jpeg",
 agentName: "Karen Maria",
 agentImage: "/src/assets/US4.jpeg",
 isFeatured: true,
@@ -247,32 +248,38 @@ isNew: false,
 const ListingPage = () => {
   const [listings, setListings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
-
   useEffect(() => {
     const fetchListings = async () => {
+      setLoading(true); // Start loading
       try {
-        const data = await authService.getListings(); 
-        setListings(data.length ? data : defaultListings);
-        setFilteredData(data.length ? data : defaultListings);
+        const data = await authService.getListings();
+        const validData = Array.isArray(data) ? data : [];
+        setListings(validData.length ? validData : defaultListings);
+        setFilteredData(validData.length ? validData : defaultListings);
       } catch (error) {
-        console.log('Error fetching listings:', error);
-        notify("error", `Error fetching listings: ${error.message}`);
+        notify("error", "Error fetching listings: " + error.message);
         setListings(defaultListings);
         setFilteredData(defaultListings);
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
     fetchListings();
   }, []);
 
+  if (loading) {
+    return <LoadingSpinner/>;
+  }
 
   const handleSearch = (filters) => {
-    const { location, priceRange, Propertytype } = filters;
+    const { location, price, Propertytype } = filters;
   
     const filtered = listings.filter((listing) => {
       const locationMatch = !location || listing.location.toLowerCase().includes(location.toLowerCase());
-      const priceMatch = !priceRange || listing.price <= Number(priceRange);
+      const priceMatch = !price || listing.price <= Number(price);
       const PropertytypeMatch = !Propertytype || listing.Propertytype.toLowerCase() === Propertytype.toLowerCase();
   
       // Use AND condition to include listings that match all selected filters

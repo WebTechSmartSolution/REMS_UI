@@ -30,7 +30,7 @@ const Section5th = () => {
             </div>
           ))}
         </div>
-        <button className="view-all-btn">View All Properties</button>
+        <button className="view-all-btn" onclick={() => window.location.href = '/all_listings'}>View All Properties</button>
       </div>
     </section>
   );

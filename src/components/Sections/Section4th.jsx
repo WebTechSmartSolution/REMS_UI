@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./style/Section4th.css"; // Assuming the CSS file is in this location
 
 const Section4th = () => {
+  const navigate = useNavigate();
   const properties = [
     { id: 1, title: "Beautiful Condo Room", price: "$2,200", location: "Royal Apartment", features: ["2 Bed", "3 Bath", "1000 Sqft"], agent: "Mike Silva", tags: ["Featured", "New"], image: "src/assets/rental2.jpeg" },
     { id: 2, title: "Royal Apartment", price: "$1,500", location: "Elegant Homes", features: ["3 Bed", "4 Bath", "1200 Sqft"], agent: "Scott Graves", tags: ["Featured"], image: "src/assets/re3.jpeg" },
@@ -10,7 +12,9 @@ const Section4th = () => {
     { id: 5, title: "Lumia's Residence", price: "$3,500", location: "Sunset Hills", features: ["4 Bed", "3 Bath", "1500 Sqft"], agent: "Sandrita Cornelia", tags: [], image: "src/assets/imagepro.jpeg" },
     { id: 6, title: "Stephan Alexander Homes", price: "$2,400", location: "Ocean Front", features: ["2 Bed", "2 Bath", "800 Sqft"], agent: "Philma Cordelia", tags: [], image: "src/assets/images.jpeg" },
   ];
-
+  const goto = () => {
+    navigate('/all_listings'); // Navigate to the specified path
+  };
   return (
     <section className="featured-properties-section">
       <div className="main">
@@ -47,12 +51,12 @@ const Section4th = () => {
 
                 <div className="rating">⭐⭐⭐⭐⭐</div>
 
-                <button href='/Listing-Details' className="view-details-btn">View Details</button>
+                <button href='/Listing-Details' className="view-details-btn" onClick={goto}>View Details</button>
               </div>
             </div>
           ))}
         </div>
-        <button className="view-all-btn">View All Properties</button>
+        <button className="view-all-btn" onClick={goto}>View All Properties</button>
       </div>
     </section>
   );

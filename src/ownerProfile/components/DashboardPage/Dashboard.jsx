@@ -4,6 +4,7 @@ import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
+import images from "../../../assets/rental2.jpeg";
 import {
     PieChart,
     Pie,
@@ -38,10 +39,10 @@ const DashboardPage = () => {
         const fetchData = async () => {
             try {
                 const response = [
-                    { id: 1, title: "Demo", type: "Apartment", status: "available", price: "$300,000", totalArea: "1200 sqft" },
-                    { id: 2, title: "Test", type: "Villa", status: "sold", price: "$1,200,000", totalArea: "5000 sqft" },
-                    { id: 3, title: "Demo", type: "Apartment", status: "available", price: "$300,000", totalArea: "1200 sqft" },
-                    { id: 4, title: "Test", type: "Villa", status: "sold", price: "$1,200,000", totalArea: "5000 sqft" },
+                    { id: 1,  title: "Demo", type: "Apartment", status: "available", price: "$300,000", totalArea: "1200 sqft" ,createdAt: "2023-07-01" },
+                    { id: 2,  title: "Test", type: "Villa", status: "sold", price: "$1,200,000", totalArea: "5000 sqft",createdAt: "2023-07-01" },
+                    { id: 3,  title: "Demo", type: "Apartment", status: "available", price: "$300,000", totalArea: "1200 sqft",createdAt: "2023-07-01" },
+                    { id: 4,  title: "Test", type: "Villa", status: "sold", price: "$1,200,000", totalArea: "5000 sqft",createdAt: "2023-07-01" },
                 ];
 
                 const totalListings = response.length;
@@ -119,12 +120,12 @@ const DashboardPage = () => {
         <Tag value={rowData.status} severity={rowData.status === "available" ? "success" : "danger"} />
     );
 
-    const actionsBodyTemplate = (rowData) => (
-        <div className="flex gap-2">
-            <Button icon="pi pi-eye" className="p-button-rounded p-button-info" />
-            <Button icon="pi pi-pencil" className="p-button-rounded p-button-warning" />
-        </div>
-    );
+    // const actionsBodyTemplate = (rowData) => (
+    //     <div className="flex gap-2">
+    //         <Button icon="pi pi-eye" className="p-button-rounded p-button-info" />
+    //         <Button icon="pi pi-pencil" className="p-button-rounded p-button-warning" />
+    //     </div>
+    // );
 
     const renderLabel = (entry) => {
         const total = pieChartData.reduce((acc, curr) => acc + curr.value, 0);
@@ -184,15 +185,17 @@ const DashboardPage = () => {
 
             <div className="table-container">
                 {header}
-                <DataTable value={listings} paginator rows={10} loading={loading} filters={filters} globalFilterFields={["title", "type", "status", "price", "totalArea"]}>
+                <DataTable value={listings} paginator rows={10} loading={loading} filters={filters} globalFilterFields={["title", "type", "status", "price", "totalArea","createdAt"]}>
                     <Column field="id" header="ID" sortable />
                     <Column body={imageBodyTemplate} header="Image" />
+                    {/* <Column field="images" header="Image" /> */}
                     <Column field="title" header="Property Title" sortable />
                     <Column field="type" header="Property Type" sortable />
                     <Column body={statusBodyTemplate} header="Status" sortable />
                     <Column field="price" header="Price" sortable />
                     <Column field="totalArea" header="Total Area" sortable />
-                    <Column body={actionsBodyTemplate} header="Actions" />
+                    {/* <Column body={actionsBodyTemplate} header="Action" /> */}
+                    <Column field="createdAt" header="Last Updated" />
                 </DataTable>
             </div>
         </div>

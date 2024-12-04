@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Common from "../components/Sections/PD_Section/Common";
 import "../components/Sections/style/PropertieDetails.css";
 import Section3 from "../components/Sections/PD_Section/Section3";
@@ -8,21 +8,31 @@ import RequestInfo from "../components/Sections/PD_Section/LeftSideDiv";
 import SimilarListings from "../components/Sections/PD_Section/LastSection";
 import OwnerDetails from "../components/Sections/PD_Section/Ownerdetails";
 import authService from "../services/Auth_JwtApi/AuthService";
+import { notify } from "../services/errorHandlingService";
+import LoadingSpinner from "../components/cards/loadingspiner";
 
 function Properties_details() {
   const { id } = useParams(); // Extract the listing ID from the URL
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     authService.isAuthenticated();
     const fetchListing = async () => {
+      setLoading(true);
       try {
         const data = await authService.fetchListingDetails(id); 
+        
         setListing(data);
       } catch (err) {
+        // setListing(listing);
+        // fetchListing(listing);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -32,8 +42,13 @@ function Properties_details() {
     fetchListing();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <LoadingSpinner />;
+
+  if (error) {
+    notify("error", "Listing have No details yet. See Another Property");
+    navigate("/all_listings");
+    return null; 
+  }
 
   return (
     <>  
