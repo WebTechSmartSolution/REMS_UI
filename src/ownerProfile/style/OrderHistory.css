@@ -6,8 +6,8 @@ body {
 }
 
 .table-container {
-    width: 100%;
-    overflow-x: auto;
+    width: 97%;
+    overflow-x: auto; /* Ensures horizontal scrolling for smaller screens */
 }
 
 .order-table {
@@ -65,4 +65,15 @@ body {
 .product-icon {
     color: #28a745;
     margin-right: 5px;
+}
+
+/* Add media query for small screens */
+@media (max-width: 1080px) {
+    .table-container {
+        overflow-x: scroll; /* Force horizontal scrolling for smaller screens */
+    }
+
+    .order-table {
+        min-width: 1000px; /* Ensures the table is wider than the container to trigger scrolling */
+    }
 }
