@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { jwtDecode } from 'jwt-decode';  // Use the named import
 
 import axiosInstance from './axiosInstance';
+import { notify } from '../errorHandlingService';
 
 const TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
@@ -109,10 +110,30 @@ const authService = {
   },
 
   // Check if the user is authenticated
-  isAuthenticated: () => {
+  isAuthenticated: async () => {
     const token = localStorage.getItem(TOKEN_KEY);
     
-    return !!token; // Return true if there's a token
+    if (!token) {
+      return false; 
+    }
+  
+    try {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // Current time in seconds
+  
+      if (decodedToken.exp < currentTime) {
+        
+         const response =await refreshToken();  
+        if(!response.status===200){
+        notify("error", "Your session has expired. Please log in again."); 
+        } 
+      }
+  
+      return true; // Token is valid
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      window.location.href = '/login';
+    }
   },
 
   // Signup method with toast

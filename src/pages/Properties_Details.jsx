@@ -14,8 +14,10 @@ function Properties_details() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
+    authService.isAuthenticated();
     const fetchListing = async () => {
       try {
         const data = await authService.fetchListingDetails(id); 
