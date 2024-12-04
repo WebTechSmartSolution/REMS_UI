@@ -284,7 +284,8 @@ PostListings: async (formData) => {
 
 getListings: async () => {
   try {
-    const response = await axiosInstance.get("/Listings");
+    const userId = authService.getUserIdFromAuthToken();
+    const response = await axiosInstance.get("/Listings/user/" + `${userId}`);
 
     if (response && Array.isArray(response.data)) {
       return response.data;

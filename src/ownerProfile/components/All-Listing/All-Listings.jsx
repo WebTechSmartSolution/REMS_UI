@@ -91,7 +91,7 @@ if (loading) {
           </div>
         </div>
         <button className="new-space-btn" onClick={() => navigate("/portfolio/post_listing")}>
-          List New Space
+          List New Property
         </button>
       </div>
 
@@ -130,16 +130,16 @@ if (loading) {
                   <td>
                     <img
                       src={listing.image}
-                      alt={`Image of ${listing.title}`}
+                      alt={`Image of ${listing.title || listing.propertyName}`}
                       className="listing-image"
                     />
                   </td>
-                  <td>{listing.title}</td>
-                  <td>{listing.reservationId}</td>
-                  <td>{listing.totalBooking}</td>
-                  <td>{listing.pending}</td>
-                  <td>{listing.confirmed}</td>
-                  <td>{listing.price}</td>
+                  <td>{listing.title ||listing.propertyName}</td>
+                  <td>{listing.reservationId || "N/A"}</td>
+                  <td>{listing.propertyType }</td>
+                  <td>{listing.sqft}</td>
+                  <td>{listing.createdAt}</td>
+                  <td>{listing.salePrice}</td>
                   <td className="action-icons">
                     <button className="action-btn view-btn" onClick={() => handleView(listing.id)}>
                       <i className="fas fa-eye"></i> View
