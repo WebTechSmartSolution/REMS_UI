@@ -15,7 +15,7 @@ const authService = {
 getUserIdFromAuthToken: () => {
   const token = localStorage.getItem(TOKEN_KEY);
   if (!token) {
-    notify('error', 'No token found. Please log in.');
+    //notify('error', 'No token found. Please log in.');
     return null;
   }
 
@@ -284,8 +284,9 @@ getListings: async () => {
   try {
     const userId = authService.getUserIdFromAuthToken();
     if (!userId) throw new Error("Invalid or missing user ID");
-
+    console.log(userId);
     const response = await axiosInstance.get(`/Listings/user/${userId}`);
+    console.log(response.data);
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     throw error.response?.data?.message || "Error fetching listings";

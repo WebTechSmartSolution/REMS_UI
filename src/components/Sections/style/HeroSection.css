@@ -1,253 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-.hero_section {
-    background-color: #1f3c88;
-    /* background-image: url('../assets//images.jpeg'); 
-    background-repeat: no-repeat; 
-    background-size: contain; 
-    background-position: center; 
-    background-attachment: fixed; */
-    height: 600px;
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+}
+
+.hero {
+    position: relative;
+    background: linear-gradient(to bottom right, rgba(0, 51, 102, 0.9), rgba(0, 204, 102, 0.9));
+    color: #ffffff;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: #fff;
+    justify-content: center;
     text-align: center;
-    border-bottom: 5px solid #ff7200;
-}
-
-.hero_content {
-    max-width: 80%;
-    margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Slight black overlay for better readability */
-    padding: 50px;
-    border-radius: 10px;
-}
-
-.hero_content h1 {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.hero_content p {
-    font-size: 18px;
-    margin-bottom: 40px;
-    color: #e0e0e0;
-}
-
-.toggle_buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.toggle_btns {
-    display: flex;
-    border: 2px solid #4d7cfe;
-    border-radius: 8px;
     overflow: hidden;
-}
-
-.toggle_btn {
-    background-color: #ffffff;
-    border: none;
-    color: #4d7cfe;
-    padding: 8px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex: 1;
-}
-
-.toggle_btn:hover {
-    background-color: #f1f1f1;
-}
-
-.toggle_btn.active {
-    background-color: #4d7cfe;
-    color: #fff;
-}
-
-.search_box_container {
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
     padding: 20px;
-    background-color: #ffffff;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
 }
 
-.search_box {
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeIn 1.5s;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero h1 .dynamic-text {
+    color: #00cc66;
+    border-right: 2px solid #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    from {
+        border-color: transparent;
+    }
+    to {
+        border-color: #ffffff;
+    }
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.cta-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cta-buttons a {
+    text-decoration: none;
+    color: white;
+    background: #004080;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cta-buttons a:hover {
+    background: #003366;
+    transform: translateY(-3px);
+}
+
+.cta-buttons a.secondary {
+    background: transparent;
+    border: 3px solid #004080;
+    color: #004080;
+}
+
+.cta-buttons a.secondary:hover {
+    background: #004080;
+    color: white;
+}
+
+.Image_cardss {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1;
     flex-wrap: wrap;
 }
 
-.search_input, .property-type2 {
-    padding: 12px 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 153px;
+.Image_cardss img {
+    width: 100px;
+    height: 70px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: rotate(-10deg);
+    animation: float 3s infinite ease-in-out;
 }
 
-.search_btn {
-    background-color: #4d7cfe;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+.Image_cardss img:nth-child(2) {
+    animation-delay: 0.5s;
 }
 
-.search_btn:hover {
-    background-color: #3a5b9b;
+.Image_cardss img:nth-child(3) {
+    animation-delay: 1s;
 }
 
-
-@media (min-width: 800px) and (max-width:1020px) {
-    .hero_section {
-        /* Match your image's background color */
-        height: 670px;
-       
-    }
-    
-}
-@media (max-width: 800px) {
-    .hero_section {
-        /* Match your image's background color */
-        height: 700px;
-       
-    }
-    
-}
-
-@media (max-width: 768px)  {
-    .search_box {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .search_input, .property-type {
-        width: 100%;
-    }
-    .hero_section {
-        /* Match your image's background color */
-        height: 915px;
-       
-    }
-    .search_input, .property-type2 {
-        padding: 12px 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-    }
-}
-
-@media (min-width:600px) and (max-width: 700px) {
-    .hero_section {
-        /* Match your image's background color */
-        height: 990px;
-       
-    }
-    .search_input, .property-type2 {
-        padding: 12px 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-    }
-    
-}
-@media (min-width:500px) and (max-width: 600px) {
-    .hero_section {
-        /* Match your image's background color */
-        height: 1075px;
-       
-    }
-    .search_input, .property-type2 {
-        padding: 12px 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-    }
-    
-}
-@media (min-width:350px) and (max-width: 500px) {
-    .hero_section {
-        /* Match your image's background color */
-        height: 1320px;
-       
-    }
-    .search_input, .property-type2 {
-        padding: 12px 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-    }
-    
-}
-@media (min-width:280px) and (max-width: 350px) {
-    .hero_section {
-        /* Match your image's background color */
-        height: 1350px;
-       
-    }
-    .search_input, .property-type2 {
-        padding: 12px 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-    }
-    
-}
- 
-.here_right_text h1 {
-  
-
-    color: var(--primary);
-    /* text-shadow: 1px 1px rgba(255, 255, 255, 0.9);
-    overflow: hidden;
-    white-space: wrap; */
-   
-    
-  }
-  
- .here_right_text  span {
-    color: var(--secondary) !important;
-    
-    /* border-right: 4px solid var(--secondary); */
-    display: inline-block;
-    animation: blink-caret 0.75s step-end infinite;
-  
-  }
-  
-  @keyframes blink-caret {
-    from, to {
-      border-color: transparent;
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(-10deg);
     }
     50% {
-      border-color: var(--secondary);
+        transform: translateY(-10px) rotate(-10deg);
     }
-  }
-  
-  
-   .here_right_text p {
-    line-height: var(--line-height);
-    font-size: var(--font-size-small);
-    color: var(--text-white);
-    font-weight: 300;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.9);
-  
-  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-buttons a {
+        font-size: 1rem;
+        padding: 10px 25px;
+    }
+
+    .Image_cardss img {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .Image_cardss {
+        gap: 5px;
+    }
+
+    .Image_cardss img {
+        width: 70px;
+        height: 50px;
+    }
+}
