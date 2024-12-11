@@ -76,7 +76,7 @@ const NavbarSidebar = () => {
       <div id="sidebar1" className={sidebarActive ? 'active1' : ''} >
         <ul className="p-3">
           <li className="active1">
-            <Link to="/portfolio/dashboard" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faHome} /><span className="sidebar-text1">Dashboard</span></Link>
+            <Link to="/portfolio" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faHome} /><span className="sidebar-text1">Dashboard</span></Link>
           </li>
           <li>
             <Link to="/portfolio/post_listing" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faPlus} /><span className="sidebar-text1">Post Listing</span></Link>

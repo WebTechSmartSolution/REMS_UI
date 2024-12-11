@@ -11,8 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 import PortfolioLayout from "./ownerProfile/Layout/PortfolioLayout";
 import Dashboard from "./ownerProfile/pages/Dashboard";
 import AllListing from "./ownerProfile/pages/All-Listing";
-// import PortfolioLayout from './Layout/PortfolioLayout';
-// import { Route, Routes } from 'react-router-dom';
 import OrderHistory from "./ownerProfile/pages/Order-History";
 import PostListing from "./ownerProfile/pages/Post-Listing";
 import Purchaseorders from "./ownerProfile/pages/Purchase-orders";
@@ -23,8 +21,6 @@ import ListingPage from "./pages/ListingPage";
 import PrivateRoute from "./services/Auth_JwtApi/PrivateRoute";
 import PaymentPage from "./ownerProfile/pages/Pyament";
 
-// import Navbar from './components/header-footer/Header';
-// import SignUp from './components/auth/signup'
 
 function App() {
   return (
@@ -46,15 +42,14 @@ function App() {
         {/* routes for portfolio section of user */}
 
         {/* Protected Portfolio Routes */}
-        <Route path="/portfolio" element={<PortfolioLayout />}>
-          {/* <Route element={<PortfolioLayout />}> */}
+        <Route path="/portfolio" element={<PrivateRoute />}>
+          <Route element={<PortfolioLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="my_all_listings" element={<AllListing />} />
             <Route path="order_history" element={<OrderHistory />} />
             <Route path="post_listing" element={<PostListing />} />
             <Route path="purchase_products" element={<Purchaseorders />} />
             <Route path="payment_checkout" element={<PaymentPage />} />
-            
             <Route path="inbox" element={<Inbox />} />
 
             {/* Profile nested routes */}
@@ -63,7 +58,8 @@ function App() {
               <Route path="change_password" element={<UserProfile />} />
             </Route>
           </Route>
-        {/* </Route> */}
+        </Route>
+
       </Routes>
     </>
   );
