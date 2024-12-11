@@ -12,24 +12,21 @@ const authService = {
   
 // ============================================Api calls for User related calls ===============================================
 
-  getUserIdFromAuthToken: () => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    
-    if (!token) {
-     authService.logout();
-      return null;  // Return null if there's no token
-    }
+getUserIdFromAuthToken: () => {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) {
+    notify('error', 'No token found. Please log in.');
+    return null;
+  }
 
-    try {
-      const decodedToken = jwtDecode(token);  // Decode the token
-      const userId = decodedToken.nameid; 
-      
-      return userId;  // Assuming 'userId' is the key in the token payload
-    } catch (error) {
-      // console.error("Error decoding token:", error);
-      return null;  // Return null in case of any error
-    }
-  },
+  try {
+    const decodedToken = jwtDecode(token);
+    return decodedToken?.nameid || null; // Add a default fallback
+  } catch (error) {
+    return null; // Handle errors gracefully
+  }
+},
+
   fetchUserData: async () => {
     try {
       const response = await axiosInstance.get("/api/user"); 
@@ -112,30 +109,31 @@ const authService = {
   // Check if the user is authenticated
   isAuthenticated: async () => {
     const token = localStorage.getItem(TOKEN_KEY);
-    
-    if (!token) {
-      return false; 
-    }
+  
+    if (!token) return false;
   
     try {
       const decodedToken = jwtDecode(token);
-      const currentTime = Date.now() / 1000; // Current time in seconds
+      const currentTime = Date.now() / 1000; // Convert milliseconds to seconds
   
+      // If the token is expired, attempt to refresh
       if (decodedToken.exp < currentTime) {
-        
-         const response =await refreshToken();  
-        if(!response.status===200){
-        notify("error", "Your session has expired. Please log in again."); 
-        } 
+        const response = await authService.refreshToken();
+  
+        // If refresh fails, notify the user and return false
+        if (response?.status !== 200) {
+          notify('error', 'Your session has expired. Please log in again.');
+          return false;
+        }
       }
   
       return true; // Token is valid
     } catch (error) {
       console.error("Error decoding token:", error);
-      window.location.href = '/login';
+      return false; // Return false if decoding fails
     }
   },
-
+  
   // Signup method with toast
   signup: async (data) => {
     try {
@@ -285,24 +283,15 @@ PostListings: async (formData) => {
 getListings: async () => {
   try {
     const userId = authService.getUserIdFromAuthToken();
-    const response = await axiosInstance.get("/Listings/user/" + `${userId}`);
+    if (!userId) throw new Error("Invalid or missing user ID");
 
-    if (response && Array.isArray(response.data)) {
-      return response.data;
-    } else {
-      
-     
-      return [];
-    }
+    const response = await axiosInstance.get(`/Listings/user/${userId}`);
+    return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
-    
-    const errorMessage = error.response
-      ? error.response.data?.message || "Error fetching listings"
-      : "An unexpected error occurred";
-      
-    return error; 
+    throw error.response?.data?.message || "Error fetching listings";
   }
 },
+
 
 fetchListingDetails: async (listingId) => {
   try {

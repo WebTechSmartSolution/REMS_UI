@@ -17,30 +17,33 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
-    // Check if user is logged in using authService
-    setLoggedIn(authService.isAuthenticated());
+    const checkAuthStatus = async () => {
+      const isAuthenticated = await authService.isAuthenticated();
+      setLoggedIn(isAuthenticated);
+    };
+    checkAuthStatus();
   }, []);
-
+  
+  
   const handleAccountClick = () => {
     setDropdownOpen((prevState) => !prevState);
   };
-
   const onLogout = () => {
-    authService.logout(); // Logout using authService
+    authService.logout();
+    setLoggedIn(false); // Update UI after logout
   };
-
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const handleAddPropertyClick = () => {
-    if (authService.isAuthenticated()) {
-      // Redirect to add listing page if logged in
-      window.location.href = "/portfolio/add-listing";
+  const handleAddPropertyClick = async () => {
+    const isAuthenticated = await authService.isAuthenticated();
+    if (isAuthenticated) {
+      navigate("/portfolio/add-listing");
     } else {
-      // Redirect to login page if not logged in
-      window.location.href = "/login";
+      navigate("/login");
     }
   };
   const handleSignUpClick = () => {
