@@ -15,7 +15,7 @@ export const usePassword = () => {
 
     if (password.length === 0) {
       setPasswordStrength('');
-    } else if (password.length < 8) {
+    } else if (password.length < 6) {
       setPasswordStrength('weak');
     } else if (strongPasswordPattern.test(password)) {
       setPasswordStrength('strong');

@@ -1,6 +1,6 @@
 .bdy {
     font-family: 'Roboto', sans-serif;
-    background-color: #f1f4f8;
+    background: linear-gradient(to right, #003366, #008000);
     display: flex;
     justify-content: end;
     align-items: center;

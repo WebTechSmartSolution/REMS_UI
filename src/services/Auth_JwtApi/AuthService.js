@@ -137,6 +137,7 @@ getUserIdFromAuthToken: () => {
   // Signup method with toast
   signup: async (data) => {
     try {
+      console.log(data);
       const response = await axiosInstance.post('/Auth/signup', data);
   
       // Handle success response

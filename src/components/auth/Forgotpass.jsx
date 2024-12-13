@@ -35,8 +35,8 @@ const ForgotPassword = () => {
             <span>↩</span> Back To Home
           </Link>
         </div>
-
-        <h1>Forgot Password</h1>
+<span className='titile'>Forgot Password</span>
+        
 
         <form className="forgot-password-form" onSubmit={handleSubmit}>
           <label htmlFor="email">

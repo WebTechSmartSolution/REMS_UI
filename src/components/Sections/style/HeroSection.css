@@ -1,184 +1,198 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f9;
-}
+/* HeroSection.css */
 
 .hero {
-    position: relative;
-    background: linear-gradient(to bottom right, rgba(0, 51, 102, 0.9), rgba(0, 204, 102, 0.9));
-    color: #ffffff;
-    height: 100vh;
+    background: linear-gradient(to right, #003366, #008000); /* Dark blue and green gradient */
+    color: white;
+    padding: 50px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 20px;
+    min-height: 100vh;
 }
 
-.hero-content {
-    max-width: 800px;
-    padding: 20px;
-    animation: fadeIn 1.5s;
-    z-index: 2;
+.hero-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1200px;
 }
 
-.hero h1 {
+.hero-left,
+.hero-right {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+.hero-title{
+    color:#e4ff57
+}
+.hero-left h1 {
     font-size: 3rem;
     margin-bottom: 20px;
-    font-weight: 700;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
 }
 
-.hero h1 .dynamic-text {
-    color: #00cc66;
-    border-right: 2px solid #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    display: inline-block;
-    animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
+.hero-left h1 .dynamic-text {
+    color: #00ff7f; /* Neon green for dynamic effect */
 }
 
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes blink {
-    from {
-        border-color: transparent;
-    }
-    to {
-        border-color: #ffffff;
-    }
-}
-
-.hero p {
+.hero-left p {
     font-size: 1.2rem;
     margin-bottom: 30px;
-    line-height: 1.6;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    line-height: 1.5;
 }
 
 .cta-buttons a {
-    text-decoration: none;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
     color: white;
-    background: #004080;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.cta-buttons a:hover {
-    background: #003366;
-    transform: translateY(-3px);
+    background: #00509e;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .cta-buttons a.secondary {
-    background: transparent;
-    border: 3px solid #004080;
-    color: #004080;
+    background: #00a86b;
 }
 
-.cta-buttons a.secondary:hover {
-    background: #004080;
-    color: white;
+.cta-buttons a:hover {
+    transform: scale(1.05);
+    background: #00b7c2; /* Hover effect */
 }
 
-.Image_cardss {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
+.hanging-images {
     display: flex;
-    gap: 10px;
-    z-index: 1;
-    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.Image_cardss img {
-    width: 100px;
-    height: 70px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+.hanging-images img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transform: rotate(-10deg);
-    animation: float 3s infinite ease-in-out;
+    transition: transform 0.3s ease;
 }
 
-.Image_cardss img:nth-child(2) {
-    animation-delay: 0.5s;
+.hanging-images img:hover {
+    transform: rotate(0deg) scale(1.1);
 }
 
-.Image_cardss img:nth-child(3) {
-    animation-delay: 1s;
+/* Right Side */
+.hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(-10deg);
-    }
-    50% {
-        transform: translateY(-10px) rotate(-10deg);
-    }
+.multi-card {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-/* Responsive Design */
+.card-frame {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 3px solid white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-frame:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+/* HeroSection.css */
+
+/* Existing styles remain unchanged */
+
+.hanging-images {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    position: relative;
+    perspective: 1000px; /* Adds 3D effect */
+}
+
+.hanging-images img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: swing 2s infinite ease-in-out;
+    transform-origin: top center;
+}
+
+/* Keyframes for Tea Patti Swing Effect */
+@keyframes swing {
+    0% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    100% { transform: rotate(-10deg); }
+}
+/* HeroSection.css */
+
+/* Cutting Effect for Title */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    line-height: 1.2;
+    overflow: hidden; /* Ensures text clipping works correctly */
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to right, #003b8b, #00a36c); /* Gradient line */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+h1 .dynamic-text {
+    display: inline-block;
+    position: relative;
+    z-index: 2; /* Ensures text is above the gradient line */
+    color: #00a36c;
+    animation: text-cut 2s infinite alternate; /* Optional dynamic effect */
+}
+
+/* Optional Animation for Dynamic Text */
+@keyframes text-cut {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
+    .hero-container {
+        flex-direction: column;
     }
 
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .cta-buttons a {
-        font-size: 1rem;
-        padding: 10px 25px;
-    }
-
-    .Image_cardss img {
-        width: 80px;
-        height: 60px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 10px;
-    }
-
-    .hero h1 {
+    .hero-left h1 {
         font-size: 2rem;
     }
 
-    .hero p {
-        font-size: 0.9rem;
+    .hero-left p {
+        font-size: 1rem;
     }
 
-    .Image_cardss {
-        gap: 5px;
-    }
-
-    .Image_cardss img {
-        width: 70px;
-        height: 50px;
+    .card-frame {
+        width: 100%;
+        height: auto;
     }
 }
