@@ -59,13 +59,13 @@ const Section3 = ({ listing }) => {
           <p className="property-description">{listing?.description || "No description available"}</p>
           <ul className="property-features">
             <li>
-              <i className="fas fa-bed"></i>Bedrooms: {listing?.bedrooms || 0} 
+              <i className="fas fa-bed"></i>Bedrooms: {listing?.noOfBedrooms  || 0} 
             </li>
             <li>
-              <i className="fas fa-bath"></i>Bathrooms: {listing?.bathrooms || 0}
+              <i className="fas fa-bath"></i>Bathrooms: {listing?.noOfBathrooms || 0}
             </li>
             <li>
-              <i className="fas fa-car"></i>Garage: {listing?.garage || "N/A"} 
+              <i className="fas fa-car"></i>Garage: {listing?.garageSize || "N/A"} 
             </li>
             {/* <li>
               <i className="fas fa-tree"></i> {listing?.view || "No specific view"}
@@ -94,11 +94,11 @@ const Section3 = ({ listing }) => {
             </div>
             <div className="address-item">
               <span className="label">Country:</span>
-              <span className="value">{listing?.country || "N/A"}</span>
+              <span className="value">{listing?.country || "Pakistan"}</span>
             </div>
             <div className="address-item">
               <span className="label">Zip:</span>
-              <span className="value">{listing?.zip || "N/A"}</span>
+              <span className="value">{listing?.zip || "06001"}</span>
             </div>
             {/* <div className="address-item">
               <span className="label">Area:</span>
