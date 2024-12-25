@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { notify } from "../../../services/errorHandlingService";
 import authService from "../../../services/Auth_JwtApi/AuthService";
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 import "./All-Listing.css";
 import LoadingSpinner from "../../../components/cards/loadingspiner";
 
@@ -9,6 +10,7 @@ const ListingDashboard = () => {
   const [listings, setListings] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState(""); // Add searchQuery state
   const navigate = useNavigate(); // To handle redirects for edit
 
   useEffect(() => {
@@ -17,12 +19,13 @@ const ListingDashboard = () => {
       try {
         // Logging response for debugging
         const fetchedListings = await authService.getListings();
-
+        console.log(fetchedListings.images);
         if (fetchedListings.length > 0) {
           setListings(fetchedListings);
         } else {
           notify("warning", "No listings found. Using default data.");
           setListings([
+            // Default data for testing
             {
               id: 1,
               image: "/src/assets/rental2.jpeg",
@@ -48,36 +51,46 @@ const ListingDashboard = () => {
       } catch (error) {
         // Logging error for debugging
         notify("error", "Error fetching listings: " + (error.message || error));
-        
+      } finally {
+        setLoading(false); // End loading
       }
-     finally {
-      setLoading(false); // End loading
-    }
     };
 
     fetchListings();
   }, []);
 
-if (loading) {
-  return <LoadingSpinner/>;
-} 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
-  const filteredListings = listings; // All listings are shown as the default filter
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredListings = listings.filter((listing) => {
+    const title = listing.title || listing.propertyName; // Ensure title is a string
+    return title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   const handleView = (id) => {
-    navigate(`/listing/view/${id}`);
+    navigate(`/portfolio/listing/view/${id}`);
   };
 
   const handleEdit = (id) => {
-    navigate(`/listing/edit/${id}`);
+    navigate(`/portfolio/listing/edit/${id}`);
   };
 
   const handleStatusChange = async (id) => {
     try {
       await authService.ChangeListingStatus(id);
-      setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
+      setListings((prevListings) =>
+        prevListings.filter((listing) => listing.id !== id)
+      );
     } catch (error) {
-      notify("error", "Error during listing deletion: " + (error.message || error));
+      notify(
+        "error",
+        "Error during listing deletion: " + (error.message || error)
+      );
     }
   };
 
@@ -90,7 +103,10 @@ if (loading) {
             <div className="stat-label">Total listings</div>
           </div>
         </div>
-        <button className="new-space-btn" onClick={() => navigate("/portfolio/post_listing")}>
+        <button
+          className="new-space-btn"
+          onClick={() => navigate("/portfolio/post_listing")}
+        >
           List New Property
         </button>
       </div>
@@ -104,7 +120,13 @@ if (loading) {
       </div>
 
       <div className="search-section">
-        <input type="text" placeholder="Search by title" className="search-input" />
+        <input
+          type="text"
+          placeholder="Search by title"
+          className="search-input"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
       </div>
 
       <div className="table-container">
@@ -129,33 +151,40 @@ if (loading) {
                   <td>{listing.id}</td>
                   <td>
                     <img
-                      src={listing.image}
+                      src={`http://localhost:5000${
+                        listing.images?.[0]?.path || "/src/assets/rental1.jpeg"
+                      }`}
                       alt={`Image of ${listing.title || listing.propertyName}`}
                       className="listing-image"
                     />
                   </td>
-                  <td>{listing.title ||listing.propertyName}</td>
+                  <td>{listing.title || listing.propertyName}</td>
                   <td>{listing.reservationId || "N/A"}</td>
-                  <td>{listing.propertyType }</td>
+                  <td>{listing.propertyType}</td>
                   <td>{listing.sqft}</td>
-                  <td>{listing.createdAt}</td>
+                  <td>{listing.createdAt ? format(new Date(listing.createdAt), "dd/MM/yyyy") : "N/A"}</td>
                   <td>{listing.salePrice}</td>
                   <td className="action-icons">
-                    <button className="action-btn view-btn" onClick={() => handleView(listing.id)}>
+                    <button
+                      className="action-btn view-btn"
+                      onClick={() => handleView(listing.id)}
+                    >
                       <i className="fas fa-eye"></i> View
                     </button>
-                    <button className="action-btn edit-btn" onClick={() => handleEdit(listing.id)}>
+                    <button
+                      className="action-btn edit-btn"
+                      onClick={() => handleEdit(listing.id)}
+                    >
                       <i className="fas fa-edit"></i> Edit
-                    </button>
-                    <button className="action-btn delete-btn" onClick={() => handleStatusChange(listing.id)}>
-                      <i className="fas fa-trash"></i> Mark Sold
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="9" className="no-data">No listings available</td>
+                <td colSpan="9" className="no-data">
+                  No listings available
+                </td>
               </tr>
             )}
           </tbody>

@@ -259,7 +259,7 @@ const ListingPage = () => {
         setListings(validData.length ? validData : defaultListings);
         setFilteredData(validData.length ? validData : defaultListings);
       } catch (error) {
-        notify("error", "Error fetching listings: " + error.message);
+        notify("warning", "No listings found. Using default data.");
         setListings(defaultListings);
         setFilteredData(defaultListings);
       } finally {

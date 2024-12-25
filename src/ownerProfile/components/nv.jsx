@@ -50,6 +50,9 @@ const NavbarSidebar = () => {
       <FontAwesomeIcon icon={sidebarActive ? faTimes : faBars} />
     </button>
     <Link className="navbar-brand1" to="/portfolio">Profolio</Link>
+    <Link className="custom-btn1 post-listing1" to="/">
+         Go Home
+      </Link>
     <div className="navbar-links1">
       <Link className="custom-btn1 my-listings1" to="/portfolio/my_all_listings">
         <FontAwesomeIcon icon={faList} /> My Listings
@@ -137,7 +140,7 @@ const NavbarSidebar = () => {
         <div className="modal-overlay" onClick={() => setShowUserModal(false)}>
           <div className="modal-content1"  onClick={(e) => e.stopPropagation()}>
             <h5>Profile Setting</h5>
-            <Link className="btn btn-outline-primary w-100 my-2" to="/portfolio/profile-setting">Account Settings</Link>
+            <Link className="btn btn-outline-primary w-100 my-2" to="/portfolio/profile_setting">Account Settings</Link>
             <button className="btn btn-outline-danger w-100 my-2" onClick={handleLogout}>Logout</button>
             {/* <button className="btn btn-secondary w-100 my-2" onClick={() => setShowUserModal(false)}>Close</button> */}
           </div>

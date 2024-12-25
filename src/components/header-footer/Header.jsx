@@ -41,7 +41,7 @@ const Navbar = () => {
   const handleAddPropertyClick = async () => {
     const isAuthenticated = await authService.isAuthenticated();
     if (isAuthenticated) {
-      navigate("/portfolio/add-listing");
+      navigate("/portfolio/post_listing");
     } else {
       navigate("/login");
     }

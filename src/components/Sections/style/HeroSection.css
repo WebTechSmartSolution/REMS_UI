@@ -26,12 +26,12 @@
 .hero-title{
     color:#e4ff57
 }
-.hero-left h1 {
+.hero-left .hero-title {
     font-size: 3rem;
     margin-bottom: 20px;
 }
 
-.hero-left h1 .dynamic-text {
+.hero-left .hero-title .dynamic-text {
     color: #00ff7f; /* Neon green for dynamic effect */
 }
 
@@ -41,7 +41,7 @@
     line-height: 1.5;
 }
 
-.cta-buttons a {
+.cta-buttons .Link,.secondary {
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 10px;
@@ -54,11 +54,11 @@
     transition: all 0.3s ease;
 }
 
-.cta-buttons a.secondary {
+.cta-buttons .secondary {
     background: #00a86b;
 }
 
-.cta-buttons a:hover {
+.cta-buttons .Link:hover,.secondary:hover {
     transform: scale(1.05);
     background: #00b7c2; /* Hover effect */
 }
@@ -142,7 +142,7 @@
 /* HeroSection.css */
 
 /* Cutting Effect for Title */
-h1 {
+.hero-title {
     font-size: 3rem;
     font-weight: bold;
     color: white;
@@ -151,7 +151,7 @@ h1 {
     overflow: hidden; /* Ensures text clipping works correctly */
 }
 
-h1::before {
+.hero-title::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -163,7 +163,7 @@ h1::before {
     z-index: 1;
 }
 
-h1 .dynamic-text {
+.hero-title .dynamic-text {
     display: inline-block;
     position: relative;
     z-index: 2; /* Ensures text is above the gradient line */
@@ -183,7 +183,7 @@ h1 .dynamic-text {
         flex-direction: column;
     }
 
-    .hero-left h1 {
+    .hero-left .hero-title {
         font-size: 2rem;
     }
 

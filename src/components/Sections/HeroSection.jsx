@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import './style/HeroSection.css';
 
 const HeroSection = () => {
@@ -10,9 +11,9 @@ const HeroSection = () => {
                     <h1 className='hero-title'>Welcome to <span className="dynamic-text">RentalEase</span></h1>
                     <p>Effortlessly manage your properties and discover exceptional rental options. RentalEase is your partner in modern property management.</p>
                     <div className="cta-buttons">
-                        <a href="/listings">Explore Listings</a>
-                        <a href="/signup" className="secondary">Get Started</a>
-                    </div>
+    <Link to="/all_Listings" className='Link'>Explore Listings</Link>
+    <Link to="/signup" className="secondary">Get Started</Link>
+</div>
                     <div className="hanging-images">
                         <img src="/src/assets/rental2.jpeg" alt="Hanging Property 1" />
                         <img src="/src/assets/rental image.jpeg" alt="Hanging Property 2" />

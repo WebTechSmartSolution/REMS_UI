@@ -48,6 +48,7 @@ function App() {
             <Route path="my_all_listings" element={<AllListing />} />
             <Route path="order_history" element={<OrderHistory />} />
             <Route path="post_listing" element={<PostListing />} />
+            <Route path="listing/view/:id" element={<Properties_details />} />
             <Route path="purchase_products" element={<Purchaseorders />} />
             <Route path="payment_checkout" element={<PaymentPage />} />
             <Route path="inbox" element={<Inbox />} />
