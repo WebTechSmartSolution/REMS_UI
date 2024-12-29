@@ -1,33 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import authService from "../../../services/Auth_JwtApi/AuthService";  
-import "../style/OwnerDetails.css"; // Assuming you have a separate CSS file for this
+import authService from "../../../services/Auth_JwtApi/AuthService";
+import "../style/OwnerDetails.css";
+import { notify } from "../../../services/errorHandlingService";
 
-const OwnerDetails = () => {
-
+const OwnerDetails = ({ listingId, ownerId }) => {
   const navigate = useNavigate();
-  const viewerId = authService.getUserIdFromAuthToken(); 
-  // const viewerId = "viewer123";
-  console.log("Viewer ID:", viewerId);
-  const startChat = async () => {
-    try {
-        const form = {
-            viewerId,
-            ownerId: listing.ownerId,
-        };
-        const roomId = await authService.StartChat_with_Listing_Owner(form);
-        navigate(`/chat/${roomId}`);
-    } catch (error) {
-        console.error("Failed to start chat:", error);
-    }
-};
-  // Hardcoded example data for the owner
+const ViewerID = authService.getUserIdFromAuthToken();  console.log(ViewerID);
   const owner = {
     name: "John Doe",
-    profileImage: "src/assets/images.jpeg", // Update this with your image path
+    profileImage: "/assets/images.jpeg", // Correct path for static assets
     phone: "+1 234 567 890",
     email: "johndoe@email.com",
     bio: "Experienced property owner with over 10 years in the real estate market. I specialize in renting and selling luxury homes and apartments.",
+  };
+
+  const startChat = async () => {
+    try {
+      const chatData = await authService.startChat(listingId, ownerId, ViewerID);
+      console.log(chatData);
+      if (chatData?.chatId) {
+        navigate(`/portfolio/chat/${chatData.chatId}`);
+      } else {
+        throw new Error("Invalid chat data");
+      }
+    } catch (error) {
+      console.error("Error starting chat:", error);
+      notify("info", "Unable to start chat. Please try again later.");
+    }
   };
 
   return (
@@ -49,13 +49,9 @@ const OwnerDetails = () => {
             <a href={`mailto:${owner.email}`}>{owner.email}</a>
           </p>
         </div>
-        <button
-            type="button"
-            className="contact-owner"
-            onClick={startChat}
-          >
-            Start Chat
-          </button>
+        <button type="button" className="contact-owner" onClick={startChat}>
+          Start Chat
+        </button>
       </div>
     </div>
   );

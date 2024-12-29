@@ -285,9 +285,19 @@ getListings: async () => {
   try {
     const userId = authService.getUserIdFromAuthToken();
     if (!userId) throw new Error("Invalid or missing user ID");
-    console.log(userId);
+    // console.log(userId);
     const response = await axiosInstance.get(`/Listings/user/${userId}`);
-    console.log(response.data);
+    // console.log(response.data);
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    throw error.response?.data?.message || "Error fetching listings";
+  }
+},
+getAllListings: async () => {
+  try {
+   
+    const response = await axiosInstance.get(`/Listings`);
+    // console.log(response.data);
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     throw error.response?.data?.message || "Error fetching listings";
@@ -325,6 +335,29 @@ StartChat_with_Listing_Owner:  async (form) => {
   const response = await axiosInstance.post("/chat/create-room", form);
   return response.data;
 },
+
+startChat: async (ListingId, OwnerId, ViewerId) => {
+  try {
+    if (!ListingId || !OwnerId || !ViewerId) {
+      throw new Error("Listing ID and Owner ID are required to start a chat.");
+    }
+    const payload = {
+      
+       ListingId, OwnerId , ViewerId  
+    };
+    console.log(payload);
+    const response = await axiosInstance.post('/chat/start', payload);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error(`Unexpected response: ${response.statusText}`);
+    }
+  } catch (error) {
+    throw error; 
+  }
+}
+
+
 
 
 

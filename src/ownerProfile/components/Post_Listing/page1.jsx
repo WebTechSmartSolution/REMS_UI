@@ -13,6 +13,7 @@ const AddPost = () => {
       CurrencyType: "",
       salePrice: "",
       offerPrice: "",
+      status: "available", 
     },
     propertyDetails: {
       PropertyId: "",
@@ -24,6 +25,7 @@ const AddPost = () => {
       noOfFloors: "",
       garageSize: "",
       yearConstructed: "",
+      Description: "",
     },
     amenities: {
       airConditioning: false,
@@ -36,11 +38,9 @@ const AddPost = () => {
       wifi: true,
     },
     ContactInfo: {
-     Email: "",
-     Phone: "",
-    
+      Email: "",
+      Phone: "",
     },
-
     location: {
       Address: "",
       City: "",
@@ -50,7 +50,8 @@ const AddPost = () => {
     },
     gallery: [],
   });
-console.log(formData)
+  
+// console.log(formData)
   const [errors, setErrors] = useState({
     propertyInfo: {
       PropertyName: "",
@@ -58,6 +59,7 @@ console.log(formData)
       CurrencyType: "",
       salePrice: "",
       offerPrice: "",
+      status: "available",
     },
     propertyDetails: {
       PropertyId: "",
@@ -69,6 +71,7 @@ console.log(formData)
       noOfFloors: "",
       garageSize: "",
       yearConstructed: "",
+      Description: "",
     },
     amenities: {
       airConditioning: false,
@@ -128,6 +131,7 @@ console.log(formData)
         CurrencyType: "usd",
         salePrice: "",
         offerPrice: "",
+        status: "available",
       },
       propertyDetails: {
         PropertyId: "",
@@ -139,6 +143,7 @@ console.log(formData)
         noOfFloors: "",
         garageSize: "",
         yearConstructed: "",
+        Description: "",
       },
       amenities: {
         airConditioning: false,
@@ -175,6 +180,7 @@ console.log(formData)
         PropertyType: !formData.propertyInfo.PropertyType.trim(),
         CurrencyType: !formData.propertyInfo.CurrencyType.trim(),
         offerPrice: !formData.propertyInfo.offerPrice.trim(),
+        status: !formData.propertyInfo.status.trim(),
         PropertyName: !formData.propertyInfo.PropertyName.trim(),
         salePrice: !formData.propertyInfo.salePrice.trim(),
       },
@@ -182,11 +188,13 @@ console.log(formData)
         PropertyId: !formData.propertyDetails.PropertyId.trim(),
         pricePerSqft: !formData.propertyDetails.pricePerSqft.trim(),
         noOfBedrooms: !formData.propertyDetails.noOfBedrooms.trim(),
+
         noOfBathrooms: !formData.propertyDetails.noOfBathrooms.trim(),
         sqft: !formData.propertyDetails.sqft.trim(),
         noOfFloors: !formData.propertyDetails.noOfFloors.trim(),
         garageSize: !formData.propertyDetails.garageSize.trim(),
         yearConstructed: !formData.propertyDetails.yearConstructed.trim(),
+        Description: !formData.propertyDetails.Description.trim(),
       },
       ContactInfo: {
         Email: !formData.ContactInfo.Email.trim(),
@@ -216,10 +224,7 @@ console.log(formData)
           ...formData.ContactInfo,
           ...formData.location,
           ...formData.amenities,
-          // Images: formData.gallery.map((file) => file.name),
-          // images: formData.gallery, // Assuming `formData.gallery` contains base64 strings or File objects
         };
-      //  payload= formData.gallery.forEach((file) => payload.append('Images', file))
       Object.entries(payload).forEach(([key, value]) => {
         form.append(key, value);
       });
@@ -228,15 +233,14 @@ console.log(formData)
       formData.gallery.forEach((file) => {
         form.append("Images", file); // Key name must match backend's expected field
       });
-        console.log("Payload:", payload);
+        // console.log("Payload:", payload);
   
-        // Send as JSON
         const response = await authService.PostListings(form);
-        console.log("Response:", response);
+        // console.log("Response:", response);
         notify("success", "Data submitted successfully." + response.message);
         handleReset();
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         notify("error", "There was an error submitting the data." + error.message);
       }
     } else {
@@ -616,6 +620,28 @@ console.log(formData)
                   {errors.propertyDetails.yearConstructed && (
                     <span className="error-message">
                       Year Constructed is required.
+                    </span>
+                  )}
+                </div>
+                <div className="Description">
+                  <label>Description</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Description"
+                    className={`details-input ${errors.propertyDetails.Description ? "error" : ""
+                      }`}
+                    value={formData.propertyDetails.Description || ""}
+                    onChange={(e) =>
+                      handleChange(
+                        "propertyDetails",
+                        "Description",
+                        e.target.value
+                      )
+                    }
+                  />
+                  {errors.propertyDetails.Description && (
+                    <span className="error-message">
+                      Description is required.
                     </span>
                   )}
                 </div>

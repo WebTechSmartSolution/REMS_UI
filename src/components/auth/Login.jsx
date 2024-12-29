@@ -41,14 +41,19 @@ const Login = () => {
         toast.success('Login Successful!');
         setTimeout(() => {
           window.location.href = '/';  // Redirect after a short delay
-        }, 5000);
+        }, 3000);
       } else if (status === 400) {
         toast.error(message);
       } else if (status === 401) {
         toast.error('Email and password not found');
       }
     } catch (err) {
-      toast.error(err.message);
+      if(err.message == null){
+        toast.error('error'+err.response.data.message);
+      }else{
+        toast.error('Network Error Server Not found');
+      }
+      // toast.error(err.message);
     }
   };
 

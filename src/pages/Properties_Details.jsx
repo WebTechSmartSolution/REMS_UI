@@ -28,7 +28,7 @@ function Properties_details() {
       setLoading(true);
       try {
         const data = await authService.fetchListingDetails(id); 
-        
+        console.log(data);
         setListing(data);
       } catch (err) {
         // setListing(listing);
@@ -60,7 +60,7 @@ function Properties_details() {
         </div>
         <div className="right-side">
           <RequestInfo listing={listing} />
-          <OwnerDetails owner={listing.owner} />
+          <OwnerDetails listingId={id} ownerId={listing.ownerId} />
           <Reviews listingId={id} />
         </div>
       </div>

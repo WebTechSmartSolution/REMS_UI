@@ -254,7 +254,8 @@ const ListingPage = () => {
     const fetchListings = async () => {
       setLoading(true); // Start loading
       try {
-        const data = await authService.getListings();
+        const data = await authService.getAllListings();
+        console.log(data);
         const validData = Array.isArray(data) ? data : [];
         setListings(validData.length ? validData : defaultListings);
         setFilteredData(validData.length ? validData : defaultListings);

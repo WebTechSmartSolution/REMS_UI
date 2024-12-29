@@ -15,11 +15,11 @@ import OrderHistory from "./ownerProfile/pages/Order-History";
 import PostListing from "./ownerProfile/pages/Post-Listing";
 import Purchaseorders from "./ownerProfile/pages/Purchase-orders";
 import UserProfile from "./ownerProfile/pages/UserProfile";
-import Inbox from "./ownerProfile/pages/Inbox";
 import Properties_details from "./pages/Properties_Details";
 import ListingPage from "./pages/ListingPage";
 import PrivateRoute from "./services/Auth_JwtApi/PrivateRoute";
 import PaymentPage from "./ownerProfile/pages/Pyament";
+import ChatPage from "./ownerProfile/pages/Inbox";
 
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
             <Route path="listing/view/:id" element={<Properties_details />} />
             <Route path="purchase_products" element={<Purchaseorders />} />
             <Route path="payment_checkout" element={<PaymentPage />} />
-            <Route path="inbox" element={<Inbox />} />
+            <Route path="chat/:chatId" element={<ChatPage />} />
 
             {/* Profile nested routes */}
             <Route path="profile_setting" element={<UserProfile />}>

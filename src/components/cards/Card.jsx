@@ -14,10 +14,14 @@ const ListingCard = ({ listing }) => {
 
       {/* Image and Price */}
       <div className="card-image2">
-        <img
-          src={`http://localhost:5000${listing.images?.[0]?.path || listing.images || "/src/assets/rental2.jpeg"}`}
-          alt={`Image of ${listing.title || listing.propertyName}`}
-        />
+      <img
+  src={
+    listing.images?.[0]?.path
+      ? `http://localhost:5000${listing.images[0].path}`
+      : listing.images || "/src/assets/US1.jpeg" // Fallback to another source or default image
+  }
+  alt={`Image of ${listing.title || listing.propertyName}`}
+/>
        
         <div className="price2">
           {listing.currencyType || "$"}{listing.salePrice || listing.price}
