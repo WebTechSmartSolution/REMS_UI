@@ -19,20 +19,16 @@ const ChatPage = () => {
   const { ownerId, viewerId } = state || {};
 
   // Fetch previous chat messages
-  useEffect(() => {
-    const fetchChatMessages = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/chat/${chatId}/messages`
-        );
-        setMessages(response.data); // Assuming the response contains the array of messages
-      } catch (error) {
-        console.error("Error fetching chat messages:", error);
-      }
-    };
-
-    fetchChatMessages();
-  }, [chatId]); // Run this effect when chatId changes
+  const fetchChatMessages = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/chat/${chatId}/messages`
+      );
+      setMessages(response.data); // Assuming the response contains the array of messages
+    } catch (error) {
+      console.error("Error fetching chat messages:", error);
+    }
+  };
 
   useEffect(() => {
     const hubConnection = new signalR.HubConnectionBuilder()
@@ -49,6 +45,7 @@ const ChatPage = () => {
         }
         // Join the SignalR group with chatId
         await hubConnection.invoke("JoinChat", chatId);
+        console.log("Joined chat:", chatId);
       } catch (error) {
         console.error("Error joining chat:", error);
       }
@@ -59,6 +56,9 @@ const ChatPage = () => {
         await hubConnection.start();
         console.log("SignalR Connected");
         setIsConnected(true);
+
+        // After connecting, fetch chat messages
+        await fetchChatMessages();
 
         // Join the chat with the provided chatId
         await joinChat(chatId);
