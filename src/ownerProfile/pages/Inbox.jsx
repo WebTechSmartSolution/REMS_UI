@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom"; // Added useLocation
+import { useParams, useLocation } from "react-router-dom";
 import * as signalR from "@microsoft/signalr";
 import "../style/ChatPage.css";
 import authService from "../../services/Auth_JwtApi/AuthService";
+import axios from "axios"; // Axios for API calls
 
 const ChatPage = () => {
   const { chatId } = useParams(); // Extract chatId from URL
-  const { state } = useLocation(); // Get state passed from the navigate function
+  const { state } = useLocation(); // Get state passed from navigate
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [connection, setConnection] = useState(null);
@@ -14,8 +15,24 @@ const ChatPage = () => {
 
   const senderId = authService.getUserIdFromAuthToken(); // Get logged in user's senderId
 
-  // Get ownerId and viewerId from location state (assuming they're passed when navigating)
-  const { ownerId, viewerId } = state || {}; // Fallback to empty object if state is undefined
+  // Get ownerId and viewerId from location state
+  const { ownerId, viewerId } = state || {};
+
+  // Fetch previous chat messages
+  useEffect(() => {
+    const fetchChatMessages = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/chat/${chatId}/messages`
+        );
+        setMessages(response.data); // Assuming the response contains the array of messages
+      } catch (error) {
+        console.error("Error fetching chat messages:", error);
+      }
+    };
+
+    fetchChatMessages();
+  }, [chatId]); // Run this effect when chatId changes
 
   useEffect(() => {
     const hubConnection = new signalR.HubConnectionBuilder()
@@ -30,12 +47,6 @@ const ChatPage = () => {
         if (!chatId) {
           throw new Error("Chat ID is required to join the chat.");
         }
-
-        // Convert chatId to Guid if necessary
-        if (typeof chatId === "string") {
-          chatId = chatId.trim(); // Optionally validate if it is a valid Guid string
-        }
-
         // Join the SignalR group with chatId
         await hubConnection.invoke("JoinChat", chatId);
       } catch (error) {
@@ -88,7 +99,6 @@ const ChatPage = () => {
       senderId,
       content: newMessage,
       timestamp: new Date().toISOString(),
-      // receiverId dynamically assigned based on the user role
       receiverId: senderId === ownerId ? viewerId : ownerId, // Set receiverId depending on who the user is
     };
 

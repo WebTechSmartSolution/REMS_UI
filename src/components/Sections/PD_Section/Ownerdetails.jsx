@@ -20,7 +20,9 @@ const ViewerID = authService.getUserIdFromAuthToken();  console.log(ViewerID);
       const chatData = await authService.startChat(listingId, ownerId, ViewerID);
       console.log(chatData);
       if (chatData?.chatId) {
-        navigate(`/portfolio/chat/${chatData.chatId}`);
+        navigate(`/portfolio/chat/${chatData.chatId}`, {
+          state: { ownerId: chatData.ownerId, viewerId: chatData.viewerId }
+        });
       } else {
         throw new Error("Invalid chat data");
       }
@@ -28,7 +30,7 @@ const ViewerID = authService.getUserIdFromAuthToken();  console.log(ViewerID);
       console.error("Error starting chat:", error);
       notify("info", "Unable to start chat. Please try again later.");
     }
-  };
+  }
 
   return (
     <div className="owner-details">

@@ -336,22 +336,26 @@ StartChat_with_Listing_Owner:  async (form) => {
   return response.data;
 },
 
-startChat: async () => {
+startChat: async (ListingId, OwnerId, ViewerId) => {
   try {
-    const chatData = await authService.startChat(listingId, ownerId, ViewerID);
-    console.log(chatData);
-    if (chatData?.chatId) {
-      navigate(`/portfolio/chat/${chatData.chatId}`, {
-        state: { ownerId: chatData.ownerId, viewerId: chatData.viewerId }
-      });
+    if (!ListingId || !OwnerId || !ViewerId) {
+      throw new Error("Listing ID and Owner ID are required to start a chat.");
+    }
+    const payload = {
+      
+       ListingId, OwnerId , ViewerId  
+    };
+    console.log(payload);
+    const response = await axiosInstance.post('/chat/start', payload);
+    if (response.status === 200) {
+      return response.data;
     } else {
-      throw new Error("Invalid chat data");
+      throw new Error(`Unexpected response: ${response.statusText}`);
     }
   } catch (error) {
-    console.error("Error starting chat:", error);
-    notify("info", "Unable to start chat. Please try again later.");
+    throw error; 
   }
-},
+}
 
 
 
