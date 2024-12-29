@@ -12,7 +12,7 @@ const ChatPage = () => {
   const [connection, setConnection] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  const senderId = authService.getUserIdFromAuthToken();
+  const senderId = authService.getUserIdFromAuthToken(); // Get logged in user's senderId
 
   useEffect(() => {
     const hubConnection = new signalR.HubConnectionBuilder()
@@ -22,23 +22,23 @@ const ChatPage = () => {
       .withAutomaticReconnect()
       .build();
 
-      const joinChat = async (chatId) => {
-        try {
-          if (!chatId) {
-            throw new Error("Chat ID is required to join the chat.");
-          }
-      
-          // Convert chatId to Guid if necessary
-          if (typeof chatId === "string") {
-            chatId = chatId.trim(); // Optionally validate if it is a valid Guid string
-          }
-      
-          await hubConnection.invoke("JoinChat", chatId);
-        } catch (error) {
-          console.error("Error joining chat:", error);
+    const joinChat = async (chatId) => {
+      try {
+        if (!chatId) {
+          throw new Error("Chat ID is required to join the chat.");
         }
-      };
-      
+
+        // Convert chatId to Guid if necessary
+        if (typeof chatId === "string") {
+          chatId = chatId.trim(); // Optionally validate if it is a valid Guid string
+        }
+
+        // Join the SignalR group with chatId
+        await hubConnection.invoke("JoinChat", chatId);
+      } catch (error) {
+        console.error("Error joining chat:", error);
+      }
+    };
 
     const startConnection = async () => {
       try {
@@ -68,6 +68,7 @@ const ChatPage = () => {
         setMessages((prevMessages) => [...prevMessages, message]);
       };
 
+      // Listen for incoming messages
       connection.on("ReceiveMessage", handleReceiveMessage);
 
       return () => {
@@ -84,13 +85,19 @@ const ChatPage = () => {
       senderId,
       content: newMessage,
       timestamp: new Date().toISOString(),
+      // receiverId could be dynamically assigned based on the user role
+      receiverId: senderId === ownerId ? viewerId : ownerId, // Set receiverId depending on who the user is
     };
 
     try {
       if (!message.chatId) {
         throw new Error("Chat ID is required to send a message.");
       }
+
+      // Send message to SignalR server
       await connection.invoke("SendMessage", message);
+
+      // Update UI with the sent message
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (err) {
