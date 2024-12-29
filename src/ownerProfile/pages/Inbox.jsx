@@ -110,8 +110,6 @@ const ChatPage = () => {
       // Send message to SignalR server
       await connection.invoke("SendMessage", message);
 
-      // Update UI with the sent message
-      setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (err) {
       console.error("Error sending message:", err);
