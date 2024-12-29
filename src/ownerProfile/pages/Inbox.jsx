@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom"; // Added useLocation
 import * as signalR from "@microsoft/signalr";
 import "../style/ChatPage.css";
 import authService from "../../services/Auth_JwtApi/AuthService";
 
 const ChatPage = () => {
   const { chatId } = useParams(); // Extract chatId from URL
-  console.log("Extracted chatId:", chatId);
+  const { state } = useLocation(); // Get state passed from the navigate function
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [connection, setConnection] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
   const senderId = authService.getUserIdFromAuthToken(); // Get logged in user's senderId
+
+  // Get ownerId and viewerId from location state (assuming they're passed when navigating)
+  const { ownerId, viewerId } = state || {}; // Fallback to empty object if state is undefined
 
   useEffect(() => {
     const hubConnection = new signalR.HubConnectionBuilder()
@@ -85,7 +88,7 @@ const ChatPage = () => {
       senderId,
       content: newMessage,
       timestamp: new Date().toISOString(),
-      // receiverId could be dynamically assigned based on the user role
+      // receiverId dynamically assigned based on the user role
       receiverId: senderId === ownerId ? viewerId : ownerId, // Set receiverId depending on who the user is
     };
 
