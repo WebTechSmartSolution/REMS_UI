@@ -1,0 +1,72 @@
+/* src/components/style/ChatList.css */
+
+.chat-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .chat-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .chat-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .chat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .chat-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .chat-card-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .chat-card-info {
+    flex: 1;
+  }
+  
+  .chat-card-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .chat-card-preview {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .chat-card-timestamp {
+    font-size: 0.8rem;
+    color: #999;
+  }
+  

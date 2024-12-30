@@ -20,6 +20,7 @@ import ListingPage from "./pages/ListingPage";
 import PrivateRoute from "./services/Auth_JwtApi/PrivateRoute";
 import PaymentPage from "./ownerProfile/pages/Pyament";
 import ChatPage from "./ownerProfile/pages/Inbox";
+import ChatList from "./ownerProfile/components/ChatPages/ChatLists";
 
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
             <Route path="purchase_products" element={<Purchaseorders />} />
             <Route path="payment_checkout" element={<PaymentPage />} />
             <Route path="chat/:chatId" element={<ChatPage />} />
-
+            <Route path="chat_list" element={<ChatList />} />
             {/* Profile nested routes */}
             <Route path="profile_setting" element={<UserProfile />}>
               <Route path="update_profile" element={<UserProfile />} />

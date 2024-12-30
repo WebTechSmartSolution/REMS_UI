@@ -89,7 +89,7 @@ const NavbarSidebar = () => {
           <Link to="/portfolio/my_all_listings" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faTasks} /><span className="sidebar-text1">All Listings</span></Link>
           </li>
           <li>
-            <Link to="/portfolio/inbox" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faEnvelope} /><span className="sidebar-text1">Inbox</span></Link>
+            <Link to="/portfolio/chat_list" onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faEnvelope} /><span className="sidebar-text1">Inbox</span></Link>
           </li>
 
           <li>
