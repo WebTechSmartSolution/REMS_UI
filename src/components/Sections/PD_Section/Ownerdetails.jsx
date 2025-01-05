@@ -6,7 +6,7 @@ import { notify } from "../../../services/errorHandlingService";
 
 const OwnerDetails = ({ listingId, ownerId }) => {
   const navigate = useNavigate();
-const ViewerID = authService.getUserIdFromAuthToken();  console.log(ViewerID);
+const ViewerID = authService.getUserIdFromAuthToken();  //console.log(ViewerID);
   const owner = {
     name: "John Doe",
     profileImage: "/assets/images.jpeg", // Correct path for static assets
@@ -18,7 +18,7 @@ const ViewerID = authService.getUserIdFromAuthToken();  console.log(ViewerID);
   const startChat = async () => {
     try {
       const chatData = await authService.startChat(listingId, ownerId, ViewerID);
-      console.log(chatData);
+      // console.log(chatData);
       if (chatData?.chatId) {
         navigate(`/portfolio/chat/${chatData.chatId}`, {
           state: { ownerId: chatData.ownerId, viewerId: chatData.viewerId }

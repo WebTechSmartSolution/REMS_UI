@@ -27,15 +27,29 @@ getUserIdFromAuthToken: () => {
   }
 },
 
-  fetchUserData: async () => {
-    try {
-      const response = await axiosInstance.get("/api/user"); 
-      return response.data; 
-    } catch (error) {
-      // console.error("Error fetching user data:", error);
-      throw new Error("Failed to fetch user data. Please try again later.");
-    }
-  },
+fetchUserData: async (userId) => {
+  try {
+    console.log(userId);
+    const response = await axiosInstance.get(`/users/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw new Error("Failed to fetch user data. Please try again later.");
+  }
+},
+updateUserData: async (userId, formData) => {
+  try {
+    const response = await axiosInstance.put(`/users/${userId}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    throw new Error("Failed to update user profile. Please try again later.");
+  }
+},
+
+
   
 //  ........................................Auth related Api calls.....................................................
 
@@ -137,7 +151,7 @@ getUserIdFromAuthToken: () => {
   // Signup method with toast
   signup: async (data) => {
     try {
-      console.log(data);
+      // console.log(data);
       const response = await axiosInstance.post('/Auth/signup', data);
   
       // Handle success response
@@ -315,27 +329,95 @@ fetchListingDetails: async (listingId) => {
   }
 },
 
+
+UpdateListing: async (id, formData) => {
+  try {
+    const response = await axiosInstance.put(`/Listings/${id}`, formData, {
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+        'Content-Type': 'application/json' 
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    throw error;
+  }
+},
+
+// Change the status of a listing
 ChangeListingStatus: async (id) => {
   try {
-    const response = await axiosInstance.put(`/Listings/${id}`);
+    const response = await axiosInstance.patch(`/Listings/${id}/ChangeStatus`, null, {
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+      },
+    });
     return response.data;
   } catch (error) {
-    // console.error('Error deleting listing:', error);
+    throw error;
+  }
+},
+
+// Get reviews by listing ID
+GetReviewsByListingId: async (id) => {
+  try {
+    const response = await axiosInstance.get(`/Listings/${id}/reviews`, {
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+},
+
+// Add a review to a listing
+AddReview: async (id, reviewData) => {
+  try {
+    const response = await axiosInstance.post(`/Listings/${id}/reviews`, reviewData, {
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+        'Content-Type': 'application/json' 
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+},
+
+// Delete a review
+DeleteReview: async (id, reviewId) => {
+  try {
+    const response = await axiosInstance.delete(`/Listings/${id}/reviews/${reviewId}`, {
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+},
+
+// Delete a listing
+DeleteListing: async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/Listings/${id}`, {
+      headers: { 
+        'Authorization': `Bearer ${TOKEN_KEY}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
     throw error;
   }
 },
 
 
 
-// ================================================Call for Chat Room Creation ==============================================
-
-
-
-StartChat_with_Listing_Owner:  async (form) => {
-  const response = await axiosInstance.post("/chat/create-room", form);
-  return response.data;
-},
-
+// ================================================Call for Chat Room Creation ================================================
 startChat: async (ListingId, OwnerId, ViewerId) => {
   try {
     if (!ListingId || !OwnerId || !ViewerId) {
@@ -345,7 +427,7 @@ startChat: async (ListingId, OwnerId, ViewerId) => {
       
        ListingId, OwnerId , ViewerId  
     };
-    console.log(payload);
+    // console.log(payload);
     const response = await axiosInstance.post('/chat/start', payload);
     if (response.status === 200) {
       return response.data;

@@ -19,7 +19,7 @@ const ListingDashboard = () => {
       try {
         // Logging response for debugging
         const fetchedListings = await authService.getListings();
-        console.log(fetchedListings.images);
+    
         if (fetchedListings.length > 0) {
           setListings(fetchedListings);
         } else {
@@ -76,16 +76,24 @@ const ListingDashboard = () => {
     navigate(`/portfolio/listing/view/${id}`);
   };
 
-  const handleEdit = (id) => {
-    navigate(`/portfolio/listing/edit/${id}`);
+  const handleEdit = async (id) => {
+    try {
+      const listingData = await authService.fetchListingDetails(id);
+      navigate(`/portfolio/listing/edit/${id}`, { state: { listingData } });
+    } catch (error) {
+      notify("error", "Error fetching listing details: " + error.message);
+      //console.error('Error fetching listing details:', error);
+      // Handle the error appropriately, e.g., show a notification to the user
+    }
   };
-
+  
   const handleStatusChange = async (id) => {
     try {
       await authService.ChangeListingStatus(id);
       setListings((prevListings) =>
         prevListings.filter((listing) => listing.id !== id)
       );
+      notify("success", "Listing status changed successfully");
     } catch (error) {
       notify(
         "error",
@@ -93,7 +101,6 @@ const ListingDashboard = () => {
       );
     }
   };
-
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
@@ -176,6 +183,12 @@ const ListingDashboard = () => {
                       onClick={() => handleEdit(listing.id)}
                     >
                       <i className="fas fa-edit"></i> Edit
+                    </button>
+                    <button
+                      className="action-btn edit-btn"
+                      onClick={() => handleStatusChange(listing.id)}
+                    >
+                      <i className="fas fa-edit"></i> Change Status
                     </button>
                   </td>
                 </tr>

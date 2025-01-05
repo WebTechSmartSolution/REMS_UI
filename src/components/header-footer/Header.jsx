@@ -107,7 +107,7 @@ const Navbar = () => {
                       <Link className="Link" to="/portfolio">
                         Profile
                       </Link>
-                      <Link className="Link" to="/portfolio/all-Listing">
+                      <Link className="Link" to="/portfolio/my_all_listings">
                         Your Listings
                       </Link>
                       <Link className="Link" to="/" onClick={onLogout}>
@@ -186,7 +186,7 @@ const Navbar = () => {
                         <Link className="Link" to="/portfolio">
                           Profile
                         </Link>
-                        <Link className="Link" to="/portfolio/all-Listing">
+                        <Link className="Link" to="/portfolio/my_all_listings">
                           Your Listings
                         </Link>
                         <Link className="Link" to="/login" onClick={onLogout}>

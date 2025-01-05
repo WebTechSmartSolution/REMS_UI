@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import "../style/Reviews.css"; // Assuming CSS is in a separate file
 import { notify } from "../../../services/errorHandlingService";
+import authService from "../../../services/Auth_JwtApi/AuthService";
 
-const Reviews = () => {
+const Reviews = ({ listingId }) => {
   // State to store reviews and form inputs
   const [reviews, setReviews] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     rating: 0,
-    comment: ""
+    Content: "",
   });
 
   // Fetch reviews from the API on component load
   useEffect(() => {
-    fetchReviewsFromAPI();
-  }, []);
+    if (listingId) {
+      fetchReviewsFromAPI();
+    }
+  }, [listingId]);
 
   const fetchReviewsFromAPI = async () => {
     try {
-      const response = await fetch("your-api-endpoint/reviews"); // Replace with your API endpoint
-      const data = await response.json();
-      if (data.length === 0) {
-        // If no reviews are fetched, show default reviews
+      const data = await authService.GetReviewsByListingId(listingId);
+      if (!data || data.length === 0) {
         setReviews([
           {
             name: "John Doe",
@@ -35,15 +36,16 @@ const Reviews = () => {
         setReviews(data);
       }
     } catch (error) {
-      notify("error", "Error fetching reviews: " + error.message);
+      notify("error", `Error fetching reviews: ${error.message}`);
     }
   };
+  
 
   // Handle form input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "rating") {
-      const validRating = Math.max(1, Math.min(5, Number(value)));  // Constrain value between 1 and 5
+      const validRating = Math.max(1, Math.min(5, Number(value))); // Constrain value between 1 and 5
       setFormData((prevData) => ({
         ...prevData,
         [name]: validRating,
@@ -59,22 +61,19 @@ const Reviews = () => {
   // Submit review to the API
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const payload = {
+      ...formData,
+      Content: formData.Content, // Map `comment` to `Content` before sending
+    };
     try {
-      await fetch("your-api-endpoint/reviews", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      // Add the new review locally for immediate feedback
+      await authService.AddReview(listingId, payload);
       setReviews((prevReviews) => [formData, ...prevReviews]);
-      // Clear form after submission
-      setFormData({ name: "", email: "", rating: 0, comment: "" });
+      setFormData({ name: "", email: "", rating: 0, Content: "" });
     } catch (error) {
-      notify("error", "Error posting review: " + error.message);
+      notify("error", `Error posting review: ${error.message}`);
     }
   };
+  
 
   return (
     <section className="reviews-section">
@@ -86,12 +85,15 @@ const Reviews = () => {
             <p>Email: {review.email}</p>
             <div className="rating">
               {Array.from({ length: 5 }, (_, idx) => (
-                <span key={idx} className={idx < review.rating ? "star filled" : "star"}>
+                <span
+                  key={idx}
+                  className={idx < review.rating ? "star filled" : "star"}
+                >
                   ★
                 </span>
               ))}
             </div>
-            <p>{review.comment}</p>
+            <p>{review.content}</p>
           </div>
         ))}
       </div>
@@ -114,20 +116,20 @@ const Reviews = () => {
           onChange={handleInputChange}
           required
         />
-       <input
-  type="number"
-  name="rating"
-  placeholder="Rating (1-5)"
-  value={formData.rating}
-  min="1"  // Minimum rating of 1
-  max="5"  // Maximum rating of 5
-  onChange={handleInputChange}
-  required
-/>
+        <input
+          type="number"
+          name="rating"
+          placeholder="Rating (1-5)"
+          value={formData.rating}
+          min="1"
+          max="5"
+          onChange={handleInputChange}
+          required
+        />
         <textarea
-          name="comment"
+          name="Content"
           placeholder="Your Review"
-          value={formData.comment}
+          value={formData.Content}
           onChange={handleInputChange}
           required
         />

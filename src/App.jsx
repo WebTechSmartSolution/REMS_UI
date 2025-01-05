@@ -21,6 +21,7 @@ import PrivateRoute from "./services/Auth_JwtApi/PrivateRoute";
 import PaymentPage from "./ownerProfile/pages/Pyament";
 import ChatPage from "./ownerProfile/pages/Inbox";
 import ChatList from "./ownerProfile/components/ChatPages/ChatLists";
+import EditPage from "./ownerProfile/components/Post_Listing/EditListing";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route path="order_history" element={<OrderHistory />} />
             <Route path="post_listing" element={<PostListing />} />
             <Route path="listing/view/:id" element={<Properties_details />} />
+            <Route path="listing/edit/:id" element={<EditPage />} />
             <Route path="purchase_products" element={<Purchaseorders />} />
             <Route path="payment_checkout" element={<PaymentPage />} />
             <Route path="chat/:chatId" element={<ChatPage />} />

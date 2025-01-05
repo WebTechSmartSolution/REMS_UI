@@ -4,7 +4,7 @@ import Common from "../components/Sections/PD_Section/Common";
 import "../components/Sections/style/PropertieDetails.css";
 import Section3 from "../components/Sections/PD_Section/Section3";
 import Reviews from "../components/Sections/PD_Section/Reviews";
-import RequestInfo from "../components/Sections/PD_Section/LeftSideDiv";
+// import RequestInfo from "../components/Sections/PD_Section/LeftSideDiv";
 import SimilarListings from "../components/Sections/PD_Section/LastSection";
 import OwnerDetails from "../components/Sections/PD_Section/Ownerdetails";
 import authService from "../services/Auth_JwtApi/AuthService";
@@ -28,7 +28,7 @@ function Properties_details() {
       setLoading(true);
       try {
         const data = await authService.fetchListingDetails(id); 
-        console.log(data);
+        // console.log(data);
         setListing(data);
       } catch (err) {
         // setListing(listing);
@@ -59,7 +59,7 @@ function Properties_details() {
           <Section3 listing={listing} />
         </div>
         <div className="right-side">
-          <RequestInfo listing={listing} />
+          
           <OwnerDetails listingId={id} ownerId={listing.ownerId} />
           <Reviews listingId={id} />
         </div>

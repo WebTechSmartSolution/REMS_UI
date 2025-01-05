@@ -1,4 +1,3 @@
-// src/components/ChatList/ChatList.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +18,6 @@ const ChatList = () => {
       );
       console.log("Fetched Chats (raw):", response.data);
   
-      // Correct mapping logic to extract `chatId`
       const chatsWithIds = response.data.map((chat) => ({
         ...chat,
         ChatId: chat.chatId, // Ensure `ChatId` is correctly assigned from `chatId` in the response
@@ -33,7 +31,18 @@ const ChatList = () => {
       setLoading(false); // Stop the loading spinner in case of errors
     }
   };
-  
+
+  // Function to handle deleting a chat
+  const deleteChat = async (chatId) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/Chat/${chatId}`);
+      console.log(response.data);
+      // Remove the deleted chat from the state
+      setChats((prevChats) => prevChats.filter((chat) => chat.ChatId !== chatId));
+    } catch (error) {
+      console.error("Error deleting chat:", error);
+    }
+  };
 
   // Fetch chat list when the component mounts
   useEffect(() => {
@@ -68,9 +77,7 @@ const ChatList = () => {
             >
               <div className="chat-card-header">
                 <img
-                  src={
-                    chat.OtherUserProfileImage || "/assets/default-avatar.png"
-                  } // Use a default avatar if no image is provided
+                  src={"/src/assets/chat-bubble.png"} // Use a default avatar if no image is provided
                   alt={chat.OtherUserName || "User"}
                   className="chat-card-avatar"
                 />
@@ -86,6 +93,10 @@ const ChatList = () => {
                   ? new Date(chat.LastMessageTimestamp).toLocaleString()
                   : "No timestamp available"}
               </p>
+              {/* Delete Button */}
+              <button onClick={() => deleteChat(chat.ChatId)} className="delete-chat-btn">
+                Delete Chat
+              </button>
             </div>
           ))}
         </div>

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "../style/PD_Section.css";
 
 const Section3 = ({ listing }) => {
-  const [mainImage, setMainImage] = useState(listing?.images?.[0] || ""); // Default to the first image
+  const [mainImage, setMainImage] = useState(`http://localhost:5000${
+    listing.images?.[0]?.path || "/src/assets/rental1.jpeg"
+  }`); // Default to the first image
+  // console.log(listing,mainImage);
   const amenitiesList = [
     "Air Conditioning",
     "Swimming Pools",
@@ -41,14 +44,12 @@ const Section3 = ({ listing }) => {
           <div className="thumbnail-images">
             {listing?.images?.map((image, index) => (
               <img
-                key={index}
-                src={image}
-                alt={`Thumbnail ${index + 1}`}
-                onClick={() => handleImageClick(image)}
-                className={`thumbnail ${
-                  image === mainImage ? "active-thumbnail" : ""
-                }`}
-              />
+              key={index}
+              src={`http://localhost:5000${image?.path || "/src/assets/rental1.jpeg"}`}
+              alt={`Thumbnail ${index + 1}`}
+              onClick={() => handleImageClick(image?.path ? `http://localhost:5000${image.path}` : "/src/assets/rental1.jpeg")}
+              className={`thumbnail ${`http://localhost:5000${image?.path || "/src/assets/rental1.jpeg"}` === mainImage ? "active-thumbnail" : ""}`}
+            />
             ))}
           </div>
         </div>
