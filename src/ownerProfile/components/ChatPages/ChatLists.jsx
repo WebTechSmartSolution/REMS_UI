@@ -16,14 +16,14 @@ const ChatList = () => {
       const response = await axios.get(
         `http://localhost:5000/api/Chat/user/${userId}/chats`
       );
-      console.log("Fetched Chats (raw):", response.data);
+      // console.log("Fetched Chats (raw):", response.data);
   
       const chatsWithIds = response.data.map((chat) => ({
         ...chat,
         ChatId: chat.chatId, // Ensure `ChatId` is correctly assigned from `chatId` in the response
       }));
   
-      console.log("Mapped Chats:", chatsWithIds); // Debugging the updated structure
+      // console.log("Mapped Chats:", chatsWithIds); // Debugging the updated structure
       setChats(chatsWithIds); // Update state with processed chat data
       setLoading(false); // Stop the loading spinner
     } catch (error) {
@@ -36,7 +36,7 @@ const ChatList = () => {
   const deleteChat = async (chatId) => {
     try {
       const response = await axios.delete(`http://localhost:5000/api/Chat/${chatId}`);
-      console.log(response.data);
+      // console.log(response.data);
       // Remove the deleted chat from the state
       setChats((prevChats) => prevChats.filter((chat) => chat.ChatId !== chatId));
     } catch (error) {
@@ -52,7 +52,7 @@ const ChatList = () => {
   // Navigate to the chat page with the selected chat ID
   const openChat = (chatId, ownerId, viewerId) => {
     if (!chatId) {
-      console.error("Invalid chatId:", chatId);
+      // console.error("Invalid chatId:", chatId);
       return;
     }
     navigate(`/portfolio/chat/${chatId}`, {

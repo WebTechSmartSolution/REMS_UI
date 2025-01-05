@@ -45,7 +45,7 @@ const ChatPage = () => {
         }
         // Join the SignalR group with chatId
         await hubConnection.invoke("JoinChat", chatId);
-        console.log("Joined chat:", chatId);
+        // console.log("Joined chat:", chatId);
       } catch (error) {
         console.error("Error joining chat:", error);
       }
@@ -54,7 +54,7 @@ const ChatPage = () => {
     const startConnection = async () => {
       try {
         await hubConnection.start();
-        console.log("SignalR Connected");
+        // console.log("SignalR Connected");
         setIsConnected(true);
 
         // After connecting, fetch chat messages
