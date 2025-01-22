@@ -96,7 +96,7 @@ const NavbarSidebar = () => {
             <Link to="/portfolio/profile_setting"  onClick={() => setSidebarActive(false)}><FontAwesomeIcon icon={faUserCog} /><span className="sidebar-text1">User Settings</span></Link>
           </li>
 
-          <li>
+          {/* <li>
             <button className="dropdown-toggle1" onClick={() => handleDropdownToggle('propShop')}>
               <FontAwesomeIcon icon={faStore} /><span className="sidebar-text1"> Prop Shop</span>
             </button>
@@ -106,7 +106,7 @@ const NavbarSidebar = () => {
                 <li><Link to="/portfolio/order_history" >Order History</Link></li>
               </ul>
             )}
-          </li>
+          </li> */}
         </ul>
       </div>
 
