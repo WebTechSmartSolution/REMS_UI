@@ -12,7 +12,7 @@ const AddPost = () => {
       PropertyType: "",
       CurrencyType: "",
       salePrice: "",
-      offerPrice: "",
+      offerPrice: "01",
       status: "available", 
     },
     propertyDetails: {
@@ -58,7 +58,7 @@ const AddPost = () => {
       PropertyType: "",
       CurrencyType: "",
       salePrice: "",
-      offerPrice: "",
+      offerPrice: "01",
       status: "available",
     },
     propertyDetails: {
@@ -130,7 +130,7 @@ const AddPost = () => {
         PropertyType: "buy",
         CurrencyType: "usd",
         salePrice: "",
-        offerPrice: "",
+        // offerPrice: "",
         status: "available",
       },
       propertyDetails: {
@@ -179,7 +179,7 @@ const AddPost = () => {
       propertyInfo: {
         PropertyType: !formData.propertyInfo.PropertyType.trim(),
         CurrencyType: !formData.propertyInfo.CurrencyType.trim(),
-        offerPrice: !formData.propertyInfo.offerPrice.trim(),
+        // offerPrice: !formData.propertyInfo.offerPrice.trim(),
         status: !formData.propertyInfo.status.trim(),
         PropertyName: !formData.propertyInfo.PropertyName.trim(),
         salePrice: !formData.propertyInfo.salePrice.trim(),
@@ -237,8 +237,8 @@ const AddPost = () => {
   
         const response = await authService.PostListings(form);
         // console.log("Response:", response);
-        notify("success", "Data submitted successfully." + response.message);
-        handleReset();
+        notify("success", "Data submitted successfully." );
+        // handleReset();
       } catch (error) {
         // console.log(error);
         notify("error", "There was an error submitting the data." + error.message);
@@ -323,7 +323,7 @@ const AddPost = () => {
 
                 {/* Property Type */}
                 <div className="info-form-group">
-                  <label>Property Type</label>
+                  <label>Property Availability</label>
                   <select
                     className={`info-select ${errors.propertyInfo.PropertyType ? "error" : ""
                       }`}
@@ -336,6 +336,7 @@ const AddPost = () => {
                       )
                     }
                   >
+                    <option value="">Please select</option>
                     <option value="buy">Buy</option>
                     <option value="rent">Rent</option>
                   </select>
@@ -356,6 +357,8 @@ const AddPost = () => {
                       )
                     }
                   >
+                    <option value="">Please Select</option>
+                    <option value="Pkr">Pkr</option>
                     <option value="usd">USD</option>
                     <option value="euro">Euro</option>
                   </select>
@@ -382,7 +385,7 @@ const AddPost = () => {
                 </div>
 
                 {/* Offer Price */}
-                <div className="info-form-group">
+                {/* <div className="info-form-group">
                   <label>Offer Price</label>
                   <input
                     type="text"
@@ -399,7 +402,7 @@ const AddPost = () => {
                       Offer Price is required.
                     </span>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -481,8 +484,11 @@ const AddPost = () => {
                       )
                     }
                   >
+                    
+                    <option value="">Please Select</option>
                     <option value="apartment">Apartment</option>
                     <option value="villa">Villa</option>
+                    <option value="villa">House</option>
                   </select>
                 </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSignUpFormValidation } from '../../hooks/authHooks/SignupformValidation_Api';
 import { usePassword } from '../../hooks/authHooks/usePassword';
 import authService from '../../services/Auth_JwtApi/AuthService';
@@ -18,6 +18,7 @@ const SignUp = () => {
   const [isAgent, setIsAgent] = useState(false);
 
   const signUpData = { name, email, password, mobileNumber: mobile, countryCode, isAgent };
+  const navigate = useNavigate();
 
   const handleInputChange = (field, value) => {
     if (field === 'name') setName(value);
@@ -49,6 +50,9 @@ const SignUp = () => {
     const { status, message } = await authService.signup(signUpData);
     if (status === 200) {
       toast.success(message);
+      setTimeout(() => {
+        navigate('/login');
+      })
     } else {
       toast.error(message);
     }

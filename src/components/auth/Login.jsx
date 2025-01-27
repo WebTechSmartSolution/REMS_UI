@@ -5,13 +5,13 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import authService from '../../services/Auth_JwtApi/AuthService';
 import { toast } from 'react-toastify';
+import {notify} from '../../services/errorHandlingService';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -38,7 +38,7 @@ const Login = () => {
     try {
       const { status, message } = await authService.login(email, password);
       if (status === 200) {
-        toast.success('Login Successful!');
+        notify('success', 'Login Successful!');
         setTimeout(() => {
           window.location.href = '/';  // Redirect after a short delay
         }, 3000);
