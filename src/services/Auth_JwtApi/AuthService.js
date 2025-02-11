@@ -332,7 +332,7 @@ fetchListingDetails: async (listingId) => {
 
 UpdateListing: async (id, formData) => {
   try {
-    const response = await axiosInstance.put(`/Listings/${id}`, formData, {
+    const response = await axiosInstance.put(`/Listings/edit/${id}`, formData, {
       headers: { 
         'Authorization': `Bearer ${TOKEN_KEY}`,
         'Content-Type': 'application/json' 

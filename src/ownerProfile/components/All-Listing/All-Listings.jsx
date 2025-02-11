@@ -19,7 +19,7 @@ const ListingDashboard = () => {
       try {
         // Logging response for debugging
         const fetchedListings = await authService.getListings();
-    
+    console.log(fetchedListings);
         if (fetchedListings.length > 0) {
           setListings(fetchedListings);
         } else {
@@ -78,7 +78,7 @@ const ListingDashboard = () => {
 
   const handleEdit = async (id) => {
     try {
-      const listingData = await authService.fetchListingDetails(id);
+      const listingData = await authService.UpdateListing(id);
       navigate(`/portfolio/listing/edit/${id}`, { state: { listingData } });
     } catch (error) {
       notify("error", "Error fetching listing details: " + error.message);
@@ -148,6 +148,7 @@ const ListingDashboard = () => {
               <th>Area(Sqft)</th>
               <th>Listing Date</th>
               <th>Price</th>
+              <th>Year Constructed</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -171,6 +172,7 @@ const ListingDashboard = () => {
                   <td>{listing.sqft}</td>
                   <td>{listing.createdAt ? format(new Date(listing.createdAt), "dd/MM/yyyy") : "N/A"}</td>
                   <td>{listing.salePrice}</td>
+                  <td>{listing.yearConstructed}</td>
                   <td className="action-icons">
                     <button
                       className="action-btn view-btn"

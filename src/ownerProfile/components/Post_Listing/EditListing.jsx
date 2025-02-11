@@ -17,6 +17,7 @@ const EditPage = () => {
       CurrencyType: listingData?.CurrencyType || "",
       salePrice: listingData?.salePrice || "",
       offerPrice: listingData?.offerPrice || "",
+      // test: listingData?. test || "",
       status: listingData?.status || "available",
     },
     propertyDetails: {
@@ -62,6 +63,7 @@ console.log(formData)
       CurrencyType: "",
       salePrice: "",
       offerPrice: "",
+      // test: "",
       status: "available",
     },
     propertyDetails: {
@@ -130,6 +132,7 @@ console.log(formData)
         CurrencyType: "usd",
         salePrice: "",
         offerPrice: "",
+        // test: "",
         status: "available",
       },
       propertyDetails: {
@@ -176,6 +179,7 @@ console.log(formData)
         CurrencyType: !formData.propertyInfo.CurrencyType.trim(),
         offerPrice: !formData.propertyInfo.offerPrice,
         status: !formData.propertyInfo.status.trim(),
+        // test: !formData.propertyInfo.test.trim(),
         PropertyName: !formData.propertyInfo.PropertyName.trim(),
         salePrice: !formData.propertyInfo.salePrice,
       },
@@ -310,8 +314,10 @@ console.log(formData)
                       Property Name is required.
                     </span>
                   )}
-                </div>
 
+                  
+                </div>
+               
                 {/* Property Type */}
                 <div className="info-form-group">
                   <label>Property Type</label>
