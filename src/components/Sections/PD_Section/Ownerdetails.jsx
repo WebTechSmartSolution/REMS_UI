@@ -86,9 +86,12 @@ const OwnerDetails = ({ listingId, ownerId }) => {
             <a href={`mailto:${owner.email}`}>{owner.email}</a>
           </p>
         </div>
-        <button type="button" className="contact-owner" onClick={startChat}>
-          Start Chat
-        </button>
+        {ViewerID !== ownerId && (
+  <button type="button" className="contact-owner" onClick={startChat}>
+    Start Chat
+  </button>
+)}
+
       </div>
     </div>
   );

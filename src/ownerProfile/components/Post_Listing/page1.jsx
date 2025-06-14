@@ -16,7 +16,7 @@ const AddPost = () => {
       status: "available", 
     },
     propertyDetails: {
-      PropertyId: "",
+      PropertyId: "01",
       pricePerSqft: "",
       structureType: "",
       noOfBedrooms: "",
@@ -62,7 +62,7 @@ const AddPost = () => {
       status: "available",
     },
     propertyDetails: {
-      PropertyId: "",
+      PropertyId: "01",
       pricePerSqft: "",
       structureType: "",
       noOfBedrooms: "",
@@ -134,7 +134,7 @@ const AddPost = () => {
         status: "available",
       },
       propertyDetails: {
-        PropertyId: "",
+        PropertyId: "01",
         pricePerSqft: "",
         structureType: "apartment",
         noOfBedrooms: "",
@@ -185,7 +185,7 @@ const AddPost = () => {
         salePrice: !formData.propertyInfo.salePrice.trim(),
       },
       propertyDetails: {
-        PropertyId: !formData.propertyDetails.PropertyId.trim(),
+        // PropertyId: !formData.propertyDetails.PropertyId.trim(),
         pricePerSqft: !formData.propertyDetails.pricePerSqft.trim(),
         noOfBedrooms: !formData.propertyDetails.noOfBedrooms.trim(),
 
@@ -421,7 +421,7 @@ const AddPost = () => {
 
             <div className="details-inputs-container">
               <div className="details-inputs">
-                {/* Property ID */}
+                {/* Property ID
                 <div className="details-form-group">
                   <label>Property ID</label>
                   <input
@@ -443,7 +443,7 @@ const AddPost = () => {
                       Property ID is required.
                     </span>
                   )}
-                </div>
+                </div> */}
 
                 {/* Price per Sqft */}
                 <div className="details-form-group">

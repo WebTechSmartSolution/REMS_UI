@@ -2,6 +2,24 @@ import React from 'react';
 import './Card.css';
 
 const ListingCard = ({ listing }) => {
+
+  const getCurrencySymbol = (currencyType) => {
+    switch (currencyType) {
+      case "Pkr":
+        return "₨ "; // Pakistani Rupee
+      case "usd":
+        return "$ ";  // US Dollar
+      case "EUR":
+        return "€ ";  // Euro
+      case "GBP":
+        return "£ ";  // British Pound
+      case "INR":
+        return "₹ ";  // Indian Rupee
+      default:
+        return "$ ";  // Default to USD if no match
+    }
+  };
+  console.log(listing.currencyType);
   return (
     <div className="listing-card2">
       {/* Labels */}
@@ -23,9 +41,10 @@ const ListingCard = ({ listing }) => {
   alt={`Image of ${listing.title || listing.propertyName}`}
 />
        
-        <div className="price2">
-          {listing.currencyType || "$"}{listing.salePrice || listing.price}
-        </div>
+<div className="price2">
+  {getCurrencySymbol(listing.currencyType)}{listing.salePrice || listing.price}
+</div>
+
       </div>
 
       {/* Property Details */}

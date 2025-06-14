@@ -39,7 +39,7 @@ fetchUserData: async (userId) => {
 },
 updateUserData: async (userId, formData) => {
   try {
-    const response = await axiosInstance.put(`/users/${userId}`, formData, {
+    const response = await axiosInstance.put(`/users/edit/${userId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return response.data;

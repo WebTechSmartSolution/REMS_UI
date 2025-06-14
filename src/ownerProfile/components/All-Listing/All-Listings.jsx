@@ -12,8 +12,9 @@ const ListingDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState(""); // Add searchQuery state
   const navigate = useNavigate(); // To handle redirects for edit
-
+ 
   useEffect(() => {
+  
     const fetchListings = async () => {
       setLoading(true);
       try {
@@ -86,7 +87,7 @@ const ListingDashboard = () => {
       // Handle the error appropriately, e.g., show a notification to the user
     }
   };
-  
+  // const SelectedId = {listing.id};
   const handleStatusChange = async (id) => {
     try {
       await authService.ChangeListingStatus(id);
@@ -147,6 +148,7 @@ const ListingDashboard = () => {
               <th>Property Type</th>
               <th>Area(Sqft)</th>
               <th>Listing Date</th>
+              <th>Listing Status</th>
               <th>Price</th>
               <th>Year Constructed</th>
               <th>Actions</th>
@@ -171,6 +173,7 @@ const ListingDashboard = () => {
                   <td>{listing.propertyType}</td>
                   <td>{listing.sqft}</td>
                   <td>{listing.createdAt ? format(new Date(listing.createdAt), "dd/MM/yyyy") : "N/A"}</td>
+                  <td>{listing.status}</td>
                   <td>{listing.salePrice}</td>
                   <td>{listing.yearConstructed}</td>
                   <td className="action-icons">
